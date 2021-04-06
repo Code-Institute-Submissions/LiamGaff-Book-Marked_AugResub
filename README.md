@@ -1,45 +1,124 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Book Marked
+![](assets/imgs/readme.md_hero_img.png)
+I am designing this web application as part of my third Milestone project for Code Institutes diploma in software development course.
 
-Welcome LiamGaff,
+# UX
+## User Stories
+As a user I would like:
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use.
+* To have access to a wide variety of books.
+* To be able to leave a review on books I have read.
+* To be able to creat a profile on the Book Marked web page.
+* To be able to login to my profile.
+* To be abel to logout of my profile.
+* To be able to add books I'm interested in to my profile.
+* To be able to remove books from my profile.
+* To have clear and easy navigation through out the page.
 
-## Gitpod Reminders
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+## Strategy
 
-`python3 -m http.server`
+## Scope
 
-A blue button should appear to click: *Make Public*,
+## Structure
 
-Another blue button should appear to click: *Open Browser*.
+## Skeleton
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+## Design
+**Wire Frames**
 
-A blue button should appear to click: *Make Public*,
+ The webpage was designed using Balsamiq to create some basic wireframes(Link below) 
+ 
 
-Another blue button should appear to click: *Open Browser*.
+**Colours**
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
 
-## Updates Since The Instructional Video
+# Features
+## Exsisting Features
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+## Features Still to Be Implemented
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+# Technologies Used
+## Languages
+* [HTML5](https://en.wikipedia.org/wiki/HTML5)
+* [CSS3](https://en.wikipedia.org/wiki/CSS)
+* [JavaScript](https://javascript.info/)
+* [Python]()
+* [MongoDB]()
+* [Flask]()
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+## Frameworks and Programs
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+* [Balsamiq](https://balsamiq.com/wireframes/?gclid=Cj0KCQiA48j9BRC-ARIsAMQu3WSc14tIkeDZUlWDIVOa-Acbyn1s5XvsJJ6CnWplwD7_WPcgk-C4cTgaAsaNEALw_wcB)
+> I used Balsamiq to make my wireframes.
 
---------
+* [GitHub](https://github.com/)
+> GitHub was used to push content to the repository.
 
-Happy coding!
+*  [W3C CSS Validator](https://jigsaw.w3.org/css-validator/validator)
+> CSS code was checked using CSS W3C CSS Validator.
+
+* [Online Beautifier](https://beautifier.io/)
+> Online Beautifier was used to beautify my HTML, CSS and JavaScript code.
+
+* [W3C Markup Validator](https://validator.w3.org/nu/#textarea)
+>W3C Markup Validator was used to check the HTML code.
+
+* [Google Fonts](https://fonts.google.com/)
+>All fonts came from Google Fonts.
+
+* [Flask]()
+>Framework used to build the backend.
+
+
+
+# Testing
+
+## Functionality Test
+Nm | Test | Action | Expected Outcome |Test result |
+-- | ---- | ------ | ---------------- |----------- |
+
+
+## Browser Compatibility Test
+Nm | Browser | Action | Test result |
+-- | ------- | ------ | ----------- |
+#1 | Chrome | Open app in browser. |  |
+#2 | Firefox | Open app in browser. | |
+#3 | Safari | Open app in browser. |  |
+
+
+## Bugs
+
+**Resolved**
+
+
+**Unresolved**
+
+
+
+## How to clone this project
+## With Gitpod
+* Create a Gitpod account and install Gitpod Browser extension for chrome.
+* Log into your gitpod account.
+* Go to [Github repository](https://github.com/LiamGaff/Feeling-Lucky-Punk) and click on the green "Gitpod" button.
+* This will open a new Gitpod workspace created from the code in the github repository where you can work.
+
+## Local IDE
+* Go to my Github repository [here](https://github.com/LiamGaff/Feeling-Lucky-Punk).
+* Under the repository name click on "clone or download"
+* In the clone with HTTPs section copy the clone URL for the repository.
+* In your local IDE open the terminal and change your directory to where you want the clone to be made.
+* In the terminal type _git clone_ and then paste the repoitory URL.
+* Press enter and a clone will be created.
+
+# Credits
+
+## Code
+
+
+## Acknowledgements
+* I would also like to credit and thank my mentor Brian Macharia for all his help. 
