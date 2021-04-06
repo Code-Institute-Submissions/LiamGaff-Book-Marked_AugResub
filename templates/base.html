@@ -11,7 +11,27 @@
     <title>Book Marked</title>
 </head>
 <body>
-    <h1>I am the Base</h1>
+    <header>
+        <nav class="nav-extended text-shadow  blue accent-4">
+            <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">Book <i class="fas fa-book icon"></i> Marked</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="">Home</a></li>
+                <li><a href="">Profile</a></li>
+                <li><a href="">Login</a></li>
+                <li><a href="">Logout</a></li>
+            </ul>
+            </div>
+        </nav>
+
+        <ul class="sidenav" id="mobile-demo">
+             <li><a href="">Home</a></li>
+            <li><a href="">Profile</a></li>
+            <li><a href="">Login</a></li>
+            <li><a href="">Logout</a></li>
+        </ul>
+    </header>
     {% block content %}
     {% endblock %}  
 

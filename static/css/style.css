@@ -1,0 +1,21 @@
+body{
+    color: black;
+}
+
+nav .brand-logo i, nav .brand-logo [class^="mdi-"], nav .brand-logo [class*="mdi-"], nav .brand-logo i.material-icons{
+    position: relative;
+    float: none;
+    margin-right: 0;
+}
+
+nav .brand-logo{
+    color: black;
+}
+
+nav ul a{
+    color: black;
+}
+
+nav a{
+    color: black;
+}
