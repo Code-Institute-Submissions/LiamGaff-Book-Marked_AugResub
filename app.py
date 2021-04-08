@@ -10,18 +10,23 @@ if os.path.exists("env.py"):
 
 app = Flask(__name__)
 
+#Routes
+from user import routes
+
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SEKRET_KEY")
 
 mongo = PyMongo(app)
 
+API_KEY = os.environ.get('API_KEY')
+SEARCH_BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q='
+VOLUME_BASE_URL = 'https://www.googleapis.com/books/v1/volumes/'
 
 @app.route("/")
-@app.route("/get_books")
-def get_books():
-    books = list(mongo.db.books.find())
-    return render_template("index.html", books=books)
+@app.route("/search_books", methods=["GET", "POST"])
+def register():
+    return render_template("register.html")
 
 
 if __name__ == "__main__":

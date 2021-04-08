@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="center-align headings">Register</h3>
+
+<div class="row">
+    <form name="signup" class="col s12 m8 offset-m2">
+        <div class="card-panel">
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-user-plus prefix  cyan-text darken-2"></i>
+                    <input id="name" name="name" type="text" class="validate" minlength="5" maxlength="15" required>
+                    <label for="username">Name</label>
+                </div>
+            </div>
+            <!-- Email -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-at prefix cyan-text darken-2"></i>
+                    <input id="email" name="email" type="email" class="validate" required>
+                    <label for="username">Email</label>
+                </div>
+            </div>
+            <!-- password -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-user-lock prefix cyan-text darken-2"></i>
+                    <input id="password" name="password" type="password" class="validate" minlength="5" maxlength="15" 
+                            placeholder="Numbers & letters only" pattern="^[a-zA-Z0-9]{5,15}$" required>
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <!-- register -->
+            <div class="row">
+                <button type="submit" class="col s12 btn-large cyan darken-2 text-shadow">
+                    Signup <i class="fas fa-sign-in-alt"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <p class="center-align">
+            Have an account? 
+            <a href="#" class="liht-blue-text text-darken-4">Log In</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}
