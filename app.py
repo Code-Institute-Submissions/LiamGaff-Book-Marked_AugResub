@@ -28,7 +28,7 @@ VOLUME_BASE_URL = 'https://www.googleapis.com/books/v1/volumes/'
 def signup():
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
-            {"email": request.form.get("email.email")})
+                {"email.email": request.form.get('email')})
 
         if existing_user:
             flash("An account with this email already exists")
