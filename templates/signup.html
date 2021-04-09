@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-user-plus prefix  cyan-text darken-2"></i>
-                    <input id="name" name="name" type="text" class="validate" minlength="5" maxlength="15" required>
+                    <input id="name" name="name" type="text" class="validate" required>
                     <label for="username">Name</label>
                 </div>
             </div>
@@ -28,6 +28,7 @@
                     <input id="password" name="password" type="password" class="validate" minlength="5" maxlength="15" 
                             placeholder="Numbers & letters only" pattern="^[a-zA-Z0-9]{5,15}$" required>
                     <label for="password">Password</label>
+                    <p class="error error--hidden"></p>
                 </div>
             </div>
             <!-- register -->

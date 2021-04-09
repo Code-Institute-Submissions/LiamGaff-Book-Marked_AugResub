@@ -3,11 +3,11 @@ from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
+from werkzeug.security import generate_password_hash, check_password_hash
+from passlib.hash import pbkdf2_sha256
 from bson.objectid import ObjectId
 if os.path.exists("env.py"):
     import env
-#Routes
-from user import routes
 
 
 app = Flask(__name__)
@@ -24,8 +24,30 @@ SEARCH_BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q='
 VOLUME_BASE_URL = 'https://www.googleapis.com/books/v1/volumes/'
 
 @app.route("/")
-def register():
-    return render_template("register.html")
+@app.route('/signup/', methods=['POST'])
+def signup():
+    if request.method == "POST":
+        existing_user = mongo.db.users.find_one(
+            {"email": request.form.get("email.email")})
+
+        if existing_user:
+            flash("An account with this email already exists")
+            return redirect(url_for("signup"))
+
+        register = {
+            "name": request.form.get("name").lower(),
+            "email": request.form.get("email"),
+            "password": generate_password_hash(request.form.get("password"))
+        }
+        mongo.db.users.insert_one(register)
+
+        # Add new user
+        session["user"] = request.form.get("email")
+        flash("Registration Successful!")
+        return redirect(url_for("profile", email=session["user"]))
+    return render_template("signup.html")
+
+
 
 
 if __name__ == "__main__":
