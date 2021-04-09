@@ -3,7 +3,7 @@ from flask import Flask, jsonify
 
 class User:
 
-    def register(self):
+    def signup(self):
         user = {
             "_id": "",
             "name": "",

@@ -6,12 +6,12 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 if os.path.exists("env.py"):
     import env
+#Routes
+from user import routes
 
 
 app = Flask(__name__)
 
-#Routes
-from user import routes
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
@@ -24,7 +24,6 @@ SEARCH_BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q='
 VOLUME_BASE_URL = 'https://www.googleapis.com/books/v1/volumes/'
 
 @app.route("/")
-@app.route("/search_books", methods=["GET", "POST"])
 def register():
     return render_template("register.html")
 
