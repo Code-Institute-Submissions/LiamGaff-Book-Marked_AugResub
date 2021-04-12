@@ -1,5 +1,5 @@
 # Book Marked
-![](assets/imgs/readme.md_hero_img.png)
+![]()
 I am designing this web application as part of my third Milestone project for Code Institutes diploma in software development course.
 
 # UX
@@ -72,7 +72,7 @@ As a user I would like:
 >All fonts came from Google Fonts.
 
 * [Flask]()
->Framework used to build the backend.
+>Framework used to build the backend with python.
 
 
 
@@ -97,7 +97,9 @@ Nm | Browser | Action | Test result |
 
 
 **Unresolved**
+* Registration wouldn't recognise accounts that were already set up.
 
+* Getting 500 error code when opening app.
 
 
 ## How to clone this project

@@ -24,8 +24,20 @@ SEARCH_BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q='
 VOLUME_BASE_URL = 'https://www.googleapis.com/books/v1/volumes/'
 
 @app.route("/")
-@app.route('/signup/', methods=['POST'])
-def signup():
+def home():
+    return render_template('index.html')
+
+
+@app.route("/profile/", methods=["GET", "POST"])
+def profile():
+    users = list(mongo.db.users.find())
+    books = list(mongo.db.books.find())
+    return render_template('profile.html', users=users, books=books)
+
+
+
+@app.route('/signup/', methods=['GET', 'POST'])
+def sign_up():
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
                 {"email.email": request.form.get('email')})
@@ -48,6 +60,13 @@ def signup():
     return render_template("signup.html")
 
 
+@app.route('/login/', methods=["GET", "POST"])
+def log_in():
+    if request.method == "POST":
+        existing_user = mongo.db.users.find_one(
+                {"email.email": request.form.get('email')})
+
+    return render_template('login.html')
 
 
 if __name__ == "__main__":

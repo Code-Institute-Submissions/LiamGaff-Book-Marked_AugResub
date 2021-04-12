@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block content %}
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS User Profile Card</title>
+	<link rel="stylesheet" href="styles.css">
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+</head>
+<body>
+    {% for user in users %}
+    <section class="">
+    
+        <div class="row">
+            <div class="col s3 hide-on-small-only" id="profile-img">
+                <div class="left">
+                    <img src="{{ user.image }}" alt="user" width="100">
+                </div>
+            </div>
+            <div class="col s4 left name">
+                <h4>{{ user.name }}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4" id="bio">
+                <h3 class="">Bio:</h3>
+            </div>
+            <div class="col s7 left bio-text">
+                <p class="left bio-text">
+                    {{ user.bio }}
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <div class="row">
+            <div class="col s12 center-align">
+                <h3>Library</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 scroll center-align">
+                <div class="card-panel center-align" id="library">
+                    <div class="row">
+                        {% for book in books %}
+                        <div class="col s4">
+                          <div class="card">
+                            <div class="card-image">
+                              <img src="images/sample-1.jpg">
+                              <span class="card-title">{{book.title}}</span>
+                            </div>
+                            <div class="card-content">
+                                <p> 
+                                    Book: <span>{{ book.title }}</span> 
+                                    <br>
+                                    Author: <span>{{ book.author }}</span>
+                                    <br>
+                                    Genere: <span>{{ book.genre }}</span>
+                                </p>
+                            </div>
+                            <div class="card-action">
+                              <a href="#">button</a>
+                            </div>
+                          </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- <footer class="conatiner">
+        <div class="row">
+            <div class="col s12 center-align">
+                <ul class="valign-wrapper">
+                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+            </div>  
+        </div>
+    </footer> -->
+        {% endfor %}
+</body>
+</html>
+
+{% endblock %}

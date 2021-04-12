@@ -27,6 +27,7 @@ $("form[name=signup_form").submit(function(e) {
   });
 
 
+  // Handle login on submission
   $("form[name=login_form").submit(function(e) {
 
     var $form = $(this);
