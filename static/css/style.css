@@ -34,7 +34,7 @@ nav a{
 }
 
 #search-box{
-    width: 100%;
+    margin-left: 2rem;
 }
 
 
@@ -68,4 +68,26 @@ nav a{
     width: 100%;
     max-height: 500px;
     overflow-y: auto;
+}
+
+#update-btn{
+    padding-top: 1rem;
+}
+
+.dl {
+    border-left: 1px solid rgb(236, 225, 180);
+    height: 800px;
+    padding-right: 1rem;
+  }
+  
+  .rate-btn{
+      margin-left: 1rem;
+  }
+
+  .add-btn{
+    margin-right: 1rem;
+}
+
+#view-btn{
+    padding-bottom: 2rem;
 }

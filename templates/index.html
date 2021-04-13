@@ -6,20 +6,61 @@
             <h2 class="col s12 center-align">Search Library</h2>
         </div>
 
-        <div class="row">
-            <form id="search-form" class="col s10 push-s4" action="" method="">
+            <form id="search-form" class="col s10" action="" method="">
                 <div class="row">
-                    <div class="input-field col s5">
+                    <div class="input-field col s5 push-s3" id="search-box">
                         <input type="search" id="search" class="white black-text" name="search" required />
                         <label class="label-icon black-text" for="search"></label>
                     </div>
-                    <div class="col s2 left-align btn-placement">
+                    <div class="col s2 push-s3 left-align btn-placement">
                         <button type="submit" id="search-btn" class="white black-text btn"><i
                                 class="fas fa-search"></i></button>
                     </div>
                 </div>
             </form>
-        </div>
+    
     </div>
+    <section class="container">
+        <div class="row">
+            <div class="col s12 center-align">
+                <h3>Featured Books</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 scroll center-align">
+                <div class="card-panel center-align" id="library">
+                    <div class="row">
+                        {% for book in books %}
+                        <div class="col s12 l4">
+                          <div class="card">
+                            <div class="card-image">
+                              <img src="images/sample-1.jpg">
+                              <span class="card-title"></span>
+                            </div>
+                            <div class="card-content">
+                                <p> 
+                                    Book: <span>{{ book.title }}</span> 
+                                    <br>
+                                    Author: <span>{{ book.author }}</span>
+                                    <br>
+                                    Genere: <span>{{ book.genre }}</span>
+                                </p>
+                            </div>
+                            <div class="card-action">
+                                <a href="#" class="add-btn" title="Add to your library">Add</a>
+                                <span class="dl"></span>
+                                <a href="#" class="rate-btn" title="Rate this book">rating</a>
+                              </div>
+                            </div>
+                            <div class="col s5 push-s3" id="view-btn">
+                                <a class="btn" title="View in google books">View Book</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 {% endblock %}

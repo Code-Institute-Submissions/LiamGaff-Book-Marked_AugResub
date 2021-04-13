@@ -25,7 +25,8 @@ VOLUME_BASE_URL = 'https://www.googleapis.com/books/v1/volumes/'
 
 @app.route("/")
 def home():
-    return render_template('index.html')
+    books = list(mongo.db.books.find())
+    return render_template('index.html', books=books)
 
 
 @app.route("/profile/", methods=["GET", "POST"])
@@ -40,7 +41,7 @@ def profile():
 def sign_up():
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
-                {"email.email": request.form.get('email')})
+                {"user.email": request.form.get('email')})
 
         if existing_user:
             flash("An account with this email already exists")
@@ -64,7 +65,7 @@ def sign_up():
 def log_in():
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
-                {"email.email": request.form.get('email')})
+                {"user.email": request.form.get('email')})
 
     return render_template('login.html')
 
