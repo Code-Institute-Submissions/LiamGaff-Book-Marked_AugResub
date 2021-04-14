@@ -102,7 +102,7 @@ nav a{
 }
 
 
-/* .................................... signup/login */
+/* .................................... signup/login/update forms */
 
 .error{
     color: red;
@@ -115,3 +115,16 @@ nav a{
 .error--hidden {
     display: none;
   }
+
+.update-form{
+    margin-top: 1rem;
+    width: 40rem;
+}
+
+.form-text{
+    font-size: 1.2rem;
+}
+
+.text-box{
+    
+}
