@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Lobster&family=Oswald&display=swap');
+
 body{
     background-color: bisque;
     color: black;
+    font-family: 'Lato', sans-serif;;
 }
 
 /* ................................. Nav */
@@ -41,7 +44,11 @@ nav a{
 /* .................................... headings */
 
 .headings{
-    
+    font-family: 'Lobster', cursive;;
+}
+
+.sub-headings{
+    font-family: 'Oswald', sans-serif;;
 }
 
 
@@ -58,6 +65,8 @@ nav a{
 
 .bio-text{
     margin-top: 0.8rem;
+    font-size: 1.2rem;
+    font-weight: 400;
 }
 
 #library{
@@ -91,3 +100,18 @@ nav a{
 #view-btn{
     padding-bottom: 2rem;
 }
+
+
+/* .................................... signup/login */
+
+.error{
+    color: red;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5px;
+    text-align: center;
+}
+
+.error--hidden {
+    display: none;
+  }

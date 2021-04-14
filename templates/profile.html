@@ -13,20 +13,20 @@
     <section>
         <div class="row">
             <div class="col s3 hide-on-small-only left" id="profile-img">
-                    <img src="{{ user.image }}" alt="user" width="100">
+                    <img src="{{ user.image }}" alt="user-image" width="100">
             </div>
             <div class="col s4 left name">
-                <h4>{{ user.name }}</h4>
+                <h4 class="sub-headings">{{ user.name }}</h4>
             </div>
-            <!-- <div class="col s1 right" id="update-btn">
-                <div class="btn">
+            <div class="col s1 right" id="update-btn">
+                <a  href="{{ url_for('update_profile')}}" class="btn">
                     Update
-                </div>
-            </div> -->
+                </a>
+            </div>
         </div>
         <div class="row">
             <div class="col s4" id="bio">
-                <h3 class="">Bio:</h3>
+                <h5 class="sub-headings">Bio:</h5>
             </div>
             <div class="col s7 left bio-text">
                 <p class="left bio-text">
@@ -38,7 +38,7 @@
     <section class="container">
         <div class="row">
             <div class="col s12 center-align">
-                <h3>Library</h3>
+                <h3 class="sub-headings">Library</h3>
             </div>
         </div>
         <div class="row">
@@ -50,7 +50,7 @@
                           <div class="card">
                             <div class="card-image">
                               <img src="images/sample-1.jpg">
-                              <span class="card-title">{{book.title}}</span>
+                              <span class="card-title"></span>
                             </div>
                             <div class="card-content">
                                 <p> 

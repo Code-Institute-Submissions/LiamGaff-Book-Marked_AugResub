@@ -35,7 +35,11 @@ As a user I would like:
 
 # Features
 ## Exsisting Features
-
+* Navabar with links to each page of the web application.
+* Registration form.
+* Login form.
+* A library where users can add books they would like to read from the search engine.
+* A serch engine to look through a database of books.
 
 ## Features Still to Be Implemented
 

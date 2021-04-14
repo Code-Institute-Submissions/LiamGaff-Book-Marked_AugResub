@@ -29,15 +29,21 @@ def home():
     return render_template('index.html', books=books)
 
 
-@app.route("/profile/", methods=["GET", "POST"])
+@app.route("/profile", methods=["GET", "POST"])
 def profile():
     users = list(mongo.db.users.find())
     books = list(mongo.db.books.find())
     return render_template('profile.html', users=users, books=books)
 
 
+@app.route("/update_profile", methods=["GET", "POST"])
+def update_profile():
+    users = list(mongo.db.users.find())
+    return render_template('update_profile.html', users=users)
 
-@app.route('/signup/', methods=['GET', 'POST'])
+
+
+@app.route('/signup', methods=['GET', 'POST'])
 def sign_up():
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
@@ -61,13 +67,32 @@ def sign_up():
     return render_template("signup.html")
 
 
-@app.route('/login/', methods=["GET", "POST"])
+@app.route('/login', methods=["GET", "POST"])
 def log_in():
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
                 {"user.email": request.form.get('email')})
 
-    return render_template('login.html')
+        if existing_user:
+            # ensure hashed password matches user input
+            if check_password_hash(
+                    existing_user["password"], request.form.get("password")):
+                session["user"] = request.form.get("email")
+                flash("Welcome, {}".format(
+                    request.form.get("email")))
+                return redirect(url_for(
+                    "profile", email=session["user"]))
+            else:
+                # invalid password match
+                flash("Incorrect Email and/or Password")
+                return redirect(url_for("log_in"))
+
+        else:
+            # username doesn't exist
+            flash("Incorrect Email and/or Password")
+            return redirect(url_for("log_in"))
+
+    return render_template("login.html")
 
 
 if __name__ == "__main__":

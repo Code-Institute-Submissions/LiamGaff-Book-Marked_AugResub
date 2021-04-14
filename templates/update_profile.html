@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="center-align headings">User Profile</h3>
+
+<div class="row">
+    <form name="update_form" class="col s12 m8 offset-m2">
+        <div class="card-panel">
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-portrait  cyan-text darken-2"></i>
+                    <input id="image" name="name" type="file" class="validate" required>
+                    <label for="image"></label>
+                </div>
+            </div>
+            <!-- bio -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-at prefix cyan-text darken-2"></i>
+                    <textarea id="bio" name="bio" rows="1" placeholder="Spider-Man"  class="validate">
+                    <label for="bio">Bio</label>
+                </div>
+            </div>
+            <!-- register -->
+            <div class="row">
+                <button type="submit" class="col s12 btn-large cyan darken-2 text-shadow">
+                    Update <i class="fas fa-sign-in-alt"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <p class="center-align">
+            Have an account? 
+            <a href="#" class="liht-blue-text text-darken-4">Log In</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}
