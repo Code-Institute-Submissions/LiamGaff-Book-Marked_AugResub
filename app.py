@@ -29,6 +29,7 @@ def home():
     return render_template('index.html', books=books)
 
 
+# Render user profile
 @app.route("/profile", methods=["GET", "POST"])
 def profile():
     users = list(mongo.db.users.find())
@@ -36,13 +37,25 @@ def profile():
     return render_template('profile.html', users=users, books=books)
 
 
-@app.route("/update_profile", methods=["GET", "POST"])
+# Update user profile with user image and bio
+# Still requires work
+@app.route("/update_profile/", methods=["GET", "POST"])
 def update_profile():
-    users = list(mongo.db.users.find())
-    return render_template('update_profile.html', users=users)
+    users = list(mongo.db.users.find_one("_id": ObjectId("users_id"))
+    if request.method == "POST":
+        update_user = {
+            "image": request.form.get("image"),
+            "bio": request.form.get("bio")
+        }
+        mongo.db.user.insert_one(update_user)
+        flash("Profile updated")
+        return redirect(url_for("profile"))
+
+    return render_template('update_profile.html', users=users, profile=profile)
 
 
-
+# Creating and adding a new user to DB
+# exisiting_user needs to be fisxed...
 @app.route('/signup', methods=['GET', 'POST'])
 def sign_up():
     if request.method == "POST":
@@ -67,6 +80,7 @@ def sign_up():
     return render_template("signup.html")
 
 
+# Login to user profile with encrypted password and email
 @app.route('/login', methods=["GET", "POST"])
 def log_in():
     if request.method == "POST":
