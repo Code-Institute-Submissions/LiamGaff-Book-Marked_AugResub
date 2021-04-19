@@ -7,6 +7,7 @@ from flask_pymongo import PyMongo
 from werkzeug.security import generate_password_hash, check_password_hash
 from passlib.hash import pbkdf2_sha256
 from bson.objectid import ObjectId
+from requests.exceptions import HTTPError
 if os.path.exists("env.py"):
     import env
 
@@ -27,8 +28,59 @@ VOLUME_BASE_URL = 'https://www.googleapis.com/books/v1/volumes/'
 
 @app.route("/")
 def home():
+    featured_books()
     books = list(mongo.db.books.find())
     return render_template('index.html', books=books)
+
+
+
+
+def featured_books():
+    books = mongo.db.books.find()
+    for book in books:
+        if (book["image"] == ""):
+            isbn = book["isbn"]
+            isbn_img_url = ISBN_SEARCH_BASE_URL + isbn
+            print(isbn_img_url)
+
+            try:
+                response = requests.get(isbn_img_url)
+                response.raise_for_status()
+                j_response = response.json()
+                for x in range(1):
+                    cover_img = j_response['items'][x]['volumeInfo']['imageLinks']['thumbnail']
+                    vol_id = j_response['items'][x]['id']
+                    author = j_response['items'][x]['volumeInfo']['authors']
+                    title = j_response['items'][x]['volumeInfo']['title']
+                    genre = j_response['items'][x]['readingModes']['categories']
+                    str_cover = str(cover_img)
+                    str_isbn = str(isbn)
+                    str_id = str(vol_id)
+                    str_author = str(author)
+                    str_title = str(title)
+                    str_genre = str(genre)
+
+                    mongo.db.books.update_one(
+                        {'isbn': str_isbn},
+                        {'$set':
+                            {
+                                'image': str_cover,
+                                'volume_id': str_id,
+                                'author': str_author,
+                                'title': str_title,
+                                'genre': str_genre
+                            }
+                        }
+                    )
+
+            except HTTPError as http_err:
+                print(f'HTTP error occurred: {http_err}')
+                return render_template('index.html')
+
+            except Exception as err:
+                print(f'Other error occurred: {err}')
+                return render_template('index.html')
+            return render_template('index.html')
 
 
 @app.route("/getSearch", methods=["GET", "POST"])
@@ -41,7 +93,7 @@ def getSearch():
 
     title = data['items'][0]['volumeInfo']['title']
 
-    print(data['items'][0]['volumeInfo']['title'])
+    print(data)
 
     return render_template('index.html', books=books)
 
