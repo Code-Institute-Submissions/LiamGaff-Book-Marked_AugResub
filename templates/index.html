@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
+
+
+
 <body>
     <div class="container">
         <div class="row">
             <h2 class="col s12 center-align sub-headings">Search Library</h2>
         </div>
 
-            <form id="search-form" class="col s10" action="" method="">
+            <form id="search-form" class="col s10" action="/getSearch" method="POST">
                 <div class="row">
                     <div class="input-field col s5 push-s3" id="search-box">
                         <input type="search" id="search" class="white black-text" name="search" required />
@@ -63,4 +66,5 @@
         </div>
     </section>
 </body>
+
 {% endblock %}

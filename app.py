@@ -1,4 +1,5 @@
 import os
+import requests
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -21,6 +22,7 @@ mongo = PyMongo(app)
 
 API_KEY = os.environ.get('API_KEY')
 SEARCH_BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q='
+ISBN_SEARCH_BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q=isbn:'
 VOLUME_BASE_URL = 'https://www.googleapis.com/books/v1/volumes/'
 
 @app.route("/")
@@ -29,29 +31,42 @@ def home():
     return render_template('index.html', books=books)
 
 
+@app.route("/getSearch", methods=["GET", "POST"])
+def getSearch():
+    books = list(mongo.db.books.find())
+    isbn_getreq_url = ISBN_SEARCH_BASE_URL + request.form.get("search")
+    print(isbn_getreq_url)
+    r = requests.get(url = isbn_getreq_url)
+    data = r.json()
+
+    title = data['items'][0]['volumeInfo']['title']
+
+    print(data['items'][0]['volumeInfo']['title'])
+
+    return render_template('index.html', books=books)
+
 # Render user profile
-@app.route("/profile", methods=["GET", "POST"])
+@app.route("/profile/", methods=["GET", "POST"])
 def profile():
     users = list(mongo.db.users.find())
     books = list(mongo.db.books.find())
-    return render_template('profile.html', users=users, books=books)
+
+    return render_template('profile.html', users=users, books=books,)
 
 
 # Update user profile with user image and bio
 # Still requires work
 @app.route("/update_profile/", methods=["GET", "POST"])
 def update_profile():
-    users = list(mongo.db.users.find_one("_id": ObjectId("users_id"))
     if request.method == "POST":
         update_user = {
             "image": request.form.get("image"),
-            "bio": request.form.get("bio")
+            "bio": request.form.get("bio-update")
         }
-        mongo.db.user.insert_one(update_user)
+        mongo.db.user.update_one(update_user)
         flash("Profile updated")
         return redirect(url_for("profile"))
-
-    return render_template('update_profile.html', users=users, profile=profile)
+    return render_template('update_profile.html')
 
 
 # Creating and adding a new user to DB
