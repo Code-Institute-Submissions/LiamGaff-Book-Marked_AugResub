@@ -5,7 +5,6 @@ from flask import (
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from werkzeug.security import generate_password_hash, check_password_hash
-from passlib.hash import pbkdf2_sha256
 from bson.objectid import ObjectId
 from requests.exceptions import HTTPError
 if os.path.exists("env.py"):
@@ -27,24 +26,23 @@ ISBN_SEARCH_BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q=isbn:'
 VOLUME_BASE_URL = 'https://www.googleapis.com/books/v1/volumes/'
 
 @app.route("/")
+@app.route("/home", methods=["GET", "POST"])
 def home():
-    featured_books()
     books = list(mongo.db.books.find())
+    featured_books()
     return render_template('index.html', books=books)
 
 
-
-
+@app.route("/featured_books")
 def featured_books():
     books = mongo.db.books.find()
     for book in books:
         if (book["image"] == ""):
             isbn = book["isbn"]
-            isbn_img_url = ISBN_SEARCH_BASE_URL + isbn
-            print(isbn_img_url)
+            isbn_book_url = ISBN_SEARCH_BASE_URL + "isbn:" + isbn
 
             try:
-                response = requests.get(isbn_img_url)
+                response = requests.get(isbn_book_url)
                 response.raise_for_status()
                 j_response = response.json()
                 for x in range(1):
@@ -52,7 +50,7 @@ def featured_books():
                     vol_id = j_response['items'][x]['id']
                     author = j_response['items'][x]['volumeInfo']['authors']
                     title = j_response['items'][x]['volumeInfo']['title']
-                    genre = j_response['items'][x]['readingModes']['categories']
+                    genre = j_response['items'][x]['volumeInfo']['categories']
                     str_cover = str(cover_img)
                     str_isbn = str(isbn)
                     str_id = str(vol_id)
@@ -80,7 +78,6 @@ def featured_books():
             except Exception as err:
                 print(f'Other error occurred: {err}')
                 return render_template('index.html')
-            return render_template('index.html')
 
 
 @app.route("/getSearch", methods=["GET", "POST"])
@@ -89,9 +86,7 @@ def getSearch():
     isbn_getreq_url = ISBN_SEARCH_BASE_URL + request.form.get("search")
     print(isbn_getreq_url)
     r = requests.get(url = isbn_getreq_url)
-    data = r.json()
-
-    title = data['items'][0]['volumeInfo']['title']
+    data = r.json() 
 
     print(data)
 
@@ -127,23 +122,25 @@ def update_profile():
 def sign_up():
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
-                {"user.email": request.form.get('email')})
+                {"email": request.form.get('email')})
 
         if existing_user:
             flash("An account with this email already exists")
             return redirect(url_for("signup"))
 
-        register = {
-            "name": request.form.get("name").lower(),
-            "email": request.form.get("email"),
-            "password": generate_password_hash(request.form.get("password"))
-        }
-        mongo.db.users.insert_one(register)
+        else:
+            register = {
+                "name": request.form.get("name").lower(),
+                "email": request.form.get("email"),
+                "password": generate_password_hash(
+                        request.form.get("password"))
+            }
+            mongo.db.users.insert_one(register)
 
-        # Add new user
-        session["user"] = request.form.get("email")
-        flash("Registration Successful!")
-        return redirect(url_for("profile", email=session["user"]))
+            # Add new user
+            session["email"] = request.form.get("email")
+            flash("Registration Successful!")
+            return redirect(url_for("profile", email=session["email"]))
     return render_template("signup.html")
 
 
@@ -152,17 +149,16 @@ def sign_up():
 def log_in():
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
-                {"user.email": request.form.get('email')})
+                {"email": request.form.get('email').lower()})
 
         if existing_user:
             # ensure hashed password matches user input
             if check_password_hash(
-                    existing_user["password"], request.form.get("password")):
-                session["user"] = request.form.get("email")
+                existing_user["password"], request.form.get("password")):
+                session["email"] = request.form.get("email").lower()
                 flash("Welcome, {}".format(
                     request.form.get("email")))
-                return redirect(url_for(
-                    "profile", email=session["user"]))
+                return redirect(url_for("profile"))
             else:
                 # invalid password match
                 flash("Incorrect Email and/or Password")
