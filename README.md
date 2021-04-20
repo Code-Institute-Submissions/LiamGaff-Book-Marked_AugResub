@@ -105,6 +105,8 @@ Nm | Browser | Action | Test result |
 
 * Getting 500 error code when opening app.
 
+* Featured books only renders one book from the database.
+
 
 ## How to clone this project
 ## With Gitpod

@@ -107,14 +107,21 @@ def profile():
 @app.route("/update_profile/", methods=["GET", "POST"])
 def update_profile():
     if request.method == "POST":
-        update_user = {
-            "image": request.form.get("image"),
-            "bio": request.form.get("bio-update")
-        }
-        mongo.db.user.update_one(update_user)
-        flash("Profile updated")
-        return redirect(url_for("profile"))
-    return render_template('update_profile.html')
+        user = mongo.db.users.find_one(
+            {"email": session["email"]})
+        if session['email']:
+            mongo.db.users.update_one(
+                        {'email': session['email']},
+                        {'$set':
+                            {
+                                'image': request.form.get("image"),
+                                'bio': request.form.get('bio-update')
+                            }
+                        }
+                    )
+            flash("Profile updated")
+            return redirect(url_for("profile"))
+    return render_template('update_profile.html', user=user)
 
 
 # Creating and adding a new user to DB
@@ -171,6 +178,14 @@ def log_in():
             return redirect(url_for("log_in"))
 
     return render_template("login.html")
+
+
+@app.route("/logout")
+def log_out():
+    # remove user from session cookie
+    flash("See you soon!")
+    session.pop("email")
+    return redirect(url_for("log_in"))
 
 
 if __name__ == "__main__":

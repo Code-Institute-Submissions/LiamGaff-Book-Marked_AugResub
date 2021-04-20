@@ -11,7 +11,7 @@
                     <i class="fas fa-portrait  cyan-text darken-2">
                     <label for="image" class="form-text">Choos a profile image:</label></i>
                     <br>
-                    <input id="image" name="name" type="file" class="validate" accept="image/*" required>
+                    <input id="image" name="name" type="file" class="validate" accept="image/*">
                 </div>
             </div>
             <!-- bio -->
@@ -20,7 +20,7 @@
                     <i class="fas fa-edit cyan-text darken-2">
                     <label for="bio-update" class="form-text">Bio:</label></i>
                      <br>
-                    <textarea id="bio-update" name="bio-update" rows="4" class="validate update-form" maxlength="100"></textarea>
+                    <textarea id="bio-update" name="bio-update" rows="4" class="validate update-form" maxlength="100">{{ user.bio }}</textarea>
                 </div>
             </div>
             <!-- register -->
