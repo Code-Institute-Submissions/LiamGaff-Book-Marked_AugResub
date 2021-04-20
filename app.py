@@ -95,10 +95,11 @@ def getSearch():
 # Render user profile
 @app.route("/profile/", methods=["GET", "POST"])
 def profile():
-    users = list(mongo.db.users.find())
-    books = list(mongo.db.books.find())
+    if session['email']:
+        user = mongo.db.users.find_one(
+            {"email": session["email"]})
 
-    return render_template('profile.html', users=users, books=books,)
+    return render_template('profile.html', user=user)
 
 
 # Update user profile with user image and bio
