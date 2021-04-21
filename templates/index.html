@@ -50,13 +50,13 @@
                                 </p>
                             </div>
                             <div class="card-action">
-                                <a href="#" class="add-btn" title="Add to your library">Add</a>
-                                <span class="dl"></span>
-                                <a href="#" class="rate-btn" title="Rate this book">rating</a>
+                                <a href="#" class="add-btn" title="Add to your library">Add to library</a>
+                                <!-- <span class="dl"></span>
+                                <a href="#" class="rate-btn" title="Rate this book">rating</a> -->
                               </div>
                             </div>
                             <div class="col s5 push-s3" id="view-btn">
-                                <a class="btn" title="View in google books">View Book</a>
+                                <a class="btn" href="{{ book.book_link }}" title="View in google books">View Book</a>
                             </div>
                         </div>
                         {% endfor %}

@@ -33,6 +33,8 @@ def home():
     return render_template('index.html', books=books)
 
 
+# render featured books to homepage from database
+# Data base is filled with info from Google Books API
 @app.route("/featured_books")
 def featured_books():
     books = mongo.db.books.find()
@@ -51,12 +53,14 @@ def featured_books():
                     author = j_response['items'][x]['volumeInfo']['authors']
                     title = j_response['items'][x]['volumeInfo']['title']
                     genre = j_response['items'][x]['volumeInfo']['categories']
+                    link = j_response['items'][x]['volumeInfo']['infoLink']
                     str_cover = str(cover_img)
                     str_isbn = str(isbn)
                     str_id = str(vol_id)
                     str_author = str(author)
                     str_title = str(title)
                     str_genre = str(genre)
+                    str_link = str(link)
 
                     mongo.db.books.update_one(
                         {'isbn': str_isbn},
@@ -66,7 +70,8 @@ def featured_books():
                                 'volume_id': str_id,
                                 'author': str_author,
                                 'title': str_title,
-                                'genre': str_genre
+                                'genre': str_genre,
+                                'book_link': str_link
                             }
                         }
                     )
@@ -80,6 +85,7 @@ def featured_books():
                 return render_template('index.html')
 
 
+# Searches google books API and renders info to search page
 @app.route("/getSearch", methods=["GET", "POST"])
 def getSearch():
     getreq_url = SEARCH_BASE_URL + request.form.get("search")
@@ -87,14 +93,11 @@ def getSearch():
     r = requests.get(url = getreq_url)
     data = r.json()
     print(data)
-    for x in range(1):
-        link = data['items'][x]['volumeInfo']['infoLink']
-        link_str = str(link)
 
-    return render_template('search_results.html', books=data, link=link_str)
+    return render_template('search_results.html', books=data)
 
 
-# Render user profile
+# Render user profile if user in session
 @app.route("/profile/", methods=["GET", "POST"])
 def profile():
     if session['email']:
