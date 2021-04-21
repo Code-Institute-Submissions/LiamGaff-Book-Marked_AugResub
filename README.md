@@ -107,6 +107,8 @@ Nm | Browser | Action | Test result |
 
 * Featured books only renders one book from the database.
 
+* Profile photos wont upload to database.
+
 
 ## How to clone this project
 ## With Gitpod

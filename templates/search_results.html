@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <h2 class="col s12 center-align sub-headings">Search Library</h2>
+    </div>
+
+        <form id="search-form" class="col s10" action="/getSearch" method="POST">
+            <div class="row">
+                <div class="input-field col s5 push-s3" id="search-box">
+                    <input type="search" id="search" class="white black-text" name="search" required />
+                    <label class="label-icon black-text" for="search"></label>
+                </div>
+                <div class="col s2 push-s3 left-align btn-placement">
+                    <button type="submit" id="search-btn" class="white black-text btn"><i
+                            class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+
+<section class="container">
+    <div class="row">
+        <div class="col s12 center-align">
+            <h3 class="sub-headings">Search Results</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 scroll center-align">
+            <div class="card-panel center-align col s12" id="library">
+                <div class="row">
+                    {% for book in books['items'] %}
+                    <div class="col s12 m6">
+                      <div class="card">
+                        <div class="card-image">
+                        {% if book['volumeInfo']['imageLinks'] %}
+                          <img src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}">
+                        {% endif %}
+                          <span class="card-title">Card Title</span>
+                        {% if book['volumeInfo']['infoLink'] %}
+                          <a src="{{ book['volumeInfo']['infoLink']}}" class="btn-floating halfway-fab waves-effect waves-light red">View</a>
+                        {% endif %}
+                        </div>
+                        <div class="card-content">
+                            <p> 
+                                Book: <span>{{ book['volumeInfo']['title']}}</span>
+                                <br>
+                            {% for author in book['volumeInfo']['authors'] %}
+                                Author: <span>{{ author }}</span>
+                            {% endfor %}
+                                <br>
+                                Published: <span>{{ book['volumeInfo']['publishedDate'] }}</span>
+                            </p>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

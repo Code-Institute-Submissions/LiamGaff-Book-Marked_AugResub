@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>CSS User Profile Card</title>
+	<title>Profile</title>
 	<link rel="stylesheet" href="styles.css">
 	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
@@ -18,7 +18,7 @@
                 <h4 class="sub-headings">{{ user.name }}</h4>
             </div>
             <div class="col s1 right" id="update-btn">
-                <a  href="{{ url_for('update_profile')}}" class="btn">
+                <a  href="{{ url_for('update_profile')}}" class="btn-small">
                     Update
                 </a>
             </div>
@@ -65,23 +65,20 @@
                             </div>
                           </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- <footer class="conatiner">
         <div class="row">
-            <div class="col s12 center-align">
-                <ul class="valign-wrapper">
-                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                </ul>
-            </div>  
+            <div class="col s12">
+                <p class="center-align">
+                    Add some books to your collection: 
+                    <a href="{{ url_for('home') }}" class="liht-blue-text text-darken-4">search</a>
+                </p>
+            </div>
         </div>
-    </footer> -->
-        {% endfor %}
 </body>
 </html>
 

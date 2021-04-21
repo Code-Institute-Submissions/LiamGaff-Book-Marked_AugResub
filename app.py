@@ -39,7 +39,7 @@ def featured_books():
     for book in books:
         if (book["image"] == ""):
             isbn = book["isbn"]
-            isbn_book_url = ISBN_SEARCH_BASE_URL + "isbn:" + isbn
+            isbn_book_url = ISBN_SEARCH_BASE_URL + isbn
 
             try:
                 response = requests.get(isbn_book_url)
@@ -82,15 +82,14 @@ def featured_books():
 
 @app.route("/getSearch", methods=["GET", "POST"])
 def getSearch():
-    books = list(mongo.db.books.find())
-    isbn_getreq_url = ISBN_SEARCH_BASE_URL + request.form.get("search")
-    print(isbn_getreq_url)
-    r = requests.get(url = isbn_getreq_url)
-    data = r.json() 
-
+    getreq_url = SEARCH_BASE_URL + request.form.get("search")
+    print(getreq_url)
+    r = requests.get(url = getreq_url)
+    data = r.json()
     print(data)
 
-    return render_template('index.html', books=books)
+    return render_template('search_results.html', books=data)
+
 
 # Render user profile
 @app.route("/profile/", methods=["GET", "POST"])
@@ -98,30 +97,33 @@ def profile():
     if session['email']:
         user = mongo.db.users.find_one(
             {"email": session["email"]})
+        user_library = mongo.db.user_books.find()
 
-    return render_template('profile.html', user=user)
+    return render_template('profile.html', user=user, books=user_library)
 
 
 # Update user profile with user image and bio
 # Still requires work
 @app.route("/update_profile/", methods=["GET", "POST"])
 def update_profile():
+    user_bio = mongo.db.users.find_one(
+            {"email": session["email"]})["bio"]
     if request.method == "POST":
-        user = mongo.db.users.find_one(
-            {"email": session["email"]})
         if session['email']:
+            profile_image = request.form.get('image')
+            user_image = str(profile_image)
             mongo.db.users.update_one(
                         {'email': session['email']},
                         {'$set':
                             {
-                                'image': request.form.get("image"),
+                                'image': user_image,
                                 'bio': request.form.get('bio-update')
                             }
                         }
                     )
             flash("Profile updated")
             return redirect(url_for("profile"))
-    return render_template('update_profile.html', user=user)
+    return render_template('update_profile.html', user_bio=user_bio)
 
 
 # Creating and adding a new user to DB
@@ -138,12 +140,17 @@ def sign_up():
 
         else:
             register = {
-                "name": request.form.get("name").lower(),
+                "name": request.form.get("name"),
                 "email": request.form.get("email"),
                 "password": generate_password_hash(
-                        request.form.get("password"))
+                        request.form.get("password")),
+                "bio": " "
+                                    }
+            users_books = {
+                "email": request.form.get("email")
             }
             mongo.db.users.insert_one(register)
+            mongo.db.user_books.insert_one(users_books)
 
             # Add new user
             session["email"] = request.form.get("email")

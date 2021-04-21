@@ -30,10 +30,14 @@
         </nav>
 
         <ul class="sidenav" id="mobile-demo">
-            <li><a href="">Home</a></li>
-            <li><a href="">Profile</a></li>
-            <li><a href="">Login</a></li>
-            <li><a href="">Logout</a></li>
+            <li><a href="{{url_for('home')}}">Home</a></li>
+            {% if session.email %}
+                <li><a href="{{url_for('profile')}}">Profile</a></li>
+                <li><a href="{{url_for('log_out')}}">Logout</a></li>
+            {% else %}
+                <li><a href="{{url_for('sign_up')}}">Signup</a></li>
+                <li><a href="{{url_for('log_in')}}">Login</a></li>
+            {% endif %}
         </ul>
     </header>
     {% block content %}
