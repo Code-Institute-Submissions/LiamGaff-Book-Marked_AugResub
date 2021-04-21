@@ -87,8 +87,11 @@ def getSearch():
     r = requests.get(url = getreq_url)
     data = r.json()
     print(data)
+    for x in range(1):
+        link = data['items'][x]['volumeInfo']['infoLink']
+        link_str = str(link)
 
-    return render_template('search_results.html', books=data)
+    return render_template('search_results.html', books=data, link=link_str)
 
 
 # Render user profile

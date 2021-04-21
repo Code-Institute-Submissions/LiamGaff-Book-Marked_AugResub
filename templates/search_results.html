@@ -30,16 +30,14 @@
             <div class="card-panel center-align col s12" id="library">
                 <div class="row">
                     {% for book in books['items'] %}
-                    <div class="col s12 m6">
+                    <div class="col s12 l4">
                       <div class="card">
                         <div class="card-image">
                         {% if book['volumeInfo']['imageLinks'] %}
-                          <img src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}">
+                          <img src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}" height="300">
                         {% endif %}
                           <span class="card-title">Card Title</span>
-                        {% if book['volumeInfo']['infoLink'] %}
-                          <a src="{{ book['volumeInfo']['infoLink']}}" class="btn-floating halfway-fab waves-effect waves-light red">View</a>
-                        {% endif %}
+                          <a href="{{link}}" target="_blank" class="btn-floating halfway-fab waves-effect waves-light red">View</a>
                         </div>
                         <div class="card-content">
                             <p> 
