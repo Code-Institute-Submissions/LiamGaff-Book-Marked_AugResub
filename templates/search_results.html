@@ -6,7 +6,7 @@
         <h2 class="col s12 center-align sub-headings">Search Library</h2>
     </div>
 
-        <form id="search-form" class="col s10" action="/getSearch" method="POST">
+        <form id="search-form" class="col s10" action="/get_search" method="POST">
             <div class="row">
                 <div class="input-field col s5 push-s3" id="search-box">
                     <input type="search" id="search" class="white black-text" name="search" required />
@@ -19,7 +19,7 @@
             </div>
         </form>
 
-<section class="container">
+<section>
     <div class="row">
         <div class="col s12 center-align">
             <h3 class="sub-headings">Search Results</h3>
@@ -30,7 +30,7 @@
             <div class="card-panel center-align col s12" id="library">
                 <div class="row">
                     {% for book in books['items'] %}
-                    <div class="col s12 l4">
+                    <div class="col s12 m4 l4">
                       <div class="card">
                         <div class="card-image">
                         {% if book['volumeInfo']['imageLinks'] %}
@@ -60,5 +60,13 @@
         </div>
     </div>
 </section>
+<div class="row">
+    <div class="col s12">
+        <p class="center-align">
+            Return home: 
+            <a href="{{ url_for('home') }}" class="liht-blue-text text-darken-4">here</a>
+        </p>
+    </div>
+</div>
 
 {% endblock %}

@@ -1,14 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Profile</title>
-	<link rel="stylesheet" href="styles.css">
-	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-</head>
-<body>
     <section>
         <div class="row">
             <div class="col s3 hide-on-small-only left" id="profile-img">
@@ -71,15 +63,13 @@
             </div>
         </div>
     </section>
-        <div class="row">
-            <div class="col s12">
-                <p class="center-align">
-                    Add some books to your collection: 
-                    <a href="{{ url_for('home') }}" class="liht-blue-text text-darken-4">search</a>
-                </p>
-            </div>
+    <div class="row">
+        <div class="col s12">
+            <p class="center-align">
+                Add some books to your collection: 
+                <a href="{{ url_for('home') }}" class="liht-blue-text text-darken-4">search</a>
+            </p>
         </div>
-</body>
-</html>
+    </div>
 
 {% endblock %}

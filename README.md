@@ -7,22 +7,31 @@ I am designing this web application as part of my third Milestone project for Co
 As a user I would like:
 
 * To have access to a wide variety of books.
-* To be able to leave a review on books I have read.
-* To be able to creat a profile on the Book Marked web page.
+* To be able to create a profile on the Book Marked web page.
 * To be able to login to my profile.
 * To be abel to logout of my profile.
 * To be able to add books I'm interested in to my profile.
 * To be able to remove books from my profile.
 * To have clear and easy navigation through out the page.
+* To be able to search a database of books.
+* To have a section of featured books as examples.
+* To have a link to view more info on the book shown.
 
 
 ## Strategy
+This page was designed with readers in mind. This page should be an easy and enjoyable experience for anyone that visits. There's a large
+database of books to view and you can add them to your own personal library so you wont forget about them.
 
 ## Scope
+The main objective of this project was to make sure the user needs were meet. The design was simplictic so that I could focus on the functionality
+of the wbpage rather than the look of it. Making sure it was easy for the user to sign up, login and logout was also essential to providing a good service with this webpage.
 
 ## Structure
+The Book Marked webpage was designed to navigate with ease. Its simple and familiar layout allows the user an enjoyable and fun experience. The 
+navbar in the top corner allows for easy movement through out the webpage aswell as additional navigation links on the bottom of the profile,signup and login pages. The books are the main focus of the webpgae so they take up most of the space on the home and profile page. The books are contained in a card panel with a scroll bar which allows for a clean and simple way to view the searched and featured books. 
 
 ## Skeleton
+There was no real theme to the design of the webpage. I aimed to use very inviting and almost relaxing colours through out the page. The colours and layout were designed to draw users in and hopefully keep them coming back. The design will be disscused further in the design section of this document.
 
 ## Design
 **Wire Frames**
@@ -33,6 +42,8 @@ As a user I would like:
 **Colours**
 
 
+**typrogapgy**
+
 # Features
 ## Exsisting Features
 * Navabar with links to each page of the web application.
@@ -40,6 +51,7 @@ As a user I would like:
 * Login form.
 * A library where users can add books they would like to read from the search engine.
 * A serch engine to look through a database of books.
+* A list of featured example books.
 
 ## Features Still to Be Implemented
 
@@ -77,6 +89,9 @@ As a user I would like:
 
 * [Flask]()
 >Framework used to build the backend with python.
+
+* [Materialize](https://materializecss.com/)
+>Materialized used for the design, layout and responsiveness of the page.
 
 
 

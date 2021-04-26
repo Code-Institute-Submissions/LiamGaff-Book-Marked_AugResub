@@ -86,7 +86,7 @@ def featured_books():
 
 
 # Searches google books API and renders info to search page
-@app.route("/getSearch", methods=["GET", "POST"])
+@app.route("/get_search", methods=["GET", "POST"])
 def getSearch():
     getreq_url = SEARCH_BASE_URL + request.form.get("search")
     print(getreq_url)
@@ -95,6 +95,14 @@ def getSearch():
     print(data)
 
     return render_template('search_results.html', books=data)
+
+
+# update user library from search or featured books
+# @app.route("/update_library")
+# def update_library():
+#     if session['email']:
+
+
 
 
 # Render user profile if user in session
@@ -113,7 +121,7 @@ def profile():
 @app.route("/update_profile/", methods=["GET", "POST"])
 def update_profile():
     user_bio = mongo.db.users.find_one(
-            {"email": session["email"]})["bio"]
+            {"email": session["email"]})["bio8"]
     if request.method == "POST":
         if session['email']:
             profile_image = request.form.get('image')
