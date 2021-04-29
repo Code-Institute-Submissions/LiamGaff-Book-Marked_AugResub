@@ -47,34 +47,33 @@ def featured_books():
                 response = requests.get(isbn_book_url)
                 response.raise_for_status()
                 j_response = response.json()
-                for x in range(1):
-                    cover_img = j_response['items'][x]['volumeInfo']['imageLinks']['thumbnail']
-                    vol_id = j_response['items'][x]['id']
-                    author = j_response['items'][x]['volumeInfo']['authors']
-                    title = j_response['items'][x]['volumeInfo']['title']
-                    genre = j_response['items'][x]['volumeInfo']['categories']
-                    link = j_response['items'][x]['volumeInfo']['infoLink']
-                    str_cover = str(cover_img)
-                    str_isbn = str(isbn)
-                    str_id = str(vol_id)
-                    str_author = str(author)
-                    str_title = str(title)
-                    str_genre = str(genre)
-                    str_link = str(link)
+                cover_img = j_response['items'][0]['volumeInfo']['imageLinks']['thumbnail']
+                vol_id = j_response['items'][0]['id']
+                author = j_response['items'][0]['volumeInfo']['authors']
+                title = j_response['items'][0]['volumeInfo']['title']
+                genre = j_response['items'][0]['volumeInfo']['categories']
+                link = j_response['items'][0]['volumeInfo']['infoLink']
+                str_cover = str(cover_img)
+                str_isbn = str(isbn)
+                str_id = str(vol_id)
+                str_author = str(author)
+                str_title = str(title)
+                str_genre = str(genre)
+                str_link = str(link)
 
-                    mongo.db.books.update_one(
-                        {'isbn': str_isbn},
-                        {'$set':
-                            {
-                                'image': str_cover,
-                                'volume_id': str_id,
-                                'author': str_author,
-                                'title': str_title,
-                                'genre': str_genre,
-                                'book_link': str_link
-                            }
+                mongo.db.books.update_one(
+                    {'isbn': str_isbn},
+                    {'$set':
+                        {
+                            'image': str_cover,
+                            'volume_id': str_id,
+                            'author': str_author,
+                            'title': str_title,
+                            'genre': str_genre,
+                            'book_link': str_link
                         }
-                    )
+                    }
+                )
 
             except HTTPError as http_err:
                 print(f'HTTP error occurred: {http_err}')
@@ -87,41 +86,97 @@ def featured_books():
 
 # Searches google books API and renders info to search page
 @app.route("/get_search", methods=["GET", "POST"])
-def getSearch():
+def get_search():
     getreq_url = SEARCH_BASE_URL + request.form.get("search")
     print(getreq_url)
     r = requests.get(url = getreq_url)
     data = r.json()
-    print(data)
-
+    isbn = data['volumeInfo'][0]['industryIdentifiers'][identifier]
+    print(isbn)
     return render_template('search_results.html', books=data)
 
 
 # update user library from search or featured books
-# @app.route("/update_library")
-# def update_library():
-#     if session['email']:
+@app.route("/library/<isbn>", methods=["GET", "POST"])
+def library(isbn):
+    if session['email']:
+        user = mongo.db.users.find_one(
+            {'email': session['email']})
+        user_library = mongo.db.user_books.find(
+            {'email': session['email']})
+        isbn_book_url = ISBN_SEARCH_BASE_URL + isbn
 
+    try:
+        response = requests.get(isbn_book_url)
+        response.raise_for_status()
+        j_response = response.json()
+        cover_img = j_response['items'][0]['volumeInfo']['imageLinks']['thumbnail']
+        vol_id = j_response['items'][0]['id']
+        author = j_response['items'][0]['volumeInfo']['authors']
+        title = j_response['items'][0]['volumeInfo']['title']
+        genre = j_response['items'][0]['volumeInfo']['categories']
+        link = j_response['items'][0]['volumeInfo']['infoLink']
+        str_cover = str(cover_img)
+        str_isbn = str(isbn)
+        str_id = str(vol_id)
+        str_author = str(author)
+        str_title = str(title)
+        str_genre = str(genre)
+        str_link = str(link)
 
+        mongo.db.user_books.insert_one(
+            {'email': session['email'],
+             'image': str_cover,
+             'volume_id': str_id,
+             'author': str_author,
+             'title': str_title,
+             'genre': str_genre,
+             'book_link': str_link,
+             'isbn': str_isbn
+            }
+        )
+
+    except HTTPError as http_err:
+        print(f'HTTP error occurred: {http_err}')
+        flash("An error occurred in processing your request. Please try again or try at a later time.")
+        return render_template('index.html')
+
+    except Exception as err:
+        print(f'Other error occurred: {err}')
+        flash("An error occurred in processing your request. Please try again or try at a later time.")
+        return render_template('index.html')
+
+    return redirect(url_for('profile'))
 
 
 # Render user profile if user in session
 @app.route("/profile/", methods=["GET", "POST"])
 def profile():
-    if session['email']:
-        user = mongo.db.users.find_one(
-            {"email": session["email"]})
-        user_library = mongo.db.user_books.find()
+    user = mongo.db.users.find_one(
+        {'email': session['email']})
+    books = mongo.db.user_books.find()
 
-    return render_template('profile.html', user=user, books=user_library)
+    for book in books:
+        if (book["email"] == session['email']):
+            user_books = books
+
+            return render_template('profile.html', user=user, books=user_books)
+
+
+@app.route("/users/", methods=["GET", "POST"])
+def users():
+    users = mongo.db.users.find()
+    user_library = mongo.db.user_books.find()
+
+    return render_template('profiles.html', users=users, books=user_library)
 
 
 # Update user profile with user image and bio
 # Still requires work
 @app.route("/update_profile/", methods=["GET", "POST"])
 def update_profile():
-    user_bio = mongo.db.users.find_one(
-            {"email": session["email"]})["bio8"]
+    user_bio = mongo.db.users.find_one_or_404(
+            {"email": session["email"]})["bio"]
     if request.method == "POST":
         if session['email']:
             profile_image = request.form.get('image')

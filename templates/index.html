@@ -8,7 +8,7 @@
             <h2 class="col s12 center-align sub-headings">Search Library</h2>
         </div>
 
-            <form id="search-form" class="col s10" action="/get_search" method="POST">
+            <form id="search-form" class="col s12" action="/get_search" method="POST">
                 <div class="row">
                     <div class="input-field col s5 push-s3" id="search-box">
                         <input type="search" id="search" class="white black-text" name="search" required />
@@ -49,7 +49,7 @@
                                 </p>
                             </div>
                             <div class="card-action">
-                                <a href="#" class="add-btn" title="Add to your library">Add to library</a>
+                                <a class="add-btn" href="{{ url_for('library', isbn=book.isbn) }}" title="Add to your library">Add to library</a>
                             </div>
                             </div>
                             <div class="col s5 push-s3" id="view-btn">
