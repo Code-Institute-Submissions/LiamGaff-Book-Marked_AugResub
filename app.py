@@ -130,15 +130,22 @@ def library(vol_id):
 
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
-        flash("An error occurred in processing your request. Please try again or try at a later time.")
+        flash("An error occurred in processing your request. Please try again.")
         return render_template('index.html')
 
     except Exception as err:
         print(f'Other error occurred: {err}')
-        flash("An error occurred in processing your request. Please try again or try at a later time.")
+        flash("An error occurred in processing your request. Please try again.")
         return render_template('index.html')
 
     return redirect(url_for('profile'))
+
+
+@app.route('/remove_book/<book_id>')
+def remove_book(book_id):
+    mongo.db.user_books.remove({"_id": ObjectId(book_id)})
+
+    return redirect(url_for("profile"))
 
 
 # Render user profile if user in session
