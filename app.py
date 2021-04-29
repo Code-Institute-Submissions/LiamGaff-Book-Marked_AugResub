@@ -91,33 +91,26 @@ def get_search():
     print(getreq_url)
     r = requests.get(url = getreq_url)
     data = r.json()
-    isbn = data['volumeInfo'][0]['industryIdentifiers'][identifier]
-    print(isbn)
+
     return render_template('search_results.html', books=data)
 
 
 # update user library from search or featured books
-@app.route("/library/<isbn>", methods=["GET", "POST"])
-def library(isbn):
+@app.route("/library/<vol_id>", methods=["GET", "POST"])
+def library(vol_id):
     if session['email']:
-        user = mongo.db.users.find_one(
-            {'email': session['email']})
-        user_library = mongo.db.user_books.find(
-            {'email': session['email']})
-        isbn_book_url = ISBN_SEARCH_BASE_URL + isbn
+        isbn_book_url = SEARCH_BASE_URL + vol_id
 
     try:
         response = requests.get(isbn_book_url)
         response.raise_for_status()
         j_response = response.json()
         cover_img = j_response['items'][0]['volumeInfo']['imageLinks']['thumbnail']
-        vol_id = j_response['items'][0]['id']
         author = j_response['items'][0]['volumeInfo']['authors']
         title = j_response['items'][0]['volumeInfo']['title']
         genre = j_response['items'][0]['volumeInfo']['categories']
         link = j_response['items'][0]['volumeInfo']['infoLink']
         str_cover = str(cover_img)
-        str_isbn = str(isbn)
         str_id = str(vol_id)
         str_author = str(author)
         str_title = str(title)
@@ -131,8 +124,7 @@ def library(isbn):
              'author': str_author,
              'title': str_title,
              'genre': str_genre,
-             'book_link': str_link,
-             'isbn': str_isbn
+             'book_link': str_link
             }
         )
 

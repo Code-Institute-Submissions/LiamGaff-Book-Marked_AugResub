@@ -36,7 +36,7 @@
                         {% if book['volumeInfo']['imageLinks'] %}
                           <img src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}" height="300">
                         {% endif %}
-                          <a href="{{ url_for('library', isbn=book['volumeInfo']['isbn']) }}" target="_blank" class="btn-floating halfway-fab waves-effect waves-light red"><i class="fas fa-plus"></i></a>
+                          <a href="{{ url_for('library', vol_id=book['id']) }}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="fas fa-plus"></i></a>
                         </div>
                         <div class="card-content">
                             <p> 
