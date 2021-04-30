@@ -99,10 +99,14 @@ def get_search():
 @app.route("/library/<vol_id>", methods=["GET", "POST"])
 def library(vol_id):
     if session['email']:
-        isbn_book_url = SEARCH_BASE_URL + vol_id
+        id_book_url = SEARCH_BASE_URL + vol_id
+
+    else:
+        flash("Login to add to library")
+        redirect(url_for('log_in'))
 
     try:
-        response = requests.get(isbn_book_url)
+        response = requests.get(id_book_url)
         response.raise_for_status()
         j_response = response.json()
         cover_img = j_response['items'][0]['volumeInfo']['imageLinks']['thumbnail']
@@ -130,12 +134,12 @@ def library(vol_id):
 
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
-        flash("An error occurred in processing your request. Please try again.")
+        flash('An error occurred in processing your request. Please try again.')
         return render_template('index.html')
 
     except Exception as err:
         print(f'Other error occurred: {err}')
-        flash("An error occurred in processing your request. Please try again.")
+        flash('An error occurred in processing your request. Please try again.')
         return render_template('index.html')
 
     return redirect(url_for('profile'))
@@ -151,15 +155,21 @@ def remove_book(book_id):
 # Render user profile if user in session
 @app.route("/profile/", methods=["GET", "POST"])
 def profile():
-    user = mongo.db.users.find_one(
+    if mongo.db.users.find_one(
+        {'email': session['email']}):
+        user = mongo.db.users.find_one(
         {'email': session['email']})
-    books = mongo.db.user_books.find()
+        books = mongo.db.user_books.find()
 
-    for book in books:
-        if (book["email"] == session['email']):
-            user_books = books
+        for book in books:
+            if (book["email"] == session['email']):
+                user_books = books
 
-            return render_template('profile.html', user=user, books=user_books)
+                return render_template('profile.html', user=user, books=user_books)
+
+    else:
+        flash("Login to add to library")
+        redirect(url_for('log_in'))
 
 
 @app.route("/users/", methods=["GET", "POST"])
@@ -214,11 +224,7 @@ def sign_up():
                         request.form.get("password")),
                 "bio": " "
                                     }
-            users_books = {
-                "email": request.form.get("email")
-            }
             mongo.db.users.insert_one(register)
-            mongo.db.user_books.insert_one(users_books)
 
             # Add new user
             session["email"] = request.form.get("email")
