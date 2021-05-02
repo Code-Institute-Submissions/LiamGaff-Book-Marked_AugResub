@@ -99,10 +99,14 @@ def get_search():
 @app.route("/library/<vol_id>", methods=["GET", "POST"])
 def library(vol_id):
     if session['email']:
-        isbn_book_url = SEARCH_BASE_URL + vol_id
+        id_book_url = SEARCH_BASE_URL + vol_id
+
+    else:
+        flash("Login to add to library")
+        redirect(url_for('log_in', _external=True, _scheme='https'))
 
     try:
-        response = requests.get(isbn_book_url)
+        response = requests.get(id_book_url)
         response.raise_for_status()
         j_response = response.json()
         cover_img = j_response['items'][0]['volumeInfo']['imageLinks']['thumbnail']
@@ -130,36 +134,41 @@ def library(vol_id):
 
     except HTTPError as http_err:
         print(f'HTTP error occurred: {http_err}')
-        flash("An error occurred in processing your request. Please try again.")
+        flash('An error occurred in processing your request. Please try again.')
         return render_template('index.html')
 
     except Exception as err:
         print(f'Other error occurred: {err}')
-        flash("An error occurred in processing your request. Please try again.")
+        flash('An error occurred in processing your request. Please try again.')
         return render_template('index.html')
 
-    return redirect(url_for('profile'))
+    return redirect(url_for('profile', _external=True, _scheme='https'))
 
 
 @app.route('/remove_book/<book_id>')
 def remove_book(book_id):
     mongo.db.user_books.remove({"_id": ObjectId(book_id)})
 
-    return redirect(url_for("profile"))
+    return redirect(url_for('profile', _external=True, _scheme='https'))
 
 
 # Render user profile if user in session
 @app.route("/profile/", methods=["GET", "POST"])
 def profile():
-    user = mongo.db.users.find_one(
-        {'email': session['email']})
-    books = mongo.db.user_books.find()
+    print("IN PROFILE FUNCTION")
+    if mongo.db.users.find_one({'email': session['email']}):
+        user = mongo.db.users.find_one({'email': session['email']})
+        books = mongo.db.user_books.find()
 
-    for book in books:
-        if (book["email"] == session['email']):
-            user_books = books
+        for book in books:
+            if (book["email"] == session['email']):
+                user_books = books
 
-            return render_template('profile.html', user=user, books=user_books)
+                return render_template('profile.html', user=user, books=user_books)
+
+    else:
+        flash("Login to add to library")
+        redirect(url_for('log_in', _external=True, _scheme='https'))
 
 
 @app.route("/users/", methods=["GET", "POST"])
@@ -190,7 +199,7 @@ def update_profile():
                         }
                     )
             flash("Profile updated")
-            return redirect(url_for("profile"))
+            return redirect(url_for("profile", _external=True, _scheme='https'))
     return render_template('update_profile.html', user_bio=user_bio)
 
 
@@ -204,7 +213,7 @@ def sign_up():
 
         if existing_user:
             flash("An account with this email already exists")
-            return redirect(url_for("signup"))
+            return redirect(url_for("signup", _external=True, _scheme='https'))
 
         else:
             register = {
@@ -214,16 +223,12 @@ def sign_up():
                         request.form.get("password")),
                 "bio": " "
                                     }
-            users_books = {
-                "email": request.form.get("email")
-            }
             mongo.db.users.insert_one(register)
-            mongo.db.user_books.insert_one(users_books)
 
             # Add new user
             session["email"] = request.form.get("email")
             flash("Registration Successful!")
-            return redirect(url_for("profile", email=session["email"]))
+            return redirect(url_for("profile", _external=True, _scheme='https'))
     return render_template("signup.html")
 
 
@@ -236,21 +241,22 @@ def log_in():
 
         if existing_user:
             # ensure hashed password matches user input
-            if check_password_hash(
-                existing_user["password"], request.form.get("password")):
+            if check_password_hash(existing_user["password"], request.form.get("password")):
                 session["email"] = request.form.get("email").lower()
-                flash("Welcome, {}".format(
-                    request.form.get("email")))
-                return redirect(url_for("profile"))
+                flash("Welcome, {}".format(request.form.get("email")))
+                return redirect(url_for("profile", _external=True, _scheme='https'))
+                # redirect("/profile/")
             else:
+                print("GOT HERE CHECK PASS ELSE")
                 # invalid password match
                 flash("Incorrect Email and/or Password")
-                return redirect(url_for("log_in"))
+                return redirect(url_for("log_in", _external=True, _scheme='https'))
 
         else:
+            print("GOT HERE FIRST ELSE")
             # username doesn't exist
             flash("Incorrect Email and/or Password")
-            return redirect(url_for("log_in"))
+            return redirect(url_for("log_in", _external=True, _scheme='https'))
 
     return render_template("login.html")
 
@@ -260,7 +266,7 @@ def log_out():
     # remove user from session cookie
     flash("See you soon!")
     session.pop("email")
-    return redirect(url_for("log_in"))
+    return redirect(url_for("log_in", _external=True, _scheme='https'))
 
 
 if __name__ == "__main__":
