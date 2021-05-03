@@ -103,7 +103,11 @@ def library(vol_id):
 
     else:
         flash("Login to add to library")
+<<<<<<< HEAD
         redirect(url_for('log_in', _external=True, _scheme='https'))
+=======
+        redirect(url_for('log_in'))
+>>>>>>> fe3802c096b021952f533e85a01c5c39f7a2e0b9
 
     try:
         response = requests.get(id_book_url)
@@ -155,9 +159,16 @@ def remove_book(book_id):
 # Render user profile if user in session
 @app.route("/profile/", methods=["GET", "POST"])
 def profile():
+<<<<<<< HEAD
     print("IN PROFILE FUNCTION")
     if mongo.db.users.find_one({'email': session['email']}):
         user = mongo.db.users.find_one({'email': session['email']})
+=======
+    if mongo.db.users.find_one(
+        {'email': session['email']}):
+        user = mongo.db.users.find_one(
+        {'email': session['email']})
+>>>>>>> fe3802c096b021952f533e85a01c5c39f7a2e0b9
         books = mongo.db.user_books.find()
 
         for book in books:
@@ -168,7 +179,11 @@ def profile():
 
     else:
         flash("Login to add to library")
+<<<<<<< HEAD
         redirect(url_for('log_in', _external=True, _scheme='https'))
+=======
+        redirect(url_for('log_in'))
+>>>>>>> fe3802c096b021952f533e85a01c5c39f7a2e0b9
 
 
 @app.route("/users/", methods=["GET", "POST"])
