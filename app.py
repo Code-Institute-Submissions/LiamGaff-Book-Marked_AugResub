@@ -101,14 +101,6 @@ def library(vol_id):
     if session['email']:
         id_book_url = SEARCH_BASE_URL + vol_id
 
-    else:
-        flash("Login to add to library")
-<<<<<<< HEAD
-        redirect(url_for('log_in', _external=True, _scheme='https'))
-=======
-        redirect(url_for('log_in'))
->>>>>>> fe3802c096b021952f533e85a01c5c39f7a2e0b9
-
     try:
         response = requests.get(id_book_url)
         response.raise_for_status()
@@ -146,6 +138,10 @@ def library(vol_id):
         flash('An error occurred in processing your request. Please try again.')
         return render_template('index.html')
 
+    else:
+        flash("Login to add to library")
+        redirect(url_for('log_in', _external=True, _scheme='https'))
+
     return redirect(url_for('profile', _external=True, _scheme='https'))
 
 
@@ -159,39 +155,91 @@ def remove_book(book_id):
 # Render user profile if user in session
 @app.route("/profile/", methods=["GET", "POST"])
 def profile():
-<<<<<<< HEAD
-    print("IN PROFILE FUNCTION")
-    if mongo.db.users.find_one({'email': session['email']}):
-        user = mongo.db.users.find_one({'email': session['email']})
-=======
-    if mongo.db.users.find_one(
-        {'email': session['email']}):
-        user = mongo.db.users.find_one(
-        {'email': session['email']})
->>>>>>> fe3802c096b021952f533e85a01c5c39f7a2e0b9
-        books = mongo.db.user_books.find()
+    if session['email']:
+        if mongo.db.users.find_one({'email': session['email']}):
+            user = mongo.db.users.find_one({'email': session['email']})
+        if mongo.db.users.find_one(
+            {'email': session['email']}):
+            user = mongo.db.users.find_one(
+            {'email': session['email']})
+            books = mongo.db.user_books.find()
 
-        for book in books:
-            if (book["email"] == session['email']):
-                user_books = books
+            for book in books:
+                if (book["email"] == session['email']):
+                    user_books = books
 
-                return render_template('profile.html', user=user, books=user_books)
+                    return render_template('profile.html', user=user, books=user_books)
+
+        else:
+            flash("Login to add to library")
+            redirect(url_for('log_in', _external=True, _scheme='https'))
+
+
+@app.route("/reviews/", methods=["GET", "POST"])
+def reviews():
+    reviews = mongo.db.book_reviews.find()
+
+    return render_template('submit_review.html', reviews=reviews)
+
+
+@app.route("/update_reviews/<vol_id>", methods=["GET", "POST"])
+def update_reviews(vol_id):
+    reviews = list(mongo.db.book_reviews.find())
+    book = mongo.db.book_reviews.find_one({'volume_id': vol_id})
+
+    return render_template('book_review.html', reviews=reviews, book=book)
+
+
+@app.route("/add_review/<vol_id>", methods=["GET", "POST"])
+def add_review(vol_id):
+    if session['email']:
+        user = mongo.db.users.find_one({'email': session['email']})['name']
+        id_book_url = SEARCH_BASE_URL + vol_id
+
+    try:
+        response = requests.get(id_book_url)
+        response.raise_for_status()
+        j_response = response.json()
+        cover_img = j_response['items'][0]['volumeInfo']['imageLinks']['thumbnail']
+        author = j_response['items'][0]['volumeInfo']['authors']
+        title = j_response['items'][0]['volumeInfo']['title']
+        link = j_response['items'][0]['volumeInfo']['infoLink']
+        des = j_response['items'][0]['volumeInfo']['description']
+        str_cover = str(cover_img)
+        str_des = str(des)
+        str_id = str(vol_id)
+        str_author = str(author)
+        str_title = str(title)
+        str_link = str(link)
+
+        mongo.db.book_reviews.insert_one(
+            {'email': session['email'],
+                'name': user,
+                'image': str_cover,
+                'volume_id': str_id,
+                'author': str_author,
+                'title': str_title,
+                'book_link': str_link,
+                'description': str_des,
+                'number_review': "",
+                'comment': ""
+            }
+        )
+        return redirect(url_for('reviews'))
+
+    except HTTPError as http_err:
+        print(f'HTTP error occurred: {http_err}')
+        flash('An error occurred in processing your request. Please try again.')
+        return render_template('index.html')
+
+    except Exception as err:
+        print(f'Other error occurred: {err}')
+        flash('An error occurred in processing your request. Please try again.')
+        return render_template('index.html')
 
     else:
-        flash("Login to add to library")
-<<<<<<< HEAD
-        redirect(url_for('log_in', _external=True, _scheme='https'))
-=======
-        redirect(url_for('log_in'))
->>>>>>> fe3802c096b021952f533e85a01c5c39f7a2e0b9
-
-
-@app.route("/users/", methods=["GET", "POST"])
-def users():
-    users = mongo.db.users.find()
-    user_library = mongo.db.user_books.find()
-
-    return render_template('profiles.html', users=users, books=user_library)
+        flash("Login to review books")
+        render_template('login.html')
 
 
 # Update user profile with user image and bio
