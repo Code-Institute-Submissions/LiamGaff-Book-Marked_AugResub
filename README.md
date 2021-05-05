@@ -40,9 +40,13 @@ There was no real theme to the design of the webpage. I aimed to use very inviti
  
 
 **Colours**
+* The main colours I used were teal and a beige(bisque) background. I felt these were very neutral and inviting colours that allowed the rest of   the content to stand out.  
 
+* I left all the text the same shade of black as it really stood out from the back round.
 
 **typrogapgy**
+* For most of the headings on the webpage i used 'Lobster', cursive. I chose this so the webpage wouldnt look too bland. I feel this font added a fun element to the website.
+* The rest of the web page either 'Oswald', sans-serif or 'Lato', sans-serif were used as the paired nicely with the Lobster and made all the text very visable.
 
 # Features
 ## Exsisting Features
@@ -52,9 +56,10 @@ There was no real theme to the design of the webpage. I aimed to use very inviti
 * A library where users can add books they would like to read from the search engine.
 * A serch engine to look through a database of books.
 * A list of featured example books.
+* You review books and see others reviews on books.
 
 ## Features Still to Be Implemented
-
+* Upload a avatar/sticker/emoji for the user image.
 
 
 # Technologies Used
@@ -123,6 +128,8 @@ Nm | Browser | Action | Test result |
 * Featured books only renders one book from the database.
 
 * Profile photos wont upload to database.
+
+* Book reviews won't update in database
 
 
 ## How to clone this project

@@ -2,40 +2,67 @@
 {% block content %}
 
   <section>
+    {% for book in book['items'] %}
     <div class="row">
       <div class="col s4 center-align">
         <div class="card center-align">
           <div class="card-image">
-            <img src="{{book.image}}">
-            <span class="card-title hide-on-small-only">{{book.title}}</span>
+            {% if book['volumeInfo']['imageLinks'] %}
+              <img src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}">
+            {% endif %}
+            <span class="card-title hide-on-small-only">{{ book['volumeInfo']['title']}}</span>
           </div>
+        </div>
       </div>
-      </div>
+      <h3>Author:</h3>
+      {% for author in book['volumeInfo']['authors'] %}
+      <p>
+        {{author}}
+      </p>
+      {% endfor %}
+      <h3>Description:</h3>
+      <p class="ellipsis">
+        {{book['volumeInfo']['description']}}
+      </p>
     </div>
-    <h3>Author:</h3>
-    <p>
-      {{book.author}}
-    </p>
-    <h3>Description:</h3>
-    <p>
-      {{book.description}}
-    </p>
+    {% endfor %}
   </section>
   <section>
-    {% for review in reviews %}
-      {% if review['volume_id'] == vol_id%}
-      <ul class="collection">
+      {% for review in reviews %}
+      {% if review.volume_id == vol_id%}
+      <ul class="collection col s6">
         <li class="collection-item avatar">
-          <img src="{{book.image}}" alt="" class="circle">
+          <img src="{{review.image}}" alt="" class="circle">
           <span class="title">{{ review.name }}</span>
-          <p> {{review.number_review}} <br>
-              {{review.comment}}
+          <p> Rating: {{review.rating}} <br>
+              Comments: {{review.comment}}
           </p>
-          <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+          {% if session['eamil'] == review.email%}
+            <a href="#!" class="secondary-content"><i>remove</i></a>
+          {% endif %}
         </li>
       </ul>
       {% endif %}
-    {% endfor %}
+      {% endfor %}
   </section>
-
+  {% if 'email' in session %}
+  <div class="row">
+    <h4>Add review</h4>
+    <form class="col s12" method="POST" action="{{ url_for('add_reviews', vol_id=vol_id) }}">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="rating" type="text" name="rating" validate required>
+          <label for="rating">Rate this book out of 10</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="comment" name="comment" class="materialize-textarea" data-length="50" validate></textarea>
+          <label for="comment">Comments</label>
+        </div>
+      </div>
+      <button id="submit" class="btn"> Add review </button>
+    </form>
+  </div>
+  {% endif %}
 {% endblock %}
