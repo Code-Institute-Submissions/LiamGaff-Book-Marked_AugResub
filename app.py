@@ -211,8 +211,9 @@ def book_review(vol_id):
 
 @app.route("/add_reviews/<vol_id>", methods=["GET", "POST"])
 def add_reviews(vol_id):
-    user = mongo.db.book_reviews.find_one({'email': session['email']})
-    if user == session['email']:
+    user = mongo.db.book_reviews.find_one(
+            {'email': session['email']})['volume_id']
+    if user:
         flash('You have already submitted a review for this book')
         return redirect( url_for('reviews') )
 
@@ -319,7 +320,6 @@ def log_in():
             # ensure hashed password matches user input
             if check_password_hash(existing_user["password"], request.form.get("password")):
                 session["email"] = request.form.get("email").lower()
-                flash("Welcome, {}".format(request.form.get("email")))
                 return redirect(url_for("profile", _external=True, _scheme='https'))
                 # redirect("/profile/")
             else:
