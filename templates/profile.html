@@ -51,6 +51,14 @@
                                     <br>
                                     Genere: <span>{{ book.genre }}</span>
                                 </p>
+                                <form action="{{ url_for('check_list', user_id=book._id) }}" method="POST">
+                                    <i>
+                                      <label>
+                                        <input type="checkbox" id="checklist" name="checklist"/>
+                                        <span>Read</span>
+                                      </label>
+                                    </i>
+                                  </form>#
                             </div>
                             <div class="card-action">
                               <a href="{{ url_for('remove_book', book_id=book._id) }}">Remove</a>
@@ -63,7 +71,7 @@
             </div>
         </div>
     </section>
-    <div class="row">
+    <div class="row"
         <div class="col s12">
             <p class="center-align">
                 Add some books to your collection: 

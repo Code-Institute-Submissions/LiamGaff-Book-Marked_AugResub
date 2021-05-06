@@ -173,6 +173,24 @@ def profile():
             redirect(url_for('log_in', _external=True, _scheme='https'))
 
 
+@app.route("/check_list/<user_id>", methods=["GET", "POST"])
+def check_list(user_id):
+    if request.method == "POST":
+        read = "completed" if request.form.get(
+                "checklist") is True else "incomplete"
+
+        mongo.db.user_books.update_one(
+                {'_id': ObjectId(user_id)},
+                {'$set':
+                    {
+                        'check_list': read
+                        }
+                        }
+                    )
+
+        return redirect('profile')
+
+
 @app.route("/reviews/", methods=["GET", "POST"])
 def reviews():
     reviews = mongo.db.book_reviews.find()
@@ -182,52 +200,59 @@ def reviews():
 @app.route("/book_review/<vol_id>", methods=["GET", "POST"])
 def book_review(vol_id):
     getreq_url = SEARCH_BASE_URL + vol_id
-    r = requests.get(url = getreq_url)
+    r = requests.get(url=getreq_url)
+    r.raise_for_status()
     data = r.json()
     reviews = list(mongo.db.book_reviews.find())
 
     return render_template('book_review.html', reviews=reviews,
-                           book=data, vol_id=vol_id,)
+                           books=data, vol_id=vol_id,)
 
 
 @app.route("/add_reviews/<vol_id>", methods=["GET", "POST"])
 def add_reviews(vol_id):
-    id_book_url = SEARCH_BASE_URL + vol_id
-    if request.method == 'POST':
-        user_name = mongo.db.users.find_one(
-                    {'email': session['email']})['name']
-    try:
-        response = requests.get(id_book_url)
-        response.raise_for_status()
-        j_response = response.json()
-        cover_img = j_response['items'][0]['volumeInfo']['imageLinks']['thumbnail']
-        link = j_response['items'][0]['volumeInfo']['infoLink']
-        str_cover = str(cover_img)
-        str_id = str(vol_id)
-        str_link = str(link)
+    user = mongo.db.book_reviews.find_one({'email': session['email']})
+    if user == session['email']:
+        flash('You have already submitted a review for this book')
+        return redirect( url_for('reviews') )
 
-        mongo.db.book_reviews.insert_one(
-            {'email': session['email'],
-             'name': user_name,
-             'image': str_cover,
-             'volume_id': str_id,
-             'book_link': str_link,
-             'rating': request.form.get('rating'),
-             'comment': request.form.get('comment')
-            }
-        )
+    else:
+        id_book_url = SEARCH_BASE_URL + vol_id
+        if request.method == 'POST':
+            user_name = mongo.db.users.find_one(
+                        {'email': session['email']})['name']
+        try:
+            response = requests.get(id_book_url)
+            response.raise_for_status()
+            j_response = response.json()
+            cover_img = j_response['items'][0]['volumeInfo']['imageLinks']['thumbnail']
+            link = j_response['items'][0]['volumeInfo']['infoLink']
+            str_cover = str(cover_img)
+            str_id = str(vol_id)
+            str_link = str(link)
 
-    except HTTPError as http_err:
-        print(f'HTTP error occurred: {http_err}')
-        flash('An error occurred in processing your request. Please try again.')
-        return render_template('reviews')
+            mongo.db.book_reviews.insert_one(
+                {'email': session['email'],
+                'name': user_name,
+                'image': str_cover,
+                'volume_id': str_id,
+                'book_link': str_link,
+                'rating': str(request.form.get('rating')),
+                'comment': request.form.get('comment')
+                }
+            )
 
-    except Exception as err:
-        print(f'Other error occurred: {err}')
-        flash('An error occurred in processing your request. Please try again.')
-        return render_template('reviews')
-        
-    return redirect(url_for('book_review', vol_id=vol_id))
+        except HTTPError as http_err:
+            print(f'HTTP error occurred: {http_err}')
+            flash('An error occurred in processing your request. Please try again.')
+            return render_template('reviews')
+
+        except Exception as err:
+            print(f'Other error occurred: {err}')
+            flash('An error occurred in processing your request. Please try again.')
+            return render_template('reviews')
+
+        return redirect(url_for('book_review', vol_id=vol_id))
 
 
 # Update user profile with user image and bio

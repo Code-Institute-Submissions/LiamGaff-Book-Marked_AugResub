@@ -129,7 +129,9 @@ Nm | Browser | Action | Test result |
 
 * Profile photos wont upload to database.
 
-* Book reviews won't update in database
+* Book reviews won't update in database.
+
+* Some books aren't iterable when using volume ID.
 
 
 ## How to clone this project

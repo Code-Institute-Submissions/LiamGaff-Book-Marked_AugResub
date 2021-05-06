@@ -4,7 +4,11 @@ body{
     background-color: bisque;
     color: black;
     font-family: 'Lato', sans-serif;
-    /* border: 2px red dotted; */
+    max-width: 2000px;
+    padding:0;
+    margin:0;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* ................................. Nav */
@@ -102,6 +106,10 @@ nav a{
     padding-bottom: 2rem;
 }
 
+.label-text{
+    font-size: 1rem;
+}
+
 
 /* .................................... signup/login/update forms */
 
@@ -136,3 +144,10 @@ nav a{
         text-overflow: ellipsis; 
     }
 } */
+
+@media only screen and (min-width: 500px){
+    .container {
+        width: 100%;
+    }
+}
+
