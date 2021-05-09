@@ -37,7 +37,7 @@
                 <div class="card-panel center-align" id="library">
                     <div class="row">
                         {% for book in books %}
-                        <div class="col s12 l4">
+                        <div class="col s12 m4 l4">
                           <div class="card">
                             <div class="card-image">
                               <img src="{{ book.image }}" height="300">
@@ -51,18 +51,27 @@
                                     <br>
                                     Genere: <span>{{ book.genre }}</span>
                                 </p>
-                                <form action="{{ url_for('check_list', user_id=book._id) }}" method="POST">
-                                    <i>
-                                      <label>
-                                        <input type="checkbox" id="checklist" name="checklist"/>
-                                        <span>Read</span>
-                                      </label>
-                                    </i>
-                                  </form>#
                             </div>
                             <div class="card-action">
                               <a href="{{ url_for('remove_book', book_id=book._id) }}">Remove</a>
                             </div>
+                                <form id="checklist_form" action="{{ url_for('check_list', user_id=book._id) }}" method="POST">
+                                    {% if book.check_list == 'incomplete' %}
+                                        <i>
+                                        <label>
+                                            <input type="checkbox" id="checklist1" name="checklist" />
+                                            <span>Completed</span>
+                                        </label>
+                                        </i>
+                                    {% else %}
+                                        <i>
+                                            <label>
+                                            <input type="checkbox" id="checklist1" name="checklist" checked/>
+                                            <span>Completed</span>
+                                            </label>
+                                        </i>
+                                    {% endif %}
+                                </form>
                           </div>
                         </div>
                         {% endfor %}
@@ -71,13 +80,12 @@
             </div>
         </div>
     </section>
-    <div class="row"
-        <div class="col s12">
+    <div class="row">
             <p class="center-align">
                 Add some books to your collection: 
                 <a href="{{ url_for('home') }}" class="liht-blue-text text-darken-4">search</a>
             </p>
-        </div>
     </div>
+    
 
 {% endblock %}

@@ -28,8 +28,7 @@ VOLUME_BASE_URL = 'https://www.googleapis.com/books/v1/volumes/'
 @app.route("/")
 @app.route("/home", methods=["GET", "POST"])
 def home():
-    books = list(mongo.db.books.find())
-    featured_books()
+    books = mongo.db.books.find()
     return render_template('index.html', books=books)
 
 
@@ -101,42 +100,42 @@ def library(vol_id):
     if session['email']:
         id_book_url = SEARCH_BASE_URL + vol_id
 
-    try:
-        response = requests.get(id_book_url)
-        response.raise_for_status()
-        j_response = response.json()
-        cover_img = j_response['items'][0]['volumeInfo']['imageLinks']['thumbnail']
-        author = j_response['items'][0]['volumeInfo']['authors']
-        title = j_response['items'][0]['volumeInfo']['title']
-        genre = j_response['items'][0]['volumeInfo']['categories']
-        link = j_response['items'][0]['volumeInfo']['infoLink']
-        str_cover = str(cover_img)
-        str_id = str(vol_id)
-        str_author = str(author)
-        str_title = str(title)
-        str_genre = str(genre)
-        str_link = str(link)
+        try:
+            response = requests.get(id_book_url)
+            response.raise_for_status()
+            j_response = response.json()
+            cover_img = j_response['items'][0]['volumeInfo']['imageLinks']['thumbnail']
+            author = j_response['items'][0]['volumeInfo']['authors']
+            title = j_response['items'][0]['volumeInfo']['title']
+            genre = j_response['items'][0]['volumeInfo']['categories']
+            link = j_response['items'][0]['volumeInfo']['infoLink']
+            str_cover = str(cover_img)
+            str_id = str(vol_id)
+            str_author = str(author)
+            str_title = str(title)
+            str_genre = str(genre)
+            str_link = str(link)
 
-        mongo.db.user_books.insert_one(
-            {'email': session['email'],
-             'image': str_cover,
-             'volume_id': str_id,
-             'author': str_author,
-             'title': str_title,
-             'genre': str_genre,
-             'book_link': str_link
-            }
-        )
+            mongo.db.user_books.insert_one(
+                {'email': session['email'],
+                'image': str_cover,
+                'volume_id': str_id,
+                'author': str_author,
+                'title': str_title,
+                'genre': str_genre,
+                'book_link': str_link
+                }
+            )
 
-    except HTTPError as http_err:
-        print(f'HTTP error occurred: {http_err}')
-        flash('An error occurred in processing your request. Please try again.')
-        return render_template('index.html')
+        except HTTPError as http_err:
+            print(f'HTTP error occurred: {http_err}')
+            flash('An error occurred in processing your request. Please try again.')
+            return render_template('index.html')
 
-    except Exception as err:
-        print(f'Other error occurred: {err}')
-        flash('An error occurred in processing your request. Please try again.')
-        return render_template('index.html')
+        except Exception as err:
+            print(f'Other error occurred: {err}')
+            flash('An error occurred in processing your request. Please try again.')
+            return render_template('index.html')
 
     else:
         flash("Login to add to library")
@@ -156,39 +155,36 @@ def remove_book(book_id):
 @app.route("/profile/", methods=["GET", "POST"])
 def profile():
     if session['email']:
-        if mongo.db.users.find_one(
-                {'email': session['email']}):
-            user = mongo.db.users.find_one(
-                    {'email': session['email']})
-            books = mongo.db.user_books.find()
+        user = mongo.db.users.find_one(
+                {'email': session['email']})
+        books = mongo.db.user_books.find()
 
-            for book in books:
-                if (book["email"] == session['email']):
-                    user_books = books
+        for book in books:
+            if (book["email"] == session['email']):
+                user_books = books
 
-                    return render_template('profile.html', user=user, books=user_books)
+                return render_template('profile.html', user=user, books=user_books)
 
-        else:
-            flash("Login to add to library")
-            redirect(url_for('log_in', _external=True, _scheme='https'))
+    else:
+        flash("Login to add to library")
+        return redirect(url_for('log_in', _external=True, _scheme='https'))
 
 
 @app.route("/check_list/<user_id>", methods=["GET", "POST"])
 def check_list(user_id):
     if request.method == "POST":
-        read = "completed" if request.form.get(
-                "checklist") is True else "incomplete"
+        checker = 'complete' if request.form.get(
+                    'Checklist_form') else 'incomplete'
 
         mongo.db.user_books.update_one(
                 {'_id': ObjectId(user_id)},
                 {'$set':
                     {
-                        'check_list': read
+                        'check_list': checker
                         }
                         }
                     )
-
-        return redirect('profile')
+    return redirect(url_for('profile'))
 
 
 @app.route("/reviews/", methods=["GET", "POST"])
@@ -211,17 +207,10 @@ def book_review(vol_id):
 
 @app.route("/add_reviews/<vol_id>", methods=["GET", "POST"])
 def add_reviews(vol_id):
-    user = mongo.db.book_reviews.find_one(
-            {'email': session['email']})['volume_id']
-    if user:
-        flash('You have already submitted a review for this book')
-        return redirect( url_for('reviews') )
-
-    else:
-        id_book_url = SEARCH_BASE_URL + vol_id
-        if request.method == 'POST':
-            user_name = mongo.db.users.find_one(
-                        {'email': session['email']})['name']
+    id_book_url = SEARCH_BASE_URL + vol_id
+    if request.method == 'POST':
+        user_name = mongo.db.users.find_one(
+                    {'email': session['email']})['name']
         try:
             response = requests.get(id_book_url)
             response.raise_for_status()
@@ -254,6 +243,10 @@ def add_reviews(vol_id):
             return render_template('reviews')
 
         return redirect(url_for('book_review', vol_id=vol_id))
+
+    else:
+        flash('You have already submitted a review for this book')
+        return redirect(url_for('reviews'))
 
 
 # Update user profile with user image and bio

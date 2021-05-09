@@ -7,12 +7,15 @@
     <form name="update_form" class="col s12 m8 offset-m2" method="POST" action="{{ url_for('update_profile') }}">
         <div class="card-panel">
             <div class="row">
-                <div class=" col s12">
-                    <i class="fas fa-portrait  cyan-text darken-2">
-                    <label for="image" class="form-text">Choos a profile image:</label></i>
-                    <br>
-                    <input id="image" name="name" type="file" class="validate" accept="image/*">
-                </div>
+                    <div class="input-field col s6">
+                        <select>
+                          <option value="" disabled selected>Choose your option</option>
+                          <option value="1">Option 1</option>
+                          <option value="2">Option 2</option>
+                          <option value="3">Option 3</option>
+                        </select>
+                        <label>Choose an avatar</label>
+                    </div>
             </div>
             <!-- bio -->
             <div class="row">
