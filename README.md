@@ -56,10 +56,11 @@ There was no real theme to the design of the webpage. I aimed to use very inviti
 * A library where users can add books they would like to read from the search engine.
 * A serch engine to look through a database of books.
 * A list of featured example books.
-* You review books and see others reviews on books.
+* You can review books and see other user reviews on books.
+* You can mark books completed on your profile library.
 
 ## Features Still to Be Implemented
-* Upload a avatar/sticker/emoji for the user image.
+* Upload an avatar/sticker/emoji for the user image.
 
 
 # Technologies Used

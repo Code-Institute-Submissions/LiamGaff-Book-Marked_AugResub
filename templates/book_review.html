@@ -37,8 +37,8 @@
           <p> Rating: {{review.rating}} <br>
               Comments: {{review.comment}}
           </p>
-          {% if session['eamil'] == review.email%}
-            <a href="#!" class="secondary-content"><i>remove</i></a>
+          {% if session.email == review.email %}
+            <a href="{{ url_for('remove_review', review_id=review._id) }}" class="secondary-content"><i>remove</i></a>
           {% endif %}
         </li>
       </ul>

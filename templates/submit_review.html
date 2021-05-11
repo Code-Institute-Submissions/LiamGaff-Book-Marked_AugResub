@@ -2,16 +2,16 @@
 {% block content %}
     <div class="row">
       {% for review in reviews %}
-      <div class="col s2 m2">
-        <div class="card center-align">
-          <div class="card-image">
-            <img src="{{review.image}}">
-          </div>
-          <div class="card-action">
-            <a href="{{url_for('book_review', vol_id=review.volume_id)}}">Reviews</a>
+        <div class="col s2 m2">
+          <div class="card center-align">
+            <div class="card-image">
+              <img src="{{review.image}}">
+            </div>
+            <div class="card-action">
+              <a href="{{url_for('book_review', vol_id=review.volume_id)}}">Reviews</a>
+            </div>
           </div>
         </div>
-      </div>
       {% endfor %}
     </div>
     
