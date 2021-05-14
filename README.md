@@ -1,5 +1,5 @@
 # Book Marked
-![](assets/imgs/readme.md_hero_img.png)
+![]()
 I am designing this web application as part of my third Milestone project for Code Institutes diploma in software development course.
 
 # UX
@@ -7,22 +7,31 @@ I am designing this web application as part of my third Milestone project for Co
 As a user I would like:
 
 * To have access to a wide variety of books.
-* To be able to leave a review on books I have read.
-* To be able to creat a profile on the Book Marked web page.
+* To be able to create a profile on the Book Marked web page.
 * To be able to login to my profile.
 * To be abel to logout of my profile.
 * To be able to add books I'm interested in to my profile.
 * To be able to remove books from my profile.
 * To have clear and easy navigation through out the page.
+* To be able to search a database of books.
+* To have a section of featured books as examples.
+* To have a link to view more info on the book shown.
 
 
 ## Strategy
+This page was designed with readers in mind. This page should be an easy and enjoyable experience for anyone that visits. There's a large
+database of books to view and you can add them to your own personal library so you wont forget about them.
 
 ## Scope
+The main objective of this project was to make sure the user needs were meet. The design was simplictic so that I could focus on the functionality
+of the wbpage rather than the look of it. Making sure it was easy for the user to sign up, login and logout was also essential to providing a good service with this webpage.
 
 ## Structure
+The Book Marked webpage was designed to navigate with ease. Its simple and familiar layout allows the user an enjoyable and fun experience. The 
+navbar in the top corner allows for easy movement through out the webpage aswell as additional navigation links on the bottom of the profile,signup and login pages. The books are the main focus of the webpgae so they take up most of the space on the home and profile page. The books are contained in a card panel with a scroll bar which allows for a clean and simple way to view the searched and featured books. 
 
 ## Skeleton
+There was no real theme to the design of the webpage. I aimed to use very inviting and almost relaxing colours through out the page. The colours and layout were designed to draw users in and hopefully keep them coming back. The design will be disscused further in the design section of this document.
 
 ## Design
 **Wire Frames**
@@ -31,14 +40,27 @@ As a user I would like:
  
 
 **Colours**
+* The main colours I used were teal and a beige(bisque) background. I felt these were very neutral and inviting colours that allowed the rest of   the content to stand out.  
 
+* I left all the text the same shade of black as it really stood out from the back round.
+
+**typrogapgy**
+* For most of the headings on the webpage i used 'Lobster', cursive. I chose this so the webpage wouldnt look too bland. I feel this font added a fun element to the website.
+* The rest of the web page either 'Oswald', sans-serif or 'Lato', sans-serif were used as the paired nicely with the Lobster and made all the text very visable.
 
 # Features
 ## Exsisting Features
-
+* Navabar with links to each page of the web application.
+* Registration form.
+* Login form.
+* A library where users can add books they would like to read from the search engine.
+* A serch engine to look through a database of books.
+* A list of featured example books.
+* You can review books and see other user reviews on books.
+* You can mark books completed on your profile library.
 
 ## Features Still to Be Implemented
-
+* Upload an avatar/sticker/emoji for the user image.
 
 
 # Technologies Used
@@ -72,7 +94,10 @@ As a user I would like:
 >All fonts came from Google Fonts.
 
 * [Flask]()
->Framework used to build the backend.
+>Framework used to build the backend with python.
+
+* [Materialize](https://materializecss.com/)
+>Materialized used for the design, layout and responsiveness of the page.
 
 
 
@@ -97,7 +122,17 @@ Nm | Browser | Action | Test result |
 
 
 **Unresolved**
+* Registration wouldn't recognise accounts that were already set up.
 
+* Getting 500 error code when opening app.
+
+* Featured books only renders one book from the database.
+
+* Profile photos wont upload to database.
+
+* Book reviews won't update in database.
+
+* Some books aren't iterable when using volume ID.
 
 
 ## How to clone this project

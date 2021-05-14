@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="center-align headings">Update Profile</h3>
+
+<div class="row">
+    <form name="update_form" class="col s12 m8 offset-m2" method="POST" action="{{ url_for('update_profile') }}">
+        <div class="card-panel">
+            <div class="row">
+                    <div class="input-field col s6">
+                        <select>
+                          <option value="" disabled selected>Choose your option</option>
+                          <option value="1">Option 1</option>
+                          <option value="2">Option 2</option>
+                          <option value="3">Option 3</option>
+                        </select>
+                        <label>Choose an avatar</label>
+                    </div>
+            </div>
+            <!-- bio -->
+            <div class="row">
+                <div class="col s12">
+                    <i class="fas fa-edit cyan-text darken-2">
+                    <label for="bio-update" class="form-text">Bio:</label></i>
+                     <br>
+                    <textarea id="bio-update" name="bio-update" rows="4" class="validate update-form" maxlength="100">{{ user_bio }}</textarea>
+                </div>
+            </div>
+            <!-- register -->
+            <div class="row">
+                <button type="submit" class="col s12 btn-large cyan darken-2 text-shadow">
+                    Update <i class="fas fa-sign-in-alt"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <p class="center-align">
+            Return to profile:
+            <a href="{{url_for('profile')}}" class="liht-blue-text text-darken-4">Profile</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}

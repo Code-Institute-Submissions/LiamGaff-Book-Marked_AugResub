@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <h2 class="col s12 center-align sub-headings">Search Library</h2>
+    </div>
+
+        <form id="search-form" class="col s10" action="/get_search" method="POST">
+            <div class="row">
+                <div class="input-field col s5 push-s3" id="search-box">
+                    <input type="search" id="search" class="white black-text" name="search" required />
+                    <label class="label-icon black-text" for="search"></label>
+                </div>
+                <div class="col s2 push-s3 left-align btn-placement">
+                    <button type="submit" id="search-btn" class="white black-text btn"><i
+                            class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+
+<section>
+    <div class="row">
+        <div class="col s12 center-align">
+            <h3 class="sub-headings">Search Results</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 scroll center-align">
+            <div class="card-panel center-align col s12" id="library">
+                <div class="row">
+                    {% for book in books['items'] %}
+                    <div class="col s12 m4 l4">
+                      <div class="card">
+                        <div class="card-image">
+                        {% if book['volumeInfo']['imageLinks'] %}
+                          <img src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}" height="300">
+                        {% endif %}
+                        <a href="{{ url_for('library', vol_id=book['id']) }}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="fas fa-plus"></i></a>
+                        </div>
+                        <div class="card-content">
+                            <p> 
+                                Book: <span>{{ book['volumeInfo']['title']}}</span>
+                                <br>
+                            {% for author in book['volumeInfo']['authors'] %}
+                                Author: <span>{{ author }}</span>
+                            {% endfor %}
+                                <br>
+                                Published: <span>{{ book['volumeInfo']['publishedDate'] }}</span>
+                            </p>
+                        </div>
+                        <div class="card-action">
+                            <a class="add-btn" href="{{ url_for('book_review', vol_id=book['id']) }}" title="Add to your library">Review</a>
+                        </div>
+                      </div>
+                      <div class="col s5 push-s3" id="view-btn">
+                        <a class="btn" href="{{ book['volumeInfo']['infoLink'] }}" target="_blank" title="View in google books">View Book</a>
+                    </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="row">
+    <div class="col s12">
+        <p class="center-align">
+            Return home: 
+            <a href="{{ url_for('home') }}" class="liht-blue-text text-darken-4">here</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}
