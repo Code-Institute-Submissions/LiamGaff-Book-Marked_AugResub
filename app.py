@@ -5,6 +5,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from werkzeug.security import generate_password_hash, check_password_hash
 from passlib.hash import pbkdf2_sha256
+from flask_wtf import FlaskForm
 from bson.objectid import ObjectId
 if os.path.exists("env.py"):
     import env
