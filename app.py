@@ -74,7 +74,8 @@ def featured_books():
                         }
                     }
                 )
-
+                """ Handle errors for request.
+                """
             except HTTPError as http_err:
                 print(f'HTTP error occurred: {http_err}')
                 flash('An error occurred in processing your request. Please try again.')
@@ -153,7 +154,7 @@ def library(vol_id):
 
 @app.route('/remove_book/<book_id>')
 def remove_book(book_id):
-    """ Removing books from user database.
+    """ Removing books from user database and render the profile template.
     """
     mongo.db.user_books.remove({"_id": ObjectId(book_id)})
 
@@ -162,8 +163,8 @@ def remove_book(book_id):
 
 @app.route("/profile/", methods=["GET", "POST"])
 def profile():
-    """ If user in session retrieve user data and render profile
-        template.
+    """ If usern is in session retrieve user data and render profile
+        template. Retrieve users books to populate their library.
     """
     if session['email']:
         user = mongo.db.users.find_one(
