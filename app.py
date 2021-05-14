@@ -288,9 +288,12 @@ def update_profile():
 
 
 class signup_form(Form):
-    name = StringField('name')
-    email = StringField('email')
-    password = PasswordField('New Password', [
+    name = StringField('Name', [
+                validators.Length(min=4, max=25)])
+    email = StringField('Email', [
+                validators.Length(min=6, max=35),
+                validators.DataRequired()])
+    password = PasswordField('Password', [
                 validators.DataRequired()])
 
 
@@ -304,22 +307,33 @@ def sign_up():
     form = signup_form(request.form)
     if request.method == 'POST' and form.validate():
         existing_user = mongo.db.users.find_one(
-                {"email": request.form.get('email')})
+                {"email": form.email.data})
 
         if existing_user:
             flash("An account with this email already exists")
-            return redirect(url_for("signup", _external=True, _scheme='https'))
+            return redirect(url_for("sign_up", _external=True, _scheme='https'))
 
         else:
-            register = (form.name.data, form.email.data,
-                        form.password.data)
+            register = {
+                'name': form.name.data, 
+                'email': form.email.data,
+                'password': generate_password_hash(form.password.data)
+            }
             mongo.db.users.insert_one(register)
+            
 
             # Add new user
-            session["email"] = request.form.get("email")
+            session["email"] = form.email.data
             flash("Registration Successful!")
-            return redirect(url_for("profile", _external=True, _scheme='https'))
+            return redirect(url_for("profile"))
     return render_template("signup.html", form=form)
+
+
+class login_form(Form):
+    email = StringField('Email', [
+                validators.DataRequired()])
+    password = PasswordField('Password', [
+                validators.DataRequired()])
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -327,14 +341,15 @@ def log_in():
     """ If user exists retrive use information and
     render profile template.
     """
+    form = login_form(request.form)
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
-                {"email": request.form.get('email').lower()})
+                {"email": form.email.data})
 
         if existing_user:
             # ensure hashed password matches user input
             if check_password_hash(existing_user["password"], request.form.get("password")):
-                session["email"] = request.form.get("email").lower()
+                session["email"] = form.email.data
                 return redirect(url_for("profile", _external=True, _scheme='https'))
                 # redirect("/profile/")
             else:
@@ -349,7 +364,7 @@ def log_in():
             flash("Incorrect Email and/or Password")
             return redirect(url_for("log_in", _external=True, _scheme='https'))
 
-    return render_template("login.html")
+    return render_template("login.html", form=form)
 
 
 @app.route("/logout")
