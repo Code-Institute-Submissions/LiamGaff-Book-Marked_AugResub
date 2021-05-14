@@ -32,8 +32,6 @@ def home():
     return render_template('index.html', books=books)
 
 
-# render featured books to homepage from database
-# Data base is filled with info from Google Books API
 @app.route("/featured_books")
 def featured_books():
     books = mongo.db.books.find()
@@ -101,7 +99,6 @@ def get_search():
     return render_template('search_results.html', books=data)
 
 
-# update user library from search or featured books
 @app.route("/library/<vol_id>", methods=["GET", "POST"])
 def library(vol_id):
     """ Using the volume ID to search google books API and retrieve data
@@ -163,7 +160,6 @@ def remove_book(book_id):
     return redirect(url_for('profile', _external=True, _scheme='https'))
 
 
-# Render user profile if user in session
 @app.route("/profile/", methods=["GET", "POST"])
 def profile():
     """ If user in session retrieve user data and render profile
@@ -185,23 +181,6 @@ def profile():
         return redirect(url_for('log_in', _external=True, _scheme='https'))
 
 
-@app.route("/check_list/<user_id>", methods=["GET", "POST"])
-def check_list(user_id):
-    if request.method == "POST":
-        checker = 'complete' if request.form.get(
-                    'Checklist_form') else 'incomplete'
-
-        mongo.db.user_books.update_one(
-                {'_id': ObjectId(user_id)},
-                {'$set':
-                    {
-                        'check_list': checker
-                        }
-                        }
-                    )
-    return redirect(url_for('profile'))
-
-
 @app.route("/reviews/", methods=["GET", "POST"])
 def reviews():
     reviews = mongo.db.book_reviews.find()
@@ -213,12 +192,12 @@ def book_review(vol_id):
     """ Use volume ID to search API and display book data
         to review template.
     """
-    getreq_url = SEARCH_BASE_URL + vol_id
+    getreq_url = VOLUME_BASE_URL + vol_id
     r = requests.get(url=getreq_url)
     r.raise_for_status()
     data = r.json()
     reviews = list(mongo.db.book_reviews.find())
-
+    print(data)
     return render_template('book_review.html', reviews=reviews,
                            books=data, vol_id=vol_id,)
 
@@ -280,8 +259,6 @@ def remove_review(review_id):
     return redirect(url_for('book_review'))
 
 
-# Update user profile with user image and bio
-# Still requires work
 @app.route("/update_profile/", methods=["GET", "POST"])
 def update_profile():
     """ Update user profile with Bio and User Image if user
@@ -307,8 +284,6 @@ def update_profile():
     return render_template('update_profile.html', user_bio=user_bio)
 
 
-# Creating and adding a new user to DB
-# exisiting_user needs to be fisxed...
 @app.route('/signup', methods=['GET', 'POST'])
 def sign_up():
     """ check if user has existing account and
@@ -340,7 +315,6 @@ def sign_up():
     return render_template("signup.html")
 
 
-# Login to user profile with encrypted password and email
 @app.route('/login', methods=["GET", "POST"])
 def log_in():
     """ If user exists retrive use information and

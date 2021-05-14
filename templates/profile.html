@@ -47,23 +47,6 @@
                             <div class="card-action">
                               <a href="{{ url_for('remove_book', book_id=book._id) }}">Remove</a>
                             </div>
-                                <form id="checklist_form" action="{{ url_for('check_list', user_id=book._id) }}" method="POST">
-                                    {% if book.check_list == 'incomplete' %}
-                                        <i>
-                                        <label>
-                                            <input type="checkbox" id="checklist1" name="checklist" />
-                                            <span>Completed</span>
-                                        </label>
-                                        </i>
-                                    {% else %}
-                                        <i>
-                                            <label>
-                                            <input type="checkbox" name="checklist" checked/>
-                                            <span>Completed</span>
-                                            </label>
-                                        </i>
-                                    {% endif %}
-                                </form>
                           </div>
                         </div>
                         {% endfor %}
