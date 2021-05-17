@@ -202,7 +202,7 @@ def book_review(vol_id):
     reviews = list(mongo.db.book_reviews.find())
     print(data)
     return render_template('book_review.html', reviews=reviews,
-                           books=data, vol_id=vol_id,)
+                           book=data, vol_id=vol_id)
 
 
 @app.route("/add_reviews/<vol_id>", methods=["GET", "POST"])
@@ -339,7 +339,8 @@ class login_form(Form):
 @app.route('/login', methods=["GET", "POST"])
 def log_in():
     """ If user exists retrive use information and
-    render profile template.
+        render profile template.
+        Render and validate form.
     """
     form = login_form(request.form)
     if request.method == "POST":
