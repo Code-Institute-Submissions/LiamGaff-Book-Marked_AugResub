@@ -16,6 +16,8 @@ As a user I would like:
 * To be able to search a database of books.
 * To have a section of featured books as examples.
 * To have a link to view more info on the book shown.
+* To be able to review any book.
+* To be able to view reviews left by other users.
 
 
 ## Strategy
@@ -40,9 +42,9 @@ There was no real theme to the design of the webpage. I aimed to use very inviti
  
 
 **Colours**
-* The main colours I used were teal and a beige(bisque) background. I felt these were very neutral and inviting colours that allowed the rest of   the content to stand out.  
+* The main colours I used were teal and a beige(bisque) background. I felt these were very neutral and inviting colours that allowed the rest of the content to stand out.  
 
-* I left all the text the same shade of black as it really stood out from the back round.
+* I left all the text the same shade of black as it really stood out from the back round. This is excluding so of the built in materialized links which are orange. I decided to leave them this way as I thought they really suited the style of the page.
 
 **typrogapgy**
 * For most of the headings on the webpage i used 'Lobster', cursive. I chose this so the webpage wouldnt look too bland. I feel this font added a fun element to the website.
@@ -50,14 +52,15 @@ There was no real theme to the design of the webpage. I aimed to use very inviti
 
 # Features
 ## Exsisting Features
-* Navabar with links to each page of the web application.
+* Navabar with links to each page of the web application which can be found in the top right corner.
 * Registration form.
 * Login form.
 * A library where users can add books they would like to read from the search engine.
 * A serch engine to look through a database of books.
 * A list of featured example books.
-* You can review books and see other user reviews on books.
-* You can mark books completed on your profile library.
+* You can review searched books or featured books.
+* You can view reviews left by other users.
+* A link to the books profile on google books.
 
 ## Features Still to Be Implemented
 * Upload an avatar/sticker/emoji for the user image.
@@ -103,37 +106,57 @@ There was no real theme to the design of the webpage. I aimed to use very inviti
 
 # Testing
 
-## Functionality Test
-Nm | Test | Action | Expected Outcome |Test result |
--- | ---- | ------ | ---------------- |----------- |
+Most of the testing can be found on my TESTING.md document which can be found [here](/workspace/Book-Marked/TESTING.md).
 
 
 ## Browser Compatibility Test
 Nm | Browser | Action | Test result |
 -- | ------- | ------ | ----------- |
-#1 | Chrome | Open app in browser. |  |
-#2 | Firefox | Open app in browser. | |
-#3 | Safari | Open app in browser. |  |
+#1 | Chrome | Open app in browser. | Pass |
+#2 | Firefox | Open app in browser. | Pass |
+#3 | Safari | Open app in browser. | Pass |
 
 
-## Bugs
+## Deployment
 
-**Resolved**
+## On github repository
+* Use pip3 to install all modules.
 
+* Create an env.py file and make sure it is listed in your .gitignore file. Input all your important secret variable into this file  e.g API_key, SECRET_KEY.
 
-**Unresolved**
-* Registration wouldn't recognise accounts that were already set up.
+* Enter this at the top of your python app file - if os.path.exists("env.py"): import env.
 
-* Getting 500 error code when opening app.
+* For each environmental variable, define the variables in the app.py file
 
-* Featured books only renders one book from the database.
+* When all of the necessary modules are installed and the env.py file is complete, your Requirements.txt file and list all the modules by entering this into the terminal - pip3 freeze --local > requirements.txt
 
-* Profile photos wont upload to database.
+* Create a Procfile that will tell Heroku how to run your app - echo web: python app.py > Procfile
 
-* Book reviews won't update in database.
+* Git add, commit and push all your changes to the github repository.
 
-* Some books aren't iterable when using volume ID.
+## Heroku
+* Sign into an Heroku account
 
+* Click on New button to create a new app with a unused name.
+
+* Next select the app and then click on Settings in menu.
+
+* Find "Config Vars" section and click on the "Reveal Config Vars" button.
+
+* In the input boxes for each variable (API Key, database url, port, Secret Key, database name, and IP) input key and value and then hit add.
+Once all variables have been input, click on "Deploy" in menu bar.
+
+* In the Deployment Method section, select GitHub
+
+* Type in the repository name and if the name of the repo is found you will be able to click connect on said repo.
+
+* The app will then be connected to the GitHub repository.
+
+* To enable automatic deployment, scroll down to "Automatic Deploys" section and click on button "Enable Automatic Deploys."
+
+* Go to Settings and scroll dow to find Domains and you will find your web adress e.g - 
+
+* After instigating automatic deployment, all changes committed to the GitHub repository will be reflected in the deployed site on Heroku.
 
 ## How to clone this project
 ## With Gitpod

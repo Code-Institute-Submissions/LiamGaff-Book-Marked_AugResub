@@ -1,8 +1,16 @@
 # Testing
 As the webpage was being built Chrome developer tools were used regularly to ensure that the code was working smoothly. Each section was then tested again every time a new feature was added. Python functions were regularly tested using the print function to ensure the code worked smoothly. Lighthouse in developer tools was also used to check the applications performance.
 
+At the end of the development process, W3C CSS and Html Checker were used to check the code.
+
+The CSS validator came back with no errors
+
+The HTML threw up some errors that were due to the use of flask 
+
 **continued testing**
 
+
+## Bugs
 
 **Unresolved issues**
 * Registration wouldn't recognise accounts that were already set up.
@@ -22,7 +30,9 @@ As the webpage was being built Chrome developer tools were used regularly to ens
 
 The final tests done on the app to ensure it was fully funtional and ready to deploy.
 
-Test #1
+**Home Page**
+
+Test #1(Nav bar)
 Action:
 Before:
 After:

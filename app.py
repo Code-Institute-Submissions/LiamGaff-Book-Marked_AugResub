@@ -267,8 +267,6 @@ def update_profile():
     """ Update user profile with Bio and User Image if user
         is in session
     """
-    user_bio = mongo.db.users.find_one_or_404(
-            {"email": session["email"]})["bio"]
     if request.method == "POST":
         if session['email']:
             profile_image = request.form.get('image')
@@ -284,7 +282,7 @@ def update_profile():
                     )
             flash("Profile updated")
             return redirect(url_for("profile", _external=True, _scheme='https'))
-    return render_template('update_profile.html', user_bio=user_bio)
+    return render_template('update_profile.html')
 
 
 class signup_form(Form):

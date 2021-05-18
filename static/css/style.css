@@ -86,6 +86,7 @@ nav a{
 
 #update-btn{
     padding-top: 1rem;
+    padding-right: 1rem;
 }
 
 .dl {
@@ -118,19 +119,8 @@ nav a{
     margin-left: 20rem;
 }
 
+
 /* .................................... signup/login/update forms */
-
-.error{
-    color: red;
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.5px;
-    text-align: center;
-}
-
-.error--hidden {
-    display: none;
-  }
 
 .update-form{
     margin-top: 1rem;
@@ -143,14 +133,6 @@ nav a{
 
 
 /* .................................... Media Queries */
-
-/* @media only screen and (max-width: 500px) {
-    .ellipsis {
-        overflow: hidden;
-        white-space: nowrap; 
-        text-overflow: ellipsis; 
-    }
-} */
 
 @media only screen and (min-width: 500px){
     .container {
