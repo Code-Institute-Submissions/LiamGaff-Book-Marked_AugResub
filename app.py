@@ -28,21 +28,22 @@ ISBN_SEARCH_BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q=isbn:'
 VOLUME_BASE_URL = 'https://www.googleapis.com/books/v1/volumes/'
 
 @app.route("/")
-@app.route("/home", methods=["GET", "POST"])
+@app.route('/home', methods=['GET', 'POST'])
 def home():
     books = mongo.db.books.find()
     return render_template('index.html', books=books)
 
 
-@app.route("/featured_books")
+@app.route('/featured_books')
 def featured_books():
     books = mongo.db.books.find()
     """ Searching books on the google books API by their ISBN
-        and retrieving data to fill featured books database.
+        and retrieving data which is then put into JSON format.
+        The selected data is then used to populate the template.
     """
     for book in books:
-        if (book["image"] == ""):
-            isbn = book["isbn"]
+        if (book['image'] == ""):
+            isbn = book['isbn']
             isbn_book_url = ISBN_SEARCH_BASE_URL + isbn
 
             try:
@@ -89,23 +90,23 @@ def featured_books():
                 return render_template('index.html')
 
 
-@app.route("/get_search", methods=["GET", "POST"])
+@app.route('/get_search', methods=['GET', 'POST'])
 def get_search():
     """ Searches google books API by keywords and put data
         into JSON format to render data to search template.
     """
-    getreq_url = SEARCH_BASE_URL + request.form.get("search")
-    print(getreq_url)
+    getreq_url = SEARCH_BASE_URL + request.form.get('search')
     r = requests.get(url = getreq_url)
     data = r.json()
 
     return render_template('search_results.html', books=data)
 
 
-@app.route("/library/<vol_id>", methods=["GET", "POST"])
+@app.route('/library/<vol_id>', methods=['GET', 'POST'])
 def library(vol_id):
-    """ Using the volume ID to search google books API and retrieve data
-        to then copy to user's profile.
+    """ if user is in session, using the volume ID to search google
+    books API and retrieve data which
+    is put into JSON format to then copy to the user's profile/library.
     """
     if session['email']:
         id_book_url = SEARCH_BASE_URL + vol_id
@@ -146,9 +147,11 @@ def library(vol_id):
             print(f'Other error occurred: {err}')
             flash('An error occurred in processing your request. Please try again.')
             return render_template('index.html')
-
+        """
+        Return flashed message and redirect user if not logged in.
+        """
     else:
-        flash("Login to add to library")
+        flash('Login to add to library')
         redirect(url_for('log_in', _external=True, _scheme='https'))
 
     return redirect(url_for('profile', _external=True, _scheme='https'))
@@ -158,15 +161,15 @@ def library(vol_id):
 def remove_book(book_id):
     """ Removing books from user database and render the profile template.
     """
-    mongo.db.user_books.remove({"_id": ObjectId(book_id)})
+    mongo.db.user_books.remove({'_id': ObjectId(book_id)})
 
     return redirect(url_for('profile', _external=True, _scheme='https'))
 
 
-@app.route("/profile/", methods=["GET", "POST"])
+@app.route('/profile/', methods=['GET', 'POST'])
 def profile():
-    """ If usern is in session retrieve user data and render profile
-        template. Retrieve users books to populate their library.
+    """ If user is in session retrieve user data from DB and render profile
+        template. Retrieve users books from the database to populate their library.
     """
     if session['email']:
         user = mongo.db.users.find_one(
@@ -174,26 +177,32 @@ def profile():
         books = mongo.db.user_books.find()
 
         for book in books:
-            if (book["email"] == session['email']):
+            if (book['email'] == session['email']):
                 user_books = books
 
                 return render_template('profile.html', user=user, books=user_books)
+        """
+        Redirect user to login if not in session.
+        """
 
     else:
-        flash("Login to add to library")
+        flash('Login to profile')
         return redirect(url_for('log_in', _external=True, _scheme='https'))
 
 
-@app.route("/reviews/", methods=["GET", "POST"])
+@app.route('/reviews/', methods=['GET', 'POST'])
 def reviews():
+    """
+    Retrieve reviews from the database and render them to the template.
+    """
     reviews = mongo.db.book_reviews.find()
     return render_template('submit_review.html', reviews=reviews)
 
 
-@app.route("/book_review/<vol_id>", methods=["GET", "POST"])
+@app.route('/book_review/<vol_id>', methods=['GET', 'POST'])
 def book_review(vol_id):
-    """ Use volume ID to search API and display book data
-        to review template.
+    """ Use volume ID to search API and put it into JSON format. 
+        Display book data to review template.
     """
     getreq_url = VOLUME_BASE_URL + vol_id
     r = requests.get(url=getreq_url)
@@ -205,10 +214,12 @@ def book_review(vol_id):
                            book=data, vol_id=vol_id)
 
 
-@app.route("/add_reviews/<vol_id>", methods=["GET", "POST"])
+@app.route('/add_reviews/<vol_id>', methods=['GET','POST'])
 def add_reviews(vol_id):
-    """ Add users review to database if user has not
-        already submitted a review for this title.
+    """ If user in session add users review to database if user has not
+        already submitted a review for this volume ID. If user
+        has already submitted a review for this title they will be
+        redirected and flashed a warning message.
     """
     if session['email']:
         user = mongo.db.book_reviews.find({'volume_id': vol_id})
@@ -257,17 +268,20 @@ def add_reviews(vol_id):
 
 @app.route('/remove_review/<review_id>')
 def remove_review(review_id):
-    mongo.db.book_reviews.remove({"_id": ObjectId(review_id)})
+    """ 
+    Remove users review from the database
+    """
+    mongo.db.book_reviews.remove({'_id': ObjectId(review_id)})
 
     return redirect(url_for('book_review'))
 
 
-@app.route("/update_profile/", methods=["GET", "POST"])
+@app.route('/update_profile/', methods=['GET', 'POST'])
 def update_profile():
-    """ Update user profile with Bio and User Image if user
-        is in session
+    """ Update user profile User Image if user
+        is in session. Not currently working.
     """
-    if request.method == "POST":
+    if request.method == 'POST':
         if session['email']:
             profile_image = request.form.get('image')
             user_image = str(profile_image)
@@ -280,8 +294,8 @@ def update_profile():
                             }
                         }
                     )
-            flash("Profile updated")
-            return redirect(url_for("profile", _external=True, _scheme='https'))
+            flash('Profile updated')
+            return redirect(url_for('profile', _external=True, _scheme='https'))
     return render_template('update_profile.html')
 
 
@@ -298,18 +312,20 @@ class signup_form(Form):
 
 @app.route('/signup', methods=['GET', 'POST'])
 def sign_up():
-    """ check if user has existing account and
-        if not add users details to the database.
+    """ Call the signup_form class. Check if user has existing account.
+        If no user exists with the profided email then
+        generate an encrypted password and
+        add users entered details to the database.
         Render user profile template.
     """
     form = signup_form(request.form)
     if request.method == 'POST' and form.validate():
         existing_user = mongo.db.users.find_one(
-                {"email": form.email.data})
+                {'email': form.email.data})
 
         if existing_user:
-            flash("An account with this email already exists")
-            return redirect(url_for("sign_up", _external=True, _scheme='https'))
+            flash('An account with this email already exists')
+            return redirect(url_for('sign_up', _external=True, _scheme='https'))
 
         else:
             register = {
@@ -321,10 +337,10 @@ def sign_up():
             
 
             # Add new user
-            session["email"] = form.email.data
-            flash("Registration Successful!")
-            return redirect(url_for("profile"))
-    return render_template("signup.html", form=form)
+            session['email'] = form.email.data
+            flash('Registration Successful!')
+            return redirect(url_for('profile'))
+    return render_template('signup.html', form=form)
 
 
 class login_form(Form):
@@ -334,44 +350,43 @@ class login_form(Form):
                 validators.DataRequired()])
 
 
-@app.route('/login', methods=["GET", "POST"])
+@app.route('/login', methods=['GET', 'POST'])
 def log_in():
-    """ If user exists retrive use information and
+    """ Call the login_form class. If user exists and the password matches
+    the provided email then retrive use information and
         render profile template.
         Render and validate form.
     """
     form = login_form(request.form)
-    if request.method == "POST":
+    if request.method == 'POST':
         existing_user = mongo.db.users.find_one(
-                {"email": form.email.data})
+                {'email': form.email.data})
 
         if existing_user:
             # ensure hashed password matches user input
-            if check_password_hash(existing_user["password"], request.form.get("password")):
-                session["email"] = form.email.data
-                return redirect(url_for("profile", _external=True, _scheme='https'))
+            if check_password_hash(existing_user['password'], request.form.get('password')):
+                session['email'] = form.email.data
+                return redirect(url_for('profile', _external=True, _scheme='https'))
                 # redirect("/profile/")
             else:
-                print("GOT HERE CHECK PASS ELSE")
                 # invalid password match
-                flash("Incorrect Email and/or Password")
-                return redirect(url_for("log_in", _external=True, _scheme='https'))
+                flash('Incorrect Email and/or Password')
+                return redirect(url_for('log_in', _external=True, _scheme='https'))
 
         else:
-            print("GOT HERE FIRST ELSE")
             # username doesn't exist
-            flash("Incorrect Email and/or Password")
-            return redirect(url_for("log_in", _external=True, _scheme='https'))
+            flash('Incorrect Email and/or Password')
+            return redirect(url_for('log_in', _external=True, _scheme='https'))
 
-    return render_template("login.html", form=form)
+    return render_template('login.html', form=form)
 
 
-@app.route("/logout")
+@app.route('/logout')
 def log_out():
     # remove user from session cookie
-    flash("See you soon!")
-    session.pop("email")
-    return redirect(url_for("log_in", _external=True, _scheme='https'))
+    flash('See you soon!')
+    session.pop('email')
+    return redirect(url_for('log_in', _external=True, _scheme='https'))
 
 
 if __name__ == "__main__":

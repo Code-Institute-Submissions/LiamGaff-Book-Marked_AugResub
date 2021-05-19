@@ -32,10 +32,11 @@ The final tests done on the app to ensure it was fully funtional and ready to de
 
 **Home Page**
 
-Test #1(Nav bar)
-Action:
-Before:
-After:
+Test #1(Nav bar - Loggedin)
+Action: Click on each to be redirected to ypur chosen template.
+Before: Nav button clicked on home page(No state change of the button)
+After: Redirected to chosen template.
+Result: Pass
 
 Test #2
 Action:

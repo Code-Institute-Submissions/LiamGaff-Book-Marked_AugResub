@@ -96,7 +96,7 @@ There was no real theme to the design of the webpage. I aimed to use very inviti
 * [Google Fonts](https://fonts.google.com/)
 >All fonts came from Google Fonts.
 
-* [Flask]()
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/)
 >Framework used to build the backend with python.
 
 * [Materialize](https://materializecss.com/)
@@ -135,7 +135,7 @@ Nm | Browser | Action | Test result |
 * Git add, commit and push all your changes to the github repository.
 
 ## Heroku
-* Sign into an Heroku account
+* Sign into a Heroku account
 
 * Click on New button to create a new app with a unused name.
 
@@ -176,7 +176,9 @@ Once all variables have been input, click on "Deploy" in menu bar.
 # Credits
 
 ## Code
+* W3 School and StackFlow were greatly used through out this project.
 
+* The backend form validation was found on pritty printed Youtube tutorials.
 
 ## Acknowledgements
-* I would also like to credit and thank my mentor Brian Macharia for all his help. 
+* I would also like to credit and thank my mentor Brian Macharia for all his help. Also Eoin O'Neill who also reviewed my work and was a huge help.
