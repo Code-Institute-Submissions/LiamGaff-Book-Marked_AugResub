@@ -108,7 +108,7 @@ def library(vol_id):
     books API and retrieve data which
     is put into JSON format to then copy to the user's profile/library.
     """
-    if session['email']:
+    if 'email' in session:
         id_book_url = SEARCH_BASE_URL + vol_id
 
         try:
@@ -147,6 +147,7 @@ def library(vol_id):
             print(f'Other error occurred: {err}')
             flash('An error occurred in processing your request. Please try again.')
             return render_template('index.html')
+
         """
         Return flashed message and redirect user if not logged in.
         """
@@ -154,7 +155,7 @@ def library(vol_id):
         flash('Login to add to library')
         redirect(url_for('log_in', _external=True, _scheme='https'))
 
-    return redirect(url_for('profile', _external=True, _scheme='https'))
+        return redirect(url_for('profile', _external=True, _scheme='https'))
 
 
 @app.route('/remove_book/<book_id>')
@@ -171,7 +172,7 @@ def profile():
     """ If user is in session retrieve user data from DB and render profile
         template. Retrieve users books from the database to populate their library.
     """
-    if session['email']:
+    if 'email' in session:
         user = mongo.db.users.find_one(
                 {'email': session['email']})
         books = mongo.db.user_books.find()
