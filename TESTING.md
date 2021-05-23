@@ -23,9 +23,9 @@ The final tests done on the app to ensure it was fully funtional and ready to de
 **Home Page**
 
 Test #1 (Navbar - Loggedin)
-Action: Click on each to be redirected to ypur chosen template.
+Action: Click on each nav button to be redirected to your chosen template.
 Before: Nav button clicked on home page(No state change of the button)
-After: Redirected to chosen template.
+After: Redirected to chosen template. This also worked for logging out of session.
 Result: Pass
 
 Test #2 (Navbar - Loggedout)
@@ -166,119 +166,127 @@ Before: Hover over button changes colour from teal to a ligther shade of teal an
 After: On click page refreshes book_review page and the new review can be found in the review section.
 Result: Fail - Book review wont submit as it says I have already submitted a review for this title when I have not.
 
-Test # ()
-Action: 
-Before: 
-After: 
+Test #3b (Submit Review button)
+Action: After form is filled click on "submit review" button.
+Before: Hover over button changes colour from teal to a ligther shade of teal and adds some box shadow.
+After: On click page refreshes book_review page and the new review can be found in the review section.
 Result: 
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+Test #4 (Remove button)
+Action: Click on "remove" button to remove your own comments 
+Before: Hover over button changes no state. Button remains a teal colour
+After: On click review page is refreshed and chosen review has been removed.
+Result: Pass
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+**Profile**
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+Test #1 (Update button)
+Action: Click on the "Update" button in the top right corner.
+Before: Hover over button changes colour from teal to a ligther shade of teal and adds some box shadow.
+After: On click page is redirected to the update profile template.
+Result: Pass
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+Test #2 (Remove button)
+Action: Click on "Remove button" below library books.
+Before: Hover over button changes state from orange to light orange.
+After: Profile page is refrshed and the chosen title has been removed from the users library.
+Result: Pass
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+Test #3 (Home page button)
+Action: Click on "Add some books to your collection: search" at the bottom of the page
+Before: Hover over blue link. No change in state.
+After: On click redirect to home page.
+Result: Pass
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+**Update Profile(still under development)**
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+Test #1 (Profile page button)
+Action: Click on "Return to profile: Profile" at the bottom of the page
+Before: Hover over blue link. No change in state.
+After: On click redirect to profile page.
+Result: Pass
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+Test #2 (Drop down selection)
+Action: Click on drop down menu on the form.
+Before: Hover over drop down arrow where filler text says "choose your option"
+After: On click three options drop down and when one is selected it will replace the filler text.
+Result: pass
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+Test #3 (Update button)
+Action: After form is filled click on "Update" button.
+Before: Hover over button changes colour from teal to a ligther shade of teal and adds some box shadow.
+After: On click redirect to profile page where profile picture is updated.
+Result: Fail - This feature has not been fully built yet.
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+**Registration**
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+Test #1 (Name input)
+Action: Enter name into name input at the top of the form.
+Before: Hover over black input line, no change in state.
+After: On click input line turns green and text can now be entered
+Result: Pass
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+Test #2 (Email input)
+Action: Enter email into email input in the middle of the form.
+Before: Hover over black input line, no change in state.
+After: On click input line turns green and text can now be entered
+Result: Pass
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+Test #3 (Password input)
+Action: Enter Password into password input at the end of the form.
+Before: Hover over black input line, no change in state.
+After: On click input line turns green and text can now be entered. The text here is hidden, presented as black dots.
+Result: Pass
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+Test #4 (Signup button)
+Action: After form is filled click on "Signup" button.
+Before: Hover over button changes colour from teal to a ligther shade of teal and adds some box shadow.
+After: On click redirect to new profile page whith an empty library
+Result: Pass
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+Test #4b (Signup button - existing account)
+Action: After form is filled click on "Signup" button.
+Before: Hover over button changes colour from teal to a ligther shade of teal and adds some box shadow.
+After: On click redirect back to the signup page and flashed message "An account with this email already exists"
+Result: Pass.
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+Test #5 ()
+Action: Click on "Have an account? Log In" at the bottom of the page
+Before: Hover over blue link. No change in state.
+After: On click redirect to login page.
+Result: Pass 
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+**Login**
 
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
+Test #1 (Email input)
+Action: Enter email into email input in the middle of the form.
+Before: Hover over black input line, no change in state.
+After: On click input line turns green and text can now be entered
+Result: Pass
+
+Test #3 (Password input)
+Action: Enter Password into password input at the end of the form.
+Before: Hover over black input line, no change in state.
+After: On click input line turns green and text can now be entered. The text here is hidden, presented as black dots.
+Result: Pass
+
+Test #4 (login button)
+Action: After form is filled click on "Login" button.
+Before: Hover over button changes colour from teal to a ligther shade of teal and adds some box shadow.
+After: On click redirect to users profile page.
+Result: Pass
+
+Test #4b (Signup button - wrong credentials)
+Action: After form is filled click on "Login" button.
+Before: Hover over button changes colour from teal to a ligther shade of teal and adds some box shadow.
+After: On click redirect back to the Login page and flashed message "Incorrect Email and/or Password"
+Result: Pass.
+
+Test #5 ()
+Action: Click on "Not registered? Signup" at the bottom of the page
+Before: Hover over blue link. No change in state.
+After: On click redirect to signup page.
+Result: Pass 
 
 Test # ()
 Action: 

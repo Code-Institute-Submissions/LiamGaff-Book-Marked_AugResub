@@ -228,8 +228,11 @@ def add_reviews(vol_id):
         has already submitted a review for this title they will be
         redirected and flashed a warning message.
     """
-    # existing_review = mongo.db.book_reviews.find_one()
-    # if not existing_review:
+    user = mongo.db.users.find_one({'email': session['email']})
+    review = mongo.db.book_reviews.find({'volume_id': vol_id})
+    if review['email'] == user:
+        flash('You have already submitted a review for this book')
+        return redirect(url_for('reviews'))
     id_book_url = SEARCH_BASE_URL + vol_id
     if request.method == 'POST':
         user_name = mongo.db.users.find_one(
@@ -266,10 +269,6 @@ def add_reviews(vol_id):
             return render_template('reviews')
 
         return redirect(url_for('book_review', vol_id=vol_id))
-
-# else:
-#     flash('You have already submitted a review for this book')
-#     return redirect(url_for('reviews'))
 
 
 @app.route('/remove_review/<review_id>/<vol_id>')
