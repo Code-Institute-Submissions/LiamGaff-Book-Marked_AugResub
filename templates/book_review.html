@@ -36,7 +36,7 @@
               Comments: {{review.comment}}
           </p>
           {% if session.email == review.email %}
-            <a href="{{ url_for('remove_review', review_id=review._id) }}" class="secondary-content"><i>remove</i></a>
+            <a href="{{ url_for('remove_review', review_id=review._id, vol_id=review.volume_id) }}" class="secondary-content"><i>remove</i></a>
           {% endif %}
         </li>
       </ul>

@@ -21,12 +21,10 @@ As a user I would like:
 
 
 ## Strategy
-This page was designed with readers in mind. This page should be an easy and enjoyable experience for anyone that visits. There's a large
-database of books to view and you can add them to your own personal library so you wont forget about them.
+This page was designed with readers in mind. This page should be an easy and enjoyable experience for anyone that visits. There's a large database of books to view and you can add them to your own personal library so you wont forget about them.
 
 ## Scope
-The main objective of this project was to make sure the user needs were meet. The design was simplictic so that I could focus on the functionality
-of the wbpage rather than the look of it. Making sure it was easy for the user to sign up, login and logout was also essential to providing a good service with this webpage.
+The main objective of this project was to make sure the user needs were meet. The design was simplictic so that I could focus on the functionality of the wbpage rather than the look of it. Making sure it was easy for the user to sign up, login and logout was also essential to providing a good service with this webpage.
 
 ## Structure
 The Book Marked webpage was designed to navigate with ease. Its simple and familiar layout allows the user an enjoyable and fun experience. The 
@@ -112,9 +110,9 @@ Most of the testing can be found on my TESTING.md document which can be found [h
 ## Browser Compatibility Test
 Nm | Browser | Action | Test result |
 -- | ------- | ------ | ----------- |
-#1 | Chrome | Open app in browser. | Pass |
-#2 | Firefox | Open app in browser. | Pass |
-#3 | Safari | Open app in browser. | Pass |
+#1 | Chrome | Open app in browser. | fail |
+#2 | Firefox | Open app in browser. | fail |
+#3 | Safari | Open app in browser. | fail |
 
 
 ## Deployment

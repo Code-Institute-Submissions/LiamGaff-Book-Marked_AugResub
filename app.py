@@ -210,9 +210,15 @@ def book_review(vol_id):
     r.raise_for_status()
     data = r.json()
     reviews = list(mongo.db.book_reviews.find())
-    print(data)
-    return render_template('book_review.html', reviews=reviews,
-                           book=data, vol_id=vol_id)
+    if 'email' in session:
+        return render_template('book_review.html', reviews=reviews,
+                               book=data, vol_id=vol_id)
+    
+    else:
+        flash("Login to submit review")
+        return render_template('book_review.html', reviews=reviews,
+                               book=data, vol_id=vol_id)
+
 
 
 @app.route('/add_reviews/<vol_id>', methods=['GET','POST'])
@@ -222,59 +228,57 @@ def add_reviews(vol_id):
         has already submitted a review for this title they will be
         redirected and flashed a warning message.
     """
-    if session['email']:
-        user = mongo.db.book_reviews.find({'volume_id': vol_id})
-        if not user:
-            id_book_url = SEARCH_BASE_URL + vol_id
-            if request.method == 'POST':
-                user_name = mongo.db.users.find_one(
-                            {'email': session['email']})['name']
-                try:
-                    response = requests.get(id_book_url)
-                    response.raise_for_status()
-                    j_response = response.json()
-                    cover_img = j_response['items'][0]['volumeInfo']['imageLinks']['thumbnail']
-                    link = j_response['items'][0]['volumeInfo']['infoLink']
-                    str_cover = str(cover_img)
-                    str_id = str(vol_id)
-                    str_link = str(link)
+    # existing_review = mongo.db.book_reviews.find_one()
+    # if not existing_review:
+    id_book_url = SEARCH_BASE_URL + vol_id
+    if request.method == 'POST':
+        user_name = mongo.db.users.find_one(
+                    {'email': session['email']})['name']
+        try:
+            response = requests.get(id_book_url)
+            response.raise_for_status()
+            j_response = response.json()
+            cover_img = j_response['items'][0]['volumeInfo']['imageLinks']['thumbnail']
+            link = j_response['items'][0]['volumeInfo']['infoLink']
+            str_cover = str(cover_img)
+            str_id = str(vol_id)
+            str_link = str(link)
 
-                    mongo.db.book_reviews.insert_one(
-                        {'email': session['email'],
-                        'name': user_name,
-                        'image': str_cover,
-                        'volume_id': str_id,
-                        'book_link': str_link,
-                        'rating': str(request.form.get('rating')),
-                        'comment': request.form.get('comment')
-                        }
-                    )
+            mongo.db.book_reviews.insert_one(
+                {'email': session['email'],
+                'name': user_name,
+                'image': str_cover,
+                'volume_id': str_id,
+                'book_link': str_link,
+                'rating': str(request.form.get('rating')),
+                'comment': request.form.get('comment')
+                }
+            )
 
-                except HTTPError as http_err:
-                    print(f'HTTP error occurred: {http_err}')
-                    flash('An error occurred in processing your request. Please try again.')
-                    return render_template('reviews')
+        except HTTPError as http_err:
+            print(f'HTTP error occurred: {http_err}')
+            flash('An error occurred in processing your request. Please try again.')
+            return render_template('reviews')
 
-                except Exception as err:
-                    print(f'Other error occurred: {err}')
-                    flash('An error occurred in processing your request. Please try again.')
-                    return render_template('reviews')
+        except Exception as err:
+            print(f'Other error occurred: {err}')
+            flash('An error occurred in processing your request. Please try again.')
+            return render_template('reviews')
 
-                return redirect(url_for('book_review', vol_id=vol_id))
+        return redirect(url_for('book_review', vol_id=vol_id))
 
-        else:
-            flash('You have already submitted a review for this book')
-            return redirect(url_for('reviews'))
+# else:
+#     flash('You have already submitted a review for this book')
+#     return redirect(url_for('reviews'))
 
 
-@app.route('/remove_review/<review_id>')
-def remove_review(review_id):
+@app.route('/remove_review/<review_id>/<vol_id>')
+def remove_review(review_id, vol_id):
     """ 
     Remove users review from the database
     """
     mongo.db.book_reviews.remove({'_id': ObjectId(review_id)})
-
-    return redirect(url_for('book_review'))
+    return redirect(url_for('book_review', vol_id=vol_id))
 
 
 @app.route('/update_profile/', methods=['GET', 'POST'])
