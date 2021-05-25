@@ -8,20 +8,20 @@
     <form name="login_form" class="col s12 m8 offset-m2" method="POST" action="{{url_for('log_in')}}">
         <div class="card-panel">
             <dl>
-            {{ form.csrf_token }}
-            <div class="row">
-                <div class="input-field col s12">
-                    <i class="fas fa-at prefix cyan-text darken-2"></i>
-                    {{ render_field(form.email) }}
+                {{ form.csrf_token }}
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-at prefix cyan-text darken-2"></i>
+                        {{ render_field(form.email) }}
+                    </div>
                 </div>
-            </div>
-            <!-- password -->
-            <div class="row">
-                <div class="input-field col s12">
-                    <i class="fas fa-user-lock prefix cyan-text darken-2"></i>
-                    {{ render_field(form.password) }}
+                <!-- password -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-user-lock prefix cyan-text darken-2"></i>
+                        {{ render_field(form.password) }}
+                    </div>
                 </div>
-            </div>
             </dl>
             <div class="row">
                 <button type="submit" value="submit" class="col s12 btn-large cyan darken-2 text-shadow">
@@ -35,27 +35,10 @@
 <div class="row">
     <div class="col s12">
         <p class="center-align">
-            Not registered? 
+            Not registered?
             <a href="{{ url_for('sign_up') }}" class="liht-blue-text text-darken-4">Signup</a>
         </p>
     </div>
 </div>
 
 {% endblock %}
-
-<div class="row">
-    <div class="input-field col s12">
-        <i class="fas fa-at prefix cyan-text darken-2"></i>
-        <input id="email" name="email" type="email" class="validate" required>
-        <label for="email">Email</label>
-    </div>
-</div>
-<!-- password -->
-<div class="row">
-    <div class="input-field col s12">
-        <i class="fas fa-user-lock prefix cyan-text darken-2"></i>
-        <input id="password" name="password" type="password" class="validate" minlength="5" maxlength="15" 
-                placeholder="Numbers & letters only"  required>
-        <label for="password">Password</label>
-        <p class="error error--hidden"></p>
-    </div>

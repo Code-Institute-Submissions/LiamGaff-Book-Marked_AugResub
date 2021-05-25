@@ -21,17 +21,16 @@ As a user I would like:
 
 
 ## Strategy
-This page was designed with readers in mind. This page should be an easy and enjoyable experience for anyone that visits. There's a large database of books to view and you can add them to your own personal library so you wont forget about them.
+This page was designed with readers in mind. This page should be an easy and enjoyable experience for anyone that visits. Other websites that provide the same or similar servicve were reviewed by my self in order to know what customers are looking for. This helped me to figure out which features were most important for my site.
 
 ## Scope
-The main objective of this project was to make sure the user needs were meet. The design was simplictic so that I could focus on the functionality of the wbpage rather than the look of it. Making sure it was easy for the user to sign up, login and logout was also essential to providing a good service with this webpage.
+The main objective of this project was to make sure the user needs were meet. The design was simplictic so that I could focus on the functionality of the wbpage rather than the look of it. Making sure it was easy for the user to sign up, login and logout was also essential to providing a good service with this webpage. Users will visit this site to discover new books, save them to their library and possibly review them upon cmpletion. This can all be done quickly and efficiently on the BookMarked website. 
 
 ## Structure
-The Book Marked webpage was designed to navigate with ease. Its simple and familiar layout allows the user an enjoyable and fun experience. The 
-navbar in the top corner allows for easy movement through out the webpage aswell as additional navigation links on the bottom of the profile,signup and login pages. The books are the main focus of the webpgae so they take up most of the space on the home and profile page. The books are contained in a card panel with a scroll bar which allows for a clean and simple way to view the searched and featured books. 
+The Book Marked webpage was designed to navigate with ease. Its simple and familiar layout allows the user an enjoyable and fun experience. The navbar in the top corner allows for easy movement through out the webpage aswell as additional navigation links on the bottom of the profile, signup and login pages. The books are the main focus of the webpgae so they take up most of the space on the home and profile page. The books are contained in a card panel with a scroll bar which allows for a clean and simple way to view the searched and featured books. All of these easy navigation tools and other features are to allow for optimal user experience.
 
 ## Skeleton
-There was no real theme to the design of the webpage. I aimed to use very inviting and almost relaxing colours through out the page. The colours and layout were designed to draw users in and hopefully keep them coming back. The design will be disscused further in the design section of this document.
+There was no real theme to the design of the webpage. I aimed to use very inviting and almost relaxing colours through out the page. The colours and layout were designed to draw users in and hopefully keep them coming back. The design of the page allowed for the sections conatining books(e.g featured books, searched books) to really stand out as these books are the whole reason for the users visit. The design will be disscused further in the design section of this document.
 
 ## Design
 **Wire Frames**
@@ -42,22 +41,23 @@ There was no real theme to the design of the webpage. I aimed to use very inviti
 **Colours**
 * The main colours I used were teal and a beige(bisque) background. I felt these were very neutral and inviting colours that allowed the rest of the content to stand out.  
 
-* I left all the text the same shade of black as it really stood out from the back round. This is excluding so of the built in materialized links which are orange. I decided to leave them this way as I thought they really suited the style of the page.
+* I left all the text the same shade of black as it really stood out from the back round. This is excluding some of the built in materialized links which are orange and other nav links that are blue. I decided to leave them this way as I thought they really suited the style of the page.
 
 **typrogapgy**
 * For most of the headings on the webpage i used 'Lobster', cursive. I chose this so the webpage wouldnt look too bland. I feel this font added a fun element to the website.
+
 * The rest of the web page either 'Oswald', sans-serif or 'Lato', sans-serif were used as the paired nicely with the Lobster and made all the text very visable.
 
 # Features
 ## Exsisting Features
 * Navabar with links to each page of the web application which can be found in the top right corner.
-* Registration form.
-* Login form.
-* A library where users can add books they would like to read from the search engine.
-* A serch engine to look through a database of books.
-* A list of featured example books.
-* You can review searched books or featured books.
-* You can view reviews left by other users.
+* Registration form for users to create a BookMarked profile.
+* Login form for users to login to their profile.
+* A library where users can add books they would like to read from searched books or featured books.
+* A serch engine to look through a database of books which can be reviewed or saved(BookMarked).
+* A list of featured example books which can be reviewed or saved(BookMarked).
+* A review page with a form that allows you to leave a rating and comment on different titles.
+* You can read reviews left by other users.
 * A link to the books profile on google books.
 
 ## Features Still to Be Implemented
@@ -69,9 +69,9 @@ There was no real theme to the design of the webpage. I aimed to use very inviti
 * [HTML5](https://en.wikipedia.org/wiki/HTML5)
 * [CSS3](https://en.wikipedia.org/wiki/CSS)
 * [JavaScript](https://javascript.info/)
-* [Python]()
-* [MongoDB]()
-* [Flask]()
+* [Python](https://www.python.org/download/releases/3.0/)
+* [MongoDB](https://www.mongodb.com/)
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/)
 
 
 ## Frameworks and Programs
@@ -104,7 +104,7 @@ There was no real theme to the design of the webpage. I aimed to use very inviti
 
 # Testing
 
-Most of the testing can be found on my TESTING.md document which can be found [here](/workspace/Book-Marked/TESTING.md).
+Most of the testing can be found on my TESTING.md document which can be found [here](TESTING.md).
 
 
 ## Browser Compatibility Test
@@ -160,11 +160,11 @@ Once all variables have been input, click on "Deploy" in menu bar.
 ## With Gitpod
 * Create a Gitpod account and install Gitpod Browser extension for chrome.
 * Log into your gitpod account.
-* Go to [Github repository](https://github.com/LiamGaff/Feeling-Lucky-Punk) and click on the green "Gitpod" button.
+* Go to [Github repository](https://github.com/LiamGaff/Book-Marked) and click on the green "Gitpod" button.
 * This will open a new Gitpod workspace created from the code in the github repository where you can work.
 
 ## Local IDE
-* Go to my Github repository [here](https://github.com/LiamGaff/Feeling-Lucky-Punk).
+* Go to my Github repository [here](https://github.com/LiamGaff/Book-Marked).
 * Under the repository name click on "clone or download"
 * In the clone with HTTPs section copy the clone URL for the repository.
 * In your local IDE open the terminal and change your directory to where you want the clone to be made.
@@ -178,5 +178,9 @@ Once all variables have been input, click on "Deploy" in menu bar.
 
 * The backend form validation was found on pritty printed Youtube tutorials.
 
+* Flaskpalletsprojects.com for guidance when I got stuck with flask related questions.
+
 ## Acknowledgements
-* I would also like to credit and thank my mentor Brian Macharia for all his help. Also Eoin O'Neill who also reviewed my work and was a huge help.
+* I would also like to credit and thank my mentor Brian Macharia for all his help and exelent guidance through out this project. Also Eoin O'Neill who also reviewed my work and was a huge help.
+
+* I would like to thank my tutors and the slack community for all the help they provided me with.

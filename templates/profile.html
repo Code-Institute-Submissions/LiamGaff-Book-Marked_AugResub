@@ -1,43 +1,43 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <section>
-        <div class="row">
-            <div class="col s8 left name">
-                <h4 class="sub-headings">{{ user.name }}</h4>
-            </div>
-            <div class="right" id="update-btn">
-                <a  href="{{ url_for('update_profile')}}" class="btn-small">
-                    Update
-                </a>
-            </div>
+<section>
+    <div class="row">
+        <div class="col s8 left name">
+            <h4 class="sub-headings">{{ user.name }}</h4>
         </div>
-        <div class="row">
-            <div class="col s12 hide-on-small-only left" id="profile-img">
-                <img src="#" alt="user-image" width="100">
-            </div>
+        <div class="right" id="update-btn">
+            <a href="{{ url_for('update_profile')}}" class="btn-small">
+                Update
+            </a>
         </div>
-    </section>
-    <section class="container">
-        <div class="row">
-            <div class="col s12 center-align">
-                <h3 class="sub-headings">Library</h3>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col s12 hide-on-small-only left" id="profile-img">
+            <img src="#" alt="user-image" width="100">
         </div>
-        <div class="row">
-            <div class="col s12 scroll center-align">
-                <div class="card-panel center-align" id="library">
-                    <div class="row">
-                        {% for book in books %}
-                        <div class="col s12 m4 l4">
-                          <div class="card">
+    </div>
+</section>
+<section class="container">
+    <div class="row">
+        <div class="col s12 center-align">
+            <h3 class="sub-headings">Library</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 scroll center-align">
+            <div class="card-panel center-align" id="library">
+                <div class="row">
+                    {% for book in books %}
+                    <div class="col s12 m4 l4">
+                        <div class="card">
                             <div class="card-image">
-                              <img src="{{ book.image }}" height="300">
-                              <span class="card-title"></span>
+                                <img src="{{ book.image }}" height="300">
+                                <span class="card-title"></span>
                             </div>
                             <div class="card-content">
-                                <p> 
-                                    Book: <span>{{ book.title }}</span> 
+                                <p>
+                                    Book: <span>{{ book.title }}</span>
                                     <br>
                                     Author: <span>{{ book.author }}</span>
                                     <br>
@@ -45,21 +45,21 @@
                                 </p>
                             </div>
                             <div class="card-action">
-                              <a href="{{ url_for('remove_book', book_id=book._id) }}">Remove</a>
+                                <a href="{{ url_for('remove_book', book_id=book._id) }}">Remove</a>
                             </div>
-                          </div>
                         </div>
-                        {% endfor %}
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-    </section>
-    <div class="row">
-            <p class="center-align">
-                Add some books to your collection: 
-                <a href="{{ url_for('home') }}" class="liht-blue-text text-darken-4">search</a>
-            </p>
     </div>
+</section>
+<div class="row">
+    <p class="center-align">
+        Add some books to your collection:
+        <a href="{{ url_for('home') }}" class="liht-blue-text text-darken-4">search</a>
+    </p>
+</div>
 
 {% endblock %}

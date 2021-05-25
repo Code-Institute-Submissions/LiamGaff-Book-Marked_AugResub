@@ -5,10 +5,10 @@ At the end of the development process, W3C CSS and Html validator were used to c
 
 The CSS validator came back with no errors
 
-The HTML threw up some errors that were due to the use of flask 
+The HTML threw up some errors that were due to the use of flask. These errors are still being looked into but dont seem to have any effect on the applications performance.
 
 **continued testing**
-
+I am still trying to find the best way to call the book API data so that it looks the most presentable.
 
 ## Bugs
 
@@ -287,57 +287,3 @@ Action: Click on "Not registered? Signup" at the bottom of the page
 Before: Hover over blue link. No change in state.
 After: On click redirect to signup page.
 Result: Pass 
-
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
-
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
-
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
-
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
-
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
-
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
-
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
-
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 
-
-Test # ()
-Action: 
-Before: 
-After: 
-Result: 

@@ -2,45 +2,44 @@
 {% block content %}
 
 
-    <div class="container">
-        <div class="row">
-            <h2 class="col s12 center-align sub-headings">Search Library</h2>
-        </div>
-
-            <form id="search-form" class="col s12" action="/get_search" method="POST">
-                <div class="row">
-                    <div class="input-field col s5 push-s3" id="search-box">
-                        <input type="search" id="search" class="white black-text" name="search" required />
-                        <label class="label-icon black-text" for="search"></label>
-                    </div>
-                    <div class="col s2 push-s3 left-align btn-placement">
-                        <button type="submit" id="search-btn" class="white black-text btn"><i
-                                class="fas fa-search"></i></button>
-                    </div>
-                </div>
-            </form>
-    
+<div class="container">
+    <div class="row">
+        <h2 class="col s12 center-align sub-headings">Search Library</h2>
     </div>
-    <section class="container">
+
+    <form id="search-form" class="col s12" action="/get_search" method="POST">
         <div class="row">
-            <div class="col s12 center-align">
-                <h3 class="sub-headings">Featured Books</h3>
+            <div class="input-field col s5 push-s3" id="search-box">
+                <input type="search" id="search" class="white black-text" name="search" required />
+                <label class="label-icon black-text" for="search"></label>
+            </div>
+            <div class="col s2 push-s3 left-align btn-placement">
+                <button type="submit" id="search-btn" class="white black-text btn"><i class="fas fa-search"></i></button>
             </div>
         </div>
-        <div class="row">
-            <div class="col s12 scroll center-align">
-                <div class="card-panel center-align" id="library">
-                    <div class="row">
-                        {% for book in books %}
-                        <div class="col s12 l4">
-                          <div class="card">
+    </form>
+
+</div>
+<section class="container">
+    <div class="row">
+        <div class="col s12 center-align">
+            <h3 class="sub-headings">Featured Books</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 scroll center-align">
+            <div class="card-panel center-align" id="library">
+                <div class="row">
+                    {% for book in books %}
+                    <div class="col s12 l4">
+                        <div class="card">
                             <div class="card-image">
-                              <img src="{{ book.image }} " height="300">
-                              <span class="card-title"></span>
+                                <img src="{{ book.image }} " height="300">
+                                <span class="card-title"></span>
                             </div>
                             <div class="card-content">
-                                <p> 
-                                    Book: <span>{{ book.title }}</span> 
+                                <p>
+                                    Book: <span>{{ book.title }}</span>
                                     <br>
                                     Author: <span>{{ book.author }}</span>
                                     <br>
@@ -53,16 +52,16 @@
                             <div class="card-action">
                                 <a class="add-btn" href="{{url_for('book_review', vol_id=book.volume_id)}}" title="Add review">Review</a>
                             </div>
-                            </div>
-                            <div class="col s5 push-s3" id="view-btn">
-                                <a class="btn" href="{{ book.book_link }}" target="_blank" title="View in google books">View Book</a>
-                            </div>
                         </div>
-                        {% endfor %}
+                        <div class="col s5 push-s3" id="view-btn">
+                            <a class="btn" href="{{ book.book_link }}" target="_blank" title="View in google books">View Book</a>
+                        </div>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 {% endblock %}
