@@ -131,6 +131,12 @@ nav a{
     font-size: 2rem;
 }
 
+.form-headings{
+    font-size: 1.5rem;
+    margin-bottom: 0;
+    padding-left: 2rem;
+}
+
 
 /* .................................... Media Queries */
 

@@ -304,12 +304,12 @@ def update_profile():
 
 
 class signup_form(Form):
-    name = StringField('Name', [
+    name = StringField('', [
                 validators.Length(min=4, max=25)])
-    email = StringField('Email', [
+    email = StringField('', [
                 validators.Length(min=6, max=35),
                 validators.DataRequired()])
-    password = PasswordField('Password', [
+    password = PasswordField('', [
                 validators.DataRequired()])
 
 
@@ -348,9 +348,9 @@ def sign_up():
 
 
 class login_form(Form):
-    email = StringField('Email', [
+    email = StringField('', [
                 validators.DataRequired()])
-    password = PasswordField('Password', [
+    password = PasswordField('', [
                 validators.DataRequired()])
 
 

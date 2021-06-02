@@ -1,6 +1,6 @@
 # Book Marked
 ![]()
-I am designing this web application as part of my third Milestone project for Code Institutes diploma in software development course.
+I am designing this web application as part of my third Milestone project for Code Institutes diploma in software development course. This application wazs designed to be bot a search engine to disciover new books aswell as a digital library to save titles that you would like to or have alreafdy read
 
 # UX
 ## User Stories
