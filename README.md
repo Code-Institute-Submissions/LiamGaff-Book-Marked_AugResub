@@ -35,7 +35,9 @@ There was no real theme to the design of the webpage. I aimed to use very inviti
 ## Design
 **Wire Frames**
 
- The webpage was designed using Balsamiq to create some basic wireframes(Link below) 
+ The webpage was designed using Balsamiq to create some basic wireframes. The design of the page really evolved from the basic wireframes as it came together(Link below).
+
+ [wireframes](wireframes.md)
  
 
 **Colours**
@@ -62,6 +64,8 @@ There was no real theme to the design of the webpage. I aimed to use very inviti
 
 ## Features Still to Be Implemented
 * Upload an avatar/sticker/emoji for the user image.
+
+* To be able to tick off books that you have completed in your library. This would give users an other reason to visit the site.
 
 
 # Technologies Used

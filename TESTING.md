@@ -10,6 +10,8 @@ The HTML threw up some errors that were due to the use of flask. These errors ar
 **continued testing**
 I am still trying to find the best way to call the book API data so that it looks the most presentable.
 
+Heroku will not deploy the webpage. I am currently trying to fix this issue.
+
 ## Bugs
 
 **Unresolved issues**
