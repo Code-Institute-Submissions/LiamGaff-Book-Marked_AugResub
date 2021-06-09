@@ -1,16 +1,16 @@
 # Book Marked
 ![]()
-I am designing this web application as part of my third Milestone project for Code Institutes diploma in software development course. This application wazs designed to be bot a search engine to disciover new books aswell as a digital library to save titles that you would like to or have alreafdy read
+I am designing this web application as part of my third Milestone project for Code Institutes diploma in software development course. This application was designed to be both a search engine to disciover new books aswell as a digital library to save titles that you would like to or have alreafdy read. The site also has a review feature where you can review searched and featured books.
 
 # UX
 ## User Stories
 As a user I would like:
 
-* To have access to a wide variety of books.
-* To be able to create a profile on the Book Marked web page.
-* To be able to login to my profile.
+* To have access to a wide variety of books from all genres.
+* To be able to create a user profile on the BookMarked web page.
+* To be able to securely login to my profile.
 * To be abel to logout of my profile.
-* To be able to add books I'm interested in to my profile.
+* To be able to add books I'm interested in to my user profile.
 * To be able to remove books from my profile.
 * To have clear and easy navigation through out the page.
 * To be able to search a database of books.
@@ -24,13 +24,13 @@ As a user I would like:
 This page was designed with readers in mind. This page should be an easy and enjoyable experience for anyone that visits. Other websites that provide the same or similar servicve were reviewed by my self in order to know what customers are looking for. This helped me to figure out which features were most important for my site.
 
 ## Scope
-The main objective of this project was to make sure the user needs were meet. The design was simplictic so that I could focus on the functionality of the wbpage rather than the look of it. Making sure it was easy for the user to sign up, login and logout was also essential to providing a good service with this webpage. Users will visit this site to discover new books, save them to their library and possibly review them upon cmpletion. This can all be done quickly and efficiently on the BookMarked website. 
+The main objective of this project was to make sure the user needs were meet. The design was simplictic so that I could focus on the functionality of the wbpage rather than the look of it. Making sure it was easy for the user to sign up, login and logout was also essential to providing a good service with this webpage. Users will visit this site to discover new books, save them to their library and possibly review them upon cmpletion. This can all be done quickly and efficiently on the BookMarked website. Some features such as updating a profile picture or contacting a support system for the webpage will have to be implemented some time in the future due to limited time.
 
 ## Structure
-The Book Marked webpage was designed to navigate with ease. Its simple and familiar layout allows the user an enjoyable and fun experience. The navbar in the top corner allows for easy movement through out the webpage aswell as additional navigation links on the bottom of the profile, signup and login pages. The books are the main focus of the webpgae so they take up most of the space on the home and profile page. The books are contained in a card panel with a scroll bar which allows for a clean and simple way to view the searched and featured books. All of these easy navigation tools and other features are to allow for optimal user experience.
+The Book Marked webpage was designed to navigate with ease. Its simple and familiar layout allows the user an enjoyable and fun experience. The navbar in the top corner allows for easy movement through out the webpage aswell as additional navigation links on the bottom of the profile, signup and login pages. The books are the main focus of the webpgae so they take up most of the space on the home and profile pages. The books are contained in a card panel with a scroll bar which allows for a clean and simple way to view the searched and featured books. All of these easy navigation tools and other features are to allow for optimal user experience.
 
 ## Skeleton
-There was no real theme to the design of the webpage. I aimed to use very inviting and almost relaxing colours through out the page. The colours and layout were designed to draw users in and hopefully keep them coming back. The design of the page allowed for the sections conatining books(e.g featured books, searched books) to really stand out as these books are the whole reason for the users visit. The design will be disscused further in the design section of this document.
+There was no real theme to the design of the webpage but I did aim to give a certain feel to it. I aimed to use very inviting and almost relaxing colours through out the page. The colours and layout were designed to draw users in and hopefully keep them coming back. The design of the page allowed for the sections conatining books(e.g featured books, searched books) to really stand out as these books are the whole reason for the users visit. The design will be disscused further in the design section of this document.
 
 ## Design
 **Wire Frames**
@@ -46,7 +46,7 @@ There was no real theme to the design of the webpage. I aimed to use very inviti
 * I left all the text the same shade of black as it really stood out from the back round. This is excluding some of the built in materialized links which are orange and other nav links that are blue. I decided to leave them this way as I thought they really suited the style of the page.
 
 **typrogapgy**
-* For most of the headings on the webpage i used 'Lobster', cursive. I chose this so the webpage wouldnt look too bland. I feel this font added a fun element to the website.
+* For most of the headings on the webpage I used 'Lobster', cursive. I chose this so the webpage wouldn't look too bland. I feel this font added a fun element to the website.
 
 * The rest of the web page either 'Oswald', sans-serif or 'Lato', sans-serif were used as the paired nicely with the Lobster and made all the text very visable.
 
@@ -103,6 +103,9 @@ There was no real theme to the design of the webpage. I aimed to use very inviti
 
 * [Materialize](https://materializecss.com/)
 >Materialized used for the design, layout and responsiveness of the page.
+
+* [Wtforms](https://wtforms.readthedocs.io/en/2.3.x/)
+>Wtforms was used for the back end validation of my login and signup forms.
 
 
 
@@ -180,7 +183,7 @@ Once all variables have been input, click on "Deploy" in menu bar.
 ## Code
 * W3 School and StackFlow were greatly used through out this project.
 
-* The backend form validation was found on pritty printed Youtube tutorials.
+* The backend form validation witch wtforms was found on pritty printed Youtube tutorials.
 
 * Flaskpalletsprojects.com for guidance when I got stuck with flask related questions.
 

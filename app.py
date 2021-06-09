@@ -228,15 +228,10 @@ def add_reviews(vol_id):
         has already submitted a review for this title they will be
         redirected and flashed a warning message.
     """
-    user = mongo.db.users.find_one({'email': session['email']})
-    review = mongo.db.book_reviews.find({'volume_id': vol_id})
-    if review['email'] == user:
-        flash('You have already submitted a review for this book')
-        return redirect(url_for('reviews'))
-    id_book_url = SEARCH_BASE_URL + vol_id
     if request.method == 'POST':
         user_name = mongo.db.users.find_one(
                     {'email': session['email']})['name']
+        id_book_url = SEARCH_BASE_URL + vol_id
         try:
             response = requests.get(id_book_url)
             response.raise_for_status()
@@ -261,7 +256,7 @@ def add_reviews(vol_id):
         except HTTPError as http_err:
             print(f'HTTP error occurred: {http_err}')
             flash('An error occurred in processing your request. Please try again.')
-            return render_template('reviews')
+            return render_template('submit_review.html')
 
         except Exception as err:
             print(f'Other error occurred: {err}')
