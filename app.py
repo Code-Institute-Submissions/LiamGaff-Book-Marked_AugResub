@@ -366,7 +366,7 @@ def log_in():
             if check_password_hash(existing_user['password'], request.form.get('password')):
                 session['email'] = form.email.data
                 return redirect(url_for('profile', _external=True, _scheme='https'))
-                # redirect("/profile/")
+                
             else:
                 # invalid password match
                 flash('Incorrect Email and/or Password')

@@ -16,7 +16,7 @@ Heroku will not deploy the webpage. I am currently trying to fix this issue.
 
 **Unresolved issues**
 * I have not yet set up the functionality for a the user to update their profile image/avatar.
-
+* Some of the data retrieved from the the google books API is still presented as it is in the JSON file which looks messy. Still working on fixing this.
 
 ## Functional testing
 

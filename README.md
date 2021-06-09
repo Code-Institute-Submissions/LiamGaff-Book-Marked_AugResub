@@ -64,7 +64,6 @@ There was no real theme to the design of the webpage but I did aim to give a cer
 
 ## Features Still to Be Implemented
 * Upload an avatar/sticker/emoji for the user image.
-
 * To be able to tick off books that you have completed in your library. This would give users an other reason to visit the site.
 
 
@@ -106,6 +105,9 @@ There was no real theme to the design of the webpage but I did aim to give a cer
 
 * [Wtforms](https://wtforms.readthedocs.io/en/2.3.x/)
 >Wtforms was used for the back end validation of my login and signup forms.
+
+* [Google books API](https://developers.google.com/books/docs/v1/reference#resource_volumes)
+>Al the book data was retrieved from Google books API .
 
 
 
@@ -186,6 +188,8 @@ Once all variables have been input, click on "Deploy" in menu bar.
 * The backend form validation witch wtforms was found on pritty printed Youtube tutorials.
 
 * Flaskpalletsprojects.com for guidance when I got stuck with flask related questions.
+
+* In order to build the search engine and retrieve any book data google books API was used.
 
 ## Acknowledgements
 * I would also like to credit and thank my mentor Brian Macharia for all his help and exelent guidance through out this project. Also Eoin O'Neill who also reviewed my work and was a huge help.
