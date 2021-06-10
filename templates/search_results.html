@@ -34,7 +34,7 @@
                       <div class="card">
                         <div class="card-image">
                         {% if book['volumeInfo']['imageLinks'] %}
-                          <img src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}" height="300">
+                          <img src="{{ book['volumeInfo']['imageLinks']['smallThumbnail'] }}" alt="Image of { book['volumeInfo']['title']}}">
                         {% endif %}
                         <a href="{{ url_for('library', vol_id=book['id']) }}" title="Add to library" class="btn-floating halfway-fab waves-effect waves-light red"><i class="fas fa-plus"></i></a>
                         </div>

@@ -138,6 +138,13 @@ nav a{
 }
 
 
+/* .................................... Reviews */
+
+.card_image{
+    height: 18.75rem;
+}
+
+
 /* .................................... Media Queries */
 
 @media only screen and (min-width: 500px){

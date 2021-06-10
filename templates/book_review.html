@@ -30,7 +30,7 @@
     {% if review.volume_id == vol_id%}
     <ul class="collection col s8">
         <li class="collection-item avatar col s6">
-            <img src="{{review.image}}" alt="" class="circle">
+            <img src="{{review.image}}" alt="Image of {{ review.name }}" class="circle">
             <span class="title headings">{{ review.name }}</span>
             <p> Rating: {{review.rating}} <br>
                 Comments: {{review.comment}}
