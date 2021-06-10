@@ -224,9 +224,8 @@ def book_review(vol_id):
 @app.route('/add_reviews/<vol_id>', methods=['GET','POST'])
 def add_reviews(vol_id):
     """ If user in session add users review to database if user has not
-        already submitted a review for this volume ID. If user
-        has already submitted a review for this title they will be
-        redirected and flashed a warning message.
+        already submitted a review for this volume ID. Code needs to be 
+        updated so that users can only add one review perbook.
     """
     if request.method == 'POST':
         user_name = mongo.db.users.find_one(
@@ -366,7 +365,7 @@ def log_in():
             if check_password_hash(existing_user['password'], request.form.get('password')):
                 session['email'] = form.email.data
                 return redirect(url_for('profile', _external=True, _scheme='https'))
-                
+
             else:
                 # invalid password match
                 flash('Incorrect Email and/or Password')

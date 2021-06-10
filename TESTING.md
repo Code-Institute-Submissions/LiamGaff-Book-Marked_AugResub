@@ -1,30 +1,32 @@
 # Testing
-As the webpage was being built Chrome developer tools were used regularly to ensure that the code was working smoothly. Each section was then tested again every time a new feature was added. Python functions were regularly tested using the print function to ensure the code worked smoothly. Lighthouse in developer tools was also used to check the applications performance. The user stories were always analysed with each page to ensure the app meet all the requirements.
+As the web page was being built Chrome developer tools were used regularly to ensure that the code was working smoothly. Each section was then tested again every time a new feature was added. Python functions were regularly tested using the print function to ensure the code worked smoothly. Lighthouse in developer tools was also used to check the application's performance. The user stories were always analyzed with each page to ensure the app meet all the requirements.
 
 At the end of the development process, W3C CSS and Html validator were used to check the code.
 
-The CSS validator came back with no errors
+The CSS validator came back with no errors.
 
-The HTML threw up some errors that were due to the use of flask. These errors are still being looked into but dont seem to have any effect on the applications performance.
+The HTML threw up some errors that were due to the use of flask. These errors are still being looked into but dont seem to have any effect on the application's performance.
 
 **continued testing**
 I am still trying to find the best way to call the book API data so that it looks the most presentable.
 
-Heroku will not deploy the webpage. I am currently trying to fix this issue.
+Heroku will not deploy the web page. I am currently trying to fix this issue.
+
+Working on only allowing a user to post one review per book.
 
 ## Bugs
 
 **Unresolved issues**
-* I have not yet set up the functionality for a the user to update their profile image/avatar.
-* Some of the data retrieved from the the google books API is still presented as it is in the JSON file which looks messy. Still working on fixing this.
+* I have not yet set up the functionality for the user to update their profile image/avatar.
+* Some data retrieved from the the google books API is still presented as it is in the JSON file which looks messy. Still working on fixing this.
 
 ## Functional testing
 
-The final tests done on the app to ensure it was fully funtional and ready to deploy. For each page I tested every possible funtion from top to bottom. During final testing the user needs and stories were revised to ensure that the site meet all requirements that were set out before development.
+The final tests done on the app to ensure it was fully functional and ready to deploy. For each page I tested every possible function from top to bottom. During final testing the user needs and stories were revised to ensure that the site meet all requirements that were set out before development.
 
 **Home Page**
 
-Test #1 (Navbar - Loggedin)
+Test #1 (Navbar - Logged in)
 
 Action: Click on each nav button to be redirected to your chosen template.
 
@@ -35,9 +37,9 @@ After: Redirected to chosen template. This also worked for logging out of sessio
 Result: Pass
 
 
-Test #2 (Navbar - Loggedout)
+Test #2 (Navbar - Logged out)
 
-Action: Click on each to be redirected to ypur chosen template.
+Action: Click on each to be redirected to your chosen template.
 
 Before: Nav button clicked on home page(No state change of the button)
 
@@ -50,7 +52,7 @@ Test #3a (Search-box input)
 
 Action: Type any book title into search box.
 
-Before: Search box is inactve with plain white background.
+Before: Search box is inactive with plain white background.
 
 After: Text fills the search box and shows previously searched words.
 
@@ -59,9 +61,9 @@ Result: Pass
 
 Test #3b (Search-box input)
 
-Action: Type an other book title into search box to confirm result.
+Action: Type another book title into search box to confirm result.
 
-Before: Search box is inactve with plain white background.
+Before: Search box is inactive with plain white background.
 
 After: Text fills the search box and shows previously searched words.
 
@@ -70,33 +72,33 @@ Result: Pass
 
 Test #4a (Search-Box button)
 
-Action: Enter any title into the search box and clik the search button to the right.
+Action: Enter any title into the search box and click the search button to the right.
 
-Before: Text filss the search box and shows previous searches. 
+Before: Text files the search box and shows previous searches. 
 
-After: Rdeirected to the search_results template where books of the searched title are displayed.
+After: Redirected to the search_results template where books of the searched title are displayed.
 
 Result: Pass
 
 
 Test #4b (Search-Box button)
 
-Action: Enter an other title into the search box and clik the search button to the right to confirm result.
+Action: Enter another title into the search box and click the search button to the right to confirm result.
 
-Before: Text filss the search box and shows previous searches. 
+Before: Text files the search box and shows previous searches. 
 
-After: Rdeirected to the search_results template where books of the searched title are displayed.
+After: Redirected to the search_results template where books of the searched title are displayed.
 
 Result: Pass
 
 
 Test #5a (Library button - logged out)
 
-Action: Click on the "Library" button under faetured book.
+Action: Click on the "Library" button under featured book.
 
 Before: Hover over button changes state from orange to light orange.
 
-After: Page is redirrected to Key Error message saying that I am missing the 'email' variable.
+After: Page is redirected to Key Error message saying that I am missing the 'email' variable.
 
 Result: Fail
 
@@ -145,11 +147,11 @@ After: Redirect to review page where a review can be submitted.
 Result: Pass
 
 
-Test #10 (View buttton)
+Test #10 (View button)
 
 Action: Click on the "View Book" button under featured book.
 
-Before: Hover over button changes colour from teal to a ligther shade of teal and adds some box shadow.
+Before: Hover over button changes colour from teal to a lighter shade of teal and adds some box shadow.
 
 After: On click a new window is opened that redirects us to the google books api page.
 
@@ -164,7 +166,7 @@ Action: Click on the "Library" button (plus sign) attached to the searched books
 
 Before: Hover over button causes no state change.
 
-After: Redirected to login page and flashed message "Login it add book"
+After: Redirected to login page and flashed message "Login to add book"
 
 Result: Pass
 
@@ -202,11 +204,11 @@ After: Redirect to review page where a review can be submitted
 Result: Pass
 
 
-Test #5 (View buttton)
+Test #5 (View button)
 
 Action: Click on the "View Book" button under featured book.
 
-Before: Hover over button changes colour from teal to a ligther shade of teal and adds some box shadow.
+Before: Hover over button changes colour from teal to a lighter shade of teal and adds some box shadow.
 
 After: On click a new window is opened that redirects us to the google books api page.
 
@@ -232,7 +234,7 @@ Action: Click on "Reviews" button below book image.
 
 Before: Hover over button changes state from orange to light orange.
 
-After: Redirect to book_review template for the chosen title. There is an option to submit a review
+After: Redirect to book_review template for the chosen title. There is an option to submit a review.
 
 Result: Pass
 
@@ -255,7 +257,7 @@ Test #1 (Range/rating field input)
 
 Action: Use the slider on the form to pick a number from zero to 10.
 
-Before: Slider is staionary showing no values
+Before: Slider is stationary showing no values
 
 After: As the slider is moved up or down a value will appear directly above the slider to show your choice of rating.
 
@@ -266,7 +268,7 @@ Test #2 (Add comment input)
 
 Action: Click on comment input section of form and add some text.
 
-Before: Filler text on the lign saying "comment".
+Before: Filler text on the line saying "comment".
 
 After: "Comment" moves above the input field so text can be entered. You can now type in your comments on the chosen title.
 
@@ -281,14 +283,14 @@ Before: Hover over button changes colour from teal to a ligther shade of teal an
 
 After: On click page refreshes book_review page and the new review can be found in the review section.
 
-Result: Fail - Book review wont submit as it says I have already submitted a review for this title when I have not.
+Result: Fail - Book review won't submit as it says I have already submitted a review for this title when I have not.
 
 
 Test #3b (Submit Review button)
 
 Action: After form is filled click on "submit review" button.
 
-Before: Hover over button changes colour from teal to a ligther shade of teal and adds some box shadow.
+Before: Hover over button changes colour from teal to a lighter shade of teal and adds some box shadow.
 
 After: On click page refreshes book_review page and the new review can be found in the review section.
 
@@ -311,7 +313,7 @@ Test #1 (Update button)
 
 Action: Click on the "Update" button in the top right corner.
 
-Before: Hover over button changes colour from teal to a ligther shade of teal and adds some box shadow.
+Before: Hover over button changes colour from teal to a lighter shade of teal and adds some box shadow.
 
 After: On click page is redirected to the update profile template.
 
@@ -324,7 +326,7 @@ Action: Click on "Remove button" below library books.
 
 Before: Hover over button changes state from orange to light orange.
 
-After: Profile page is refrshed and the chosen title has been removed from the users library.
+After: Profile page is refreshed and the chosen title has been removed from the user's library.
 
 Result: Pass
 
@@ -410,31 +412,31 @@ After: On click input line turns green and text can now be entered. The text her
 Result: Pass
 
 
-Test #4 (Signup button)
+Test #4 (Sign up button)
 
-Action: After form is filled click on "Signup" button.
+Action: After form is filled click on "Sign up" button.
 
-Before: Hover over button changes colour from teal to a ligther shade of teal and adds some box shadow.
+Before: Hover over button changes colour from teal to a lighter shade of teal and adds some box shadow.
 
-After: On click redirect to new profile page whith an empty library
+After: On click redirect to new profile page with an empty library
 
 Result: Pass
 
 
-Test #4b (Signup button - existing account)
+Test #4b (Sign up button - existing account)
 
-Action: After form is filled click on "Signup" button.
+Action: After form is filled click on "Sign up" button.
 
 Before: Hover over button changes colour from teal to a ligther shade of teal and adds some box shadow.
 
-After: On click redirect back to the signup page and flashed message "An account with this email already exists"
+After: On click redirect back to the sign up page and flashed message "An account with this email already exists"
 
 Result: Pass.
 
 
 Test #5 (Login page button)
 
-Action: Click on "Have an account? Log In" at the bottom of the page
+Action: Click on "Have an account? Log In" at the bottom of the page.
 
 Before: Hover over blue link. No change in state.
 
@@ -471,30 +473,30 @@ Test #4 (login button)
 
 Action: After form is filled click on "Login" button.
 
-Before: Hover over button changes colour from teal to a ligther shade of teal and adds some box shadow.
+Before: Hover over button changes colour from teal to a lighter shade of teal and adds some box shadow.
 
 After: On click redirect to users profile page.
 
 Result: Pass
 
 
-Test #4b (Signup button - wrong credentials)
+Test #4b (Sign up button - wrong credentials)
 
 Action: After form is filled click on "Login" button.
 
-Before: Hover over button changes colour from teal to a ligther shade of teal and adds some box shadow.
+Before: Hover over button changes colour from teal to a lighter shade of teal and adds some box shadow.
 
 After: On click redirect back to the Login page and flashed message "Incorrect Email and/or Password"
 
 Result: Pass
 
 
-Test #5 (Signup page button)
+Test #5 (Sign up page button)
 
-Action: Click on "Not registered? Signup" at the bottom of the page
+Action: Click on "Not registered? Sign up" at the bottom of the page.
 
 Before: Hover over blue link. No change in state.
 
-After: On click redirect to signup page.
+After: On click redirect to sign up page.
 
-Result: Pass 
+Result: Pass
