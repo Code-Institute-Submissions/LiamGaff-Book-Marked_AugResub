@@ -16,7 +16,7 @@ As a user I would like:
 * To be able to search a database of books.
 * To have a section of featured books as examples.
 * To have a link to view more info on the book shown.
-* To be able to review any book.
+* To be able to review any book of my choice.
 * To be able to view reviews left by other users.
 
 
