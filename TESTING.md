@@ -7,7 +7,7 @@ As the web page was being built Chrome developer tools were used regularly to en
 
 * The CSS validator came back with no errors.
 
-* The HTML threw up some errors that were due to the use of flask. These errors are still being looked into but dont seem to have any effect on the application's performance.
+* The HTML threw up some errors that were due to the use of flask. These errors are still being looked into but do not seem to have any effect on the application's performance. After further validation testing, errors have been corrected on most templates. The only errors occuring now are due to a materialize form template. I am unable to change the code in these templates to fix said html errors but the form still works as desired.
 
 ## Bugs
 

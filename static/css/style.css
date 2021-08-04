@@ -103,8 +103,8 @@ nav a{
     margin-right: 1rem;
 }
 
-#view-btn{
-    padding-bottom: 2rem;
+.view-btn{
+    padding-bottom: 2rem !important;
 }
 
 #review-btn{

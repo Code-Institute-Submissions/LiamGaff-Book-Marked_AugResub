@@ -113,13 +113,13 @@ There was no real theme to the design of the web page but I did aim to give a ce
 
 # Database
 
-I used MongoDB to store all the relevant data for this site. The user data, user books data and featured books data were all stored on seperate tables/collections.
+I used MongoDB to store all the relevant data for this site. The user data, user books data and featured books data were all stored on separate tables/collections.
 
-* The data for the featured books is stored sepearte from the users saved books. This list of books is updated directly in the mongodb database by the admin.
+* The data for the featured books is stored separately from the user's saved books. This list of books is updated directly in the MongoDB database by the admin.
 
-* The user data is then save in a diferent collection when the user creates an account. The users password deatils are encrypted with werkzeug.security before it is enetered into the database.
+* The user data is then saved in a different collection when the user creates an account. The users' password details are encrypted with werkzeug.security before it is entered into the database.
 
-* The users email is retrieved from the users data collection and is then used to save any books into their profiles library. This data is stored in the user_books collection.
+* The user's email is retrieved from the user's data collection and is then used to save any books into their profiles library. This data is stored in the user_books collection.
 
 
 # Testing
@@ -137,10 +137,10 @@ Nm | Browser | Action | Test result |
 
 ## Deployment
 
-## On github repository
+## On GitHub repository
 * Use pip3 to install all modules.
 
-* Create an env.py file and make sure it is listed in your.gitignore file. Input all your important secret variable into this file e.g (API_key, SECRET_KEY, IP, PORT, MONGO_URI and MONGO_DBNAME.)
+* Create an env.py file and make sure it is listed in your .gitignore file. Input all your important secret variables into this file e.g (API_key, SECRET_KEY, IP, PORT, MONGO_URI, and MONGO_DBNAME.)
 
 * Enter this at the top of your python app file - if os.path.exists("env.py"): import env.
 
@@ -153,34 +153,34 @@ Nm | Browser | Action | Test result |
 * Git add, commit and push all your changes to the github repository.
 
 ## Heroku
-* Sign into a Heroku account
+* Sign in to a Heroku account
 
-* Click on New button to create a new app with a unused name.
+* Click on the New button to create a new app with an unused name.
 
-* Next select the app and then click on Settings in menu.
+* Next select the app and then click on Settings in the menu.
 
 * Find "Config Vars" section and click on the "Reveal Config Vars" button.
 
-* In the input boxes for each variable (API Key, database url, port, Secret Key, database name, and IP) input key and value and then hit add.
-Once all variables have been input, click on "Deploy" in menu bar.
+* In the input boxes for each variable (API Key, database URL, port, Secret Key, database name, and IP) input key and value and then hit add.
+Once all variables have been input, click on "Deploy" in the menu bar.
 
 * In the Deployment Method section, select GitHub
 
-* Type in the repository name and if the name of the repo is found you will be able to click connect on said repo.
+* Type in the repository name and if the name of the repo is found you will be able to click connect on the said repo.
 
 * The app will then be connected to the GitHub repository.
 
-* To enable automatic deployment, scroll down to "Automatic Deploys" section and click on button "Enable Automatic Deploys."
+* To enable automatic deployment, scroll down to "Automatic Deploys" section and click on the button "Enable Automatic Deploys."
 
 * Go to Settings and scroll down to find Domains and you will find your web address e.g - https://bookmarked-db.herokuapp.com/home
 
 * After instigating automatic deployment, all changes committed to the GitHub repository will be reflected in the deployed site on Heroku.
 
 ## How to Fork it
-* Login or Sign Up to GitHub.
+* log in or Sign Up to GitHub.
 * On GitHub, go to [BookMarked Repository](https://github.com/LiamGaff/Book-Marked).
 * In the top right, click "Fork".
-* You should then create an env.py file with your own values, and create a MongoDB database with the data keys that are in the above example.
+* You should then create an env.py file with your values, and create a MongoDB database with the data keys that are in the above example.
 * You will need to install all of the project requirements. This can be done using the command pip3 install -r requirements.txt.
 * Type python3 app.py in your GitPod terminal to run the project.
 
@@ -190,7 +190,7 @@ Once all variables have been input, click on "Deploy" in menu bar.
 * Log into your gitpod account.
 * Go to [Github repository](https://github.com/LiamGaff/Book-Marked) and click on the green "Gitpod" button.
 * This will open a new Gitpod workspace created from the code in the github repository where you can work.
-* You will need to create an env.py file with your own values, and create a MongoDB database with the data keys given in the example above.
+* You will need to create an env.py file with your values, and create a MongoDB database with the data keys given in the example above.
 * You will need to install all of the project requirements. This can be done using the command pip3 install -r requirements.txt.
 * Type python3 app.py in your GitPod terminal to run the project.
 
@@ -203,7 +203,7 @@ Once all variables have been input, click on "Deploy" in menu bar.
 * Change the current working directory to where you want the cloned directory to be.
 * Type git clone, and then paste the URL that was copied in the previous step.
 * Press enter and a local clone will be created.
-* You will need to create an env.py file with your own values, and create a MongoDB database with the data keys given in the example above.
+* You will need to create an env.py file with your values, and create a MongoDB database with the data keys given in the example above.
 * You will need to install all of the project requirements. This can be done using the command pip3 install -r requirements.txt.
 
 # Credits
