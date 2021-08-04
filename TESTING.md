@@ -1,32 +1,32 @@
 # Testing
 As the web page was being built Chrome developer tools were used regularly to ensure that the code was working smoothly. Each section was then tested again every time a new feature was added. Python functions were regularly tested using the print function to ensure the code worked smoothly. Lighthouse in developer tools was also used to check the application's performance. The user stories were always analyzed with each page to ensure the app meet all the requirements.
 
-At the end of the development process, W3C CSS and Html validator were used to check the code.
+## Code validation
 
-The CSS validator came back with no errors.
+* At the end of the development process, W3C CSS and Html validator were used to check the code.
 
-The HTML threw up some errors that were due to the use of flask. These errors are still being looked into but dont seem to have any effect on the application's performance.
+* The CSS validator came back with no errors.
 
-**continued testing**
-I am still trying to find the best way to call the book API data so that it looks the most presentable.
-
-Heroku will not deploy the web page. I am currently trying to fix this issue.
-
-Working on only allowing a user to post one review per book.
+* The HTML threw up some errors that were due to the use of flask. These errors are still being looked into but dont seem to have any effect on the application's performance.
 
 ## Bugs
 
 **Unresolved issues**
 * I have not yet set up the functionality for the user to update their profile image/avatar.
+
 * Some data retrieved from the the google books API is still presented as it is in the JSON file which looks messy. Still working on fixing this.
 
-## Functional testing
+**continued testing**
+* I am still trying to find the best way to call the book API data so that it looks more presentable.
+* Working on only allowing a user to post one review per book.
+
+# Functional testing
 
 The final tests done on the app to ensure it was fully functional and ready to deploy. For each page I tested every possible function from top to bottom. During final testing the user needs and stories were revised to ensure that the site meet all requirements that were set out before development.
 
-**Home Page**
+# Home Page
 
-Test #1 (Navbar - Logged in)
+**Test #1 (Navbar - Logged in)**
 
 Action: Click on each nav button to be redirected to your chosen template.
 
@@ -36,8 +36,9 @@ After: Redirected to chosen template. This also worked for logging out of sessio
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #2 (Navbar - Logged out)
+**Test #2 (Navbar - Logged out)**
 
 Action: Click on each to be redirected to your chosen template.
 
@@ -47,8 +48,9 @@ After: Redirected to chosen template.
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #3a (Search-box input)
+**Test #3a (Search-box input)**
 
 Action: Type any book title into search box.
 
@@ -58,8 +60,9 @@ After: Text fills the search box and shows previously searched words.
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #3b (Search-box input)
+**Test #3b (Search-box input)**
 
 Action: Type another book title into search box to confirm result.
 
@@ -69,8 +72,9 @@ After: Text fills the search box and shows previously searched words.
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #4a (Search-Box button)
+**Test #4a (Search-Box button)**
 
 Action: Enter any title into the search box and click the search button to the right.
 
@@ -80,8 +84,9 @@ After: Redirected to the search_results template where books of the searched tit
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #4b (Search-Box button)
+**Test #4b (Search-Box button)**
 
 Action: Enter another title into the search box and click the search button to the right to confirm result.
 
@@ -91,8 +96,9 @@ After: Redirected to the search_results template where books of the searched tit
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #5a (Library button - logged out)
+**Test #5a (Library button - logged out)**
 
 Action: Click on the "Library" button under featured book.
 
@@ -102,8 +108,9 @@ After: Page is redirected to Key Error message saying that I am missing the 'ema
 
 Result: Fail
 
+-----------------------------------------------------------------------------------------
 
-Test #6(Library button - logged out)
+**Test #6(Library button - logged out)**
 
 Action: Click on the "Library" button under featured book.(Function has been updated).
 
@@ -113,8 +120,9 @@ After: Redirected to login page and flashed a warning message
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #7 (Library button - logged in)
+**Test #7 (Library button - logged in)**
 
 Action: Click on the "Library" button under featured book.
 
@@ -124,8 +132,9 @@ After: Redirected to profile and book is added to library.
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #8 (Review button - logged out)
+**Test #8 (Review button - logged out)**
 
 Action: Click on the "Review" button under featured book.
 
@@ -135,8 +144,9 @@ After: Redirect to review page with a flash message "Login to review book".
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #9 (Review button - logged In)
+**Test #9 (Review button - logged In)**
 
 Action: Click on the "Review" button under featured book.
 
@@ -146,8 +156,9 @@ After: Redirect to review page where a review can be submitted.
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #10 (View button)
+**Test #10 (View button)**
 
 Action: Click on the "View Book" button under featured book.
 
@@ -157,10 +168,11 @@ After: On click a new window is opened that redirects us to the google books api
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-**Search page**
+# Search page
 
-Test #1 (Library button - logged out)
+**Test #1 (Library button - logged out)**
 
 Action: Click on the "Library" button (plus sign) attached to the searched books.
 
@@ -170,8 +182,9 @@ After: Redirected to login page and flashed message "Login to add book"
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #2 (Library button - logged in)
+**Test #2 (Library button - logged in)**
 
 Action: Click on the "Library" button (plus sign) attached to the searched books.
 
@@ -181,8 +194,9 @@ After: Redirected to profile and book is added to library.
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #3 (Review button - logged out)
+**Test #3 (Review button - logged out)**
 
 Action: Click on the "Review" button under featured book.
 
@@ -192,8 +206,9 @@ After: Redirect to review page with a flash message "Login to review book".
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #4 (Review button - logged In)
+**Test #4 (Review button - logged In)**
 
 Action: Click on the "Review" button under featured book.
 
@@ -203,8 +218,9 @@ After: Redirect to review page where a review can be submitted
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #5 (View button)
+**Test #5 (View button)**
 
 Action: Click on the "View Book" button under featured book.
 
@@ -214,8 +230,9 @@ After: On click a new window is opened that redirects us to the google books api
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #5 (Return home link)
+**Test #5 (Return home link)**
 
 Action: Click on the "Return home: here" link at the bottom of the page.
 
@@ -225,8 +242,9 @@ After: On click redirect to home page.
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-**Submit_review**
+# Submit_review
 
 Test #1 (Reviews button - Logged in)
 
@@ -238,8 +256,9 @@ After: Redirect to book_review template for the chosen title. There is an option
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #2 (Reviews button - Logged out)
+**Test #2 (Reviews button - Logged out)**
 
 Action: Click on "Reviews" button below book image.
 
@@ -249,11 +268,12 @@ After: Redirect to book_review template for the chosen title. No option to add r
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-**book_review(Logged in)**
+# book_review(Logged in)
 
 
-Test #1 (Range/rating field input)
+**Test #1 (Range/rating field input)**
 
 Action: Use the slider on the form to pick a number from zero to 10.
 
@@ -263,8 +283,9 @@ After: As the slider is moved up or down a value will appear directly above the 
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #2 (Add comment input)
+**Test #2 (Add comment input)**
 
 Action: Click on comment input section of form and add some text.
 
@@ -274,8 +295,9 @@ After: "Comment" moves above the input field so text can be entered. You can now
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #3 (Submit Review button)
+**Test #3 (Submit Review button)**
 
 Action: After form is filled click on "submit review" button.
 
@@ -285,8 +307,9 @@ After: On click page refreshes book_review page and the new review can be found 
 
 Result: Fail - Book review won't submit as it says I have already submitted a review for this title when I have not.
 
+-----------------------------------------------------------------------------------------
 
-Test #3b (Submit Review button)
+**Test #3b (Submit Review button)**
 
 Action: After form is filled click on "submit review" button.
 
@@ -296,7 +319,9 @@ After: On click page refreshes book_review page and the new review can be found 
 
 Result: 
 
-Test #4 (Remove button)
+-----------------------------------------------------------------------------------------
+
+**Test #4 (Remove button)**
 
 Action: Click on "remove" button to remove your own comments 
 
@@ -306,10 +331,11 @@ After: On click review page is refreshed and chosen review has been removed.
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-**Profile**
+# Profile
 
-Test #1 (Update button)
+**Test #1 (Update button)**
 
 Action: Click on the "Update" button in the top right corner.
 
@@ -319,8 +345,9 @@ After: On click page is redirected to the update profile template.
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #2 (Remove button)
+**Test #2 (Remove button)**
 
 Action: Click on "Remove button" below library books.
 
@@ -330,6 +357,7 @@ After: Profile page is refreshed and the chosen title has been removed from the 
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
 Test #3 (Home page button)
 
@@ -341,10 +369,11 @@ After: On click redirect to home page.
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-**Update Profile(still under development)**
+# Update Profile(still under development)
 
-Test #1 (Profile page button)
+**Test #1 (Profile page button)**
 
 Action: Click on "Return to profile: Profile" at the bottom of the page
 
@@ -354,8 +383,9 @@ After: On click redirect to profile page.
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #2 (Drop down selection)
+**Test #2 (Drop down selection)**
 
 Action: Click on drop down menu on the form.
 
@@ -365,8 +395,9 @@ After: On click three options drop down and when one is selected it will replace
 
 Result: pass
 
+-----------------------------------------------------------------------------------------
 
-Test #3 (Update button)
+**Test #3 (Update button)**
 
 Action: After form is filled click on "Update" button.
 
@@ -376,10 +407,11 @@ After: On click redirect to profile page where profile picture is updated.
 
 Result: Fail - This feature has not been fully built yet.
 
+-----------------------------------------------------------------------------------------
 
-**Registration**
+# Registration
 
-Test #1 (Name input)
+**Test #1 (Name input)**
 
 Action: Enter name into name input at the top of the form.
 
@@ -389,8 +421,9 @@ After: On click input line turns green and text can now be entered
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #2 (Email input)
+**Test #2 (Email input)**
 
 Action: Enter email into email input in the middle of the form.
 
@@ -400,8 +433,9 @@ After: On click input line turns green and text can now be entered
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #3 (Password input)
+**Test #3 (Password input)**
 
 Action: Enter Password into password input at the end of the form.
 
@@ -411,8 +445,9 @@ After: On click input line turns green and text can now be entered. The text her
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #4 (Sign up button)
+**Test #4 (Sign up button)**
 
 Action: After form is filled click on "Sign up" button.
 
@@ -422,8 +457,9 @@ After: On click redirect to new profile page with an empty library
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #4b (Sign up button - existing account)
+**Test #4b (Sign up button - existing account)**
 
 Action: After form is filled click on "Sign up" button.
 
@@ -433,6 +469,7 @@ After: On click redirect back to the sign up page and flashed message "An accoun
 
 Result: Pass.
 
+-----------------------------------------------------------------------------------------
 
 Test #5 (Login page button)
 
@@ -444,10 +481,11 @@ After: On click redirect to login page.
 
 Result: Pass 
 
+-----------------------------------------------------------------------------------------
 
-**Login**
+# Login
 
-Test #1 (Email input)
+**Test #1 (Email input)**
 
 Action: Enter email into email input in the middle of the form.
 
@@ -457,8 +495,9 @@ After: On click input line turns green and text can now be entered
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #3 (Password input)
+**Test #3 (Password input)**
 
 Action: Enter Password into password input at the end of the form.
 
@@ -468,8 +507,9 @@ After: On click input line turns green and text can now be entered. The text her
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #4 (login button)
+**Test #4 (login button)**
 
 Action: After form is filled click on "Login" button.
 
@@ -479,8 +519,9 @@ After: On click redirect to users profile page.
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #4b (Sign up button - wrong credentials)
+**Test #4b (Sign up button - wrong credentials)**
 
 Action: After form is filled click on "Login" button.
 
@@ -490,8 +531,9 @@ After: On click redirect back to the Login page and flashed message "Incorrect E
 
 Result: Pass
 
+-----------------------------------------------------------------------------------------
 
-Test #5 (Sign up page button)
+**Test #5 (Sign up page button)**
 
 Action: Click on "Not registered? Sign up" at the bottom of the page.
 

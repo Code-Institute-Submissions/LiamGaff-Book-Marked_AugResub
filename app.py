@@ -18,7 +18,7 @@ app = Flask(__name__)
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
-app.secret_key = os.environ.get("SEKRET_KEY")
+app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
@@ -122,9 +122,9 @@ def library(vol_id):
             link = j_response['items'][0]['volumeInfo']['infoLink']
             str_cover = str(cover_img)
             str_id = str(vol_id)
-            str_author = str(author)
-            str_title = str(title)
-            str_genre = str(genre)
+            str_author = str(author)[1: -1]
+            str_title = str(title)[1: -1]
+            str_genre = str(genre)[1: -1]
             str_link = str(link)
 
             mongo.db.user_books.insert_one(
@@ -155,7 +155,7 @@ def library(vol_id):
         flash('Login to add to library')
         redirect(url_for('log_in', _external=True, _scheme='https'))
 
-        return redirect(url_for('profile', _external=True, _scheme='https'))
+    return redirect(url_for('profile', _external=True, _scheme='https'))
 
 
 @app.route('/remove_book/<book_id>')

@@ -61,6 +61,7 @@ There was no real theme to the design of the web page but I did aim to give a ce
 * A review page with a form that allows you to leave a rating and comment on different titles.
 * You can read reviews left by other users.
 * A link to the books profile on google books.
+* Any time a user creates a password werkzeug.security is used to encrypt that password before it reaches the database.
 
 ## Features Still to Be Implemented
 * Upload an avatar/sticker/emoji for the user image.
@@ -110,6 +111,16 @@ There was no real theme to the design of the web page but I did aim to give a ce
 >All the book data was retrieved from Google books API.
 
 
+# Database
+
+I used MongoDB to store all the relevant data for this site. The user data, user books data and featured books data were all stored on seperate tables/collections.
+
+* The data for the featured books is stored sepearte from the users saved books. This list of books is updated directly in the mongodb database by the admin.
+
+* The user data is then save in a diferent collection when the user creates an account. The users password deatils are encrypted with werkzeug.security before it is enetered into the database.
+
+* The users email is retrieved from the users data collection and is then used to save any books into their profiles library. This data is stored in the user_books collection.
+
 
 # Testing
 
@@ -129,7 +140,7 @@ Nm | Browser | Action | Test result |
 ## On github repository
 * Use pip3 to install all modules.
 
-* Create an env.py file and make sure it is listed in your.gitignore file. Input all your important secret variable into this file e.g API_key, SECRET_KEY.
+* Create an env.py file and make sure it is listed in your.gitignore file. Input all your important secret variable into this file e.g (API_key, SECRET_KEY, IP, PORT, MONGO_URI and MONGO_DBNAME.)
 
 * Enter this at the top of your python app file - if os.path.exists("env.py"): import env.
 
@@ -165,20 +176,35 @@ Once all variables have been input, click on "Deploy" in menu bar.
 
 * After instigating automatic deployment, all changes committed to the GitHub repository will be reflected in the deployed site on Heroku.
 
+## How to Fork it
+* Login or Sign Up to GitHub.
+* On GitHub, go to [BookMarked Repository](https://github.com/LiamGaff/Book-Marked).
+* In the top right, click "Fork".
+* You should then create an env.py file with your own values, and create a MongoDB database with the data keys that are in the above example.
+* You will need to install all of the project requirements. This can be done using the command pip3 install -r requirements.txt.
+* Type python3 app.py in your GitPod terminal to run the project.
+
 ## How to clone this project
 ## With Gitpod
 * Create a Gitpod account and install Gitpod Browser extension for chrome.
 * Log into your gitpod account.
 * Go to [Github repository](https://github.com/LiamGaff/Book-Marked) and click on the green "Gitpod" button.
 * This will open a new Gitpod workspace created from the code in the github repository where you can work.
+* You will need to create an env.py file with your own values, and create a MongoDB database with the data keys given in the example above.
+* You will need to install all of the project requirements. This can be done using the command pip3 install -r requirements.txt.
+* Type python3 app.py in your GitPod terminal to run the project.
 
 ## Local IDE
 * Go to my Github repository [here](https://github.com/LiamGaff/Book-Marked).
-* Under the repository name click on "clone or download"
-* In the clone with HTTPs section copy the clone URL for the repository.
-* In your local IDE open the terminal and change your directory to where you want the clone to be made.
-* In the terminal type _git clone_ and then paste the repository URL.
-* Press enter and a clone will be created.
+* Under the repository name click "Code".
+* Here you can either Clone or Download the repository.
+* You should clone the repository using HTTPS, clicking on the icon to copy the link.
+* Open the terminal.
+* Change the current working directory to where you want the cloned directory to be.
+* Type git clone, and then paste the URL that was copied in the previous step.
+* Press enter and a local clone will be created.
+* You will need to create an env.py file with your own values, and create a MongoDB database with the data keys given in the example above.
+* You will need to install all of the project requirements. This can be done using the command pip3 install -r requirements.txt.
 
 # Credits
 
