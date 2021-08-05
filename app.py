@@ -175,13 +175,10 @@ def profile():
     if 'email' in session:
         user = mongo.db.users.find_one(
                 {'email': session['email']})
-        books = mongo.db.user_books.find()
-
-        for book in books:
-            if (book['email'] == session['email']):
-                user_books = books
-
-                return render_template('profile.html', user=user, books=user_books)
+        books = mongo.db.user_books.find(
+                {'email': session['email']})
+        return render_template('profile.html', user=user, books=books)
+    
         """
         Redirect user to login if not in session.
         """
@@ -316,6 +313,8 @@ def sign_up():
         add users entered details to the database.
         Render user profile template.
     """
+
+    print("Got here")
     form = signup_form(request.form)
     if request.method == 'POST' and form.validate():
         existing_user = mongo.db.users.find_one(
@@ -333,11 +332,10 @@ def sign_up():
             }
             mongo.db.users.insert_one(register)
             
-
             # Add new user
             session['email'] = form.email.data
             flash('Registration Successful!')
-            return redirect(url_for('profile'))
+            return redirect(url_for('profile', _external=True, _scheme='https'))
     return render_template('signup.html', form=form)
 
 
